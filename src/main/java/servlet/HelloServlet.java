@@ -21,10 +21,15 @@ public class HelloServlet extends HttpServlet {
 
         String auth = "";
 
-        if(req.getSession().getAttribute("auth").equals("String")){
-            auth += "auther";
-        }
+        try {
 
+
+            if (req.getSession().getAttribute("auth").equals("String")) {
+                auth += "auther";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         auth += " hello heroku";
 
