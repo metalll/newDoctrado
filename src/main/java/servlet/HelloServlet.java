@@ -18,8 +18,24 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+
+        String auth = "";
+
+        if(req.getSession().getAttribute("auth").equals("String")){
+            auth += "auther";
+        }
+
+
+        auth += " hello heroku";
+
+        req.getSession().setAttribute("auth","String");
         ServletOutputStream out = resp.getOutputStream();
-        out.write("hello heroku".getBytes());
+        out.write(auth.getBytes());
+
+
+
+
+
         out.flush();
         out.close();
     }
