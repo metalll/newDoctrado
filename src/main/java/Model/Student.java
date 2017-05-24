@@ -30,6 +30,9 @@ public class Student extends User {
     @DatabaseField
     private String surname;
 
+
+
+
     @DatabaseField
     private String firstname;
 

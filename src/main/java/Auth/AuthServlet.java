@@ -1,6 +1,7 @@
 package Auth;
 
 import Model.Admin;
+import Model.RealmModelForJSON;
 import Model.Student;
 import Model.Teacher;
 import NSDReqCodeUtils.ReqCode;
@@ -88,7 +89,7 @@ public class AuthServlet extends HttpServlet{
         switch (authRealm.getAccessRole()){
             case ADMIN:
                 Admin admin = (Admin) authRealm.getUser();
-                out.write(gson.toJson(admin));
+                out.write(gson.toJson(new RealmModelForJSON<Admin>(admin,"ADMIN")));
             break;
             case ANNONYMOUS:
                 String respG = "ANNONYMOUS";
@@ -96,11 +97,11 @@ public class AuthServlet extends HttpServlet{
             break;
             case STUDENT:
                 Student student = (Student) authRealm.getUser();
-                out.write(gson.toJson(student));
+                out.write(gson.toJson(new RealmModelForJSON<Student>(student,"STUDENT")));
             break;
             case TEACHER:
                 Teacher teacher = (Teacher) authRealm.getUser();
-                out.write(gson.toJson(teacher));
+                out.write(gson.toJson(new RealmModelForJSON<Teacher>(teacher,"TEACHER")));
             break;
 
 
