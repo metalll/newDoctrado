@@ -132,6 +132,32 @@ public class AuthServlet extends HttpServlet{
         //TODO get exist user is db
 
 
+        AuthRealm resultRealm = Authorizator.getInstance().Auth(login,pass);
+
+        if(resultRealm.getAccessRole()==UserRole.ANNONYMOUS){
+            PrintWriter out = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_OK);
+            out.write("-1");
+            out.flush();
+            out.close();
+        }else{
+            req.setAttribute("auth",resultRealm);
+            PrintWriter out = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_OK);
+            switch (resultRealm.getAccessRole()){
+                case ADMIN:
+                    out.write("1"); break;
+                case STUDENT:
+                    out.write("2"); break;
+                case TEACHER:
+                    out.write("3"); break;
+            }
+
+            out.flush();
+            out.close();
+
+
+        }
 
 
 
@@ -146,7 +172,10 @@ public class AuthServlet extends HttpServlet{
 
     @Override // registration
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+
+
+
+
 
     }
 
