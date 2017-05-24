@@ -92,7 +92,7 @@ public class AuthServlet extends HttpServlet{
             break;
             case ANNONYMOUS:
                 String respG = "ANNONYMOUS";
-                out.write(gson.toJson(respG));
+                out.write(respG);
             break;
             case STUDENT:
                 Student student = (Student) authRealm.getUser();
