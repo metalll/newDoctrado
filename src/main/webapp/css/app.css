@@ -1,0 +1,8 @@
+.backgr-col{
+    padding: -1px; /* Поля вокруг текста */
+    background: #000; /* Цвет фона */
+    margin: 0 auto; /* Выравниваем слой по центру */
+    width: 100%; /* Ширина слоя */
+    opacity: 0.6; /* Значение прозрачности */
+    filter: alpha(Opacity=60);
+}

@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/app.css"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,6 +19,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script type="text/javascript" src="js/index_init.js"></script>
 
 
 
@@ -36,9 +38,107 @@
     </div>
 </nav>
 
+<div class="carousel carousel-slider center" data-indicators="true">
+    <div class="carousel-fixed-item center">
+        <a href="#modal1" id="download-button" class="btn-large modal-trigger waves-effect waves-light  " style="    background: linear-gradient(to bottom right, #ef6c00 0%, #2e7d32 36%,#ef6c00 100%);">Приступить
+            к
+            работе</a>
+    </div>
+    <div class="carousel-item white-text" href="#one!" style="background: url('img/carImg1.jpeg') center center fixed;  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
 
-<p>&nbsp;</p>
 
+        <h1 class="center orange-text text-darken-3 ">Doctrado</h1>
+        <div class="row center ">
+            <h5 class="header col s12 light white-text ">Обретай новые знания сейчас!</h5>
+
+            <h5 class="header col s12 light white-text ">Вместе с Doctrado</h5>
+        </div>
+    </div>
+    <div class="carousel-item amber white-text" href="#two!"  style="background: url('img/carImg2.png') center center fixed ;  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
+        <h1 class="center green-text text-darken-3 ">Сертификаты</h1>
+        <div class="row center ">
+            <h5 class="header col s12 light white-text ">Выберите нужный курс. Ознакомьтесь с лекционный материалом</h5>
+            <h5 class="header col s12 light white-text ">Пройдите тест. И сертификат у вас!</h5>
+
+        </div>
+    </div>
+    <div class="carousel-item green white-text" href="#three!" style="background: url('img/carImg3.png') center center fixed ;  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;">
+
+        <h1 class="center orange-text text-darken-3 ">Возможности</h1>
+        <div class="row center ">
+            <h5 class="header col s12 green-text text-darken-3  ">Наш сервис вам предоставляет возможности студентов и преподавателей</h5>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container" style="{height: 160px; }">
+    <div class="section">
+
+        <!--   Icon Section   -->
+        <div class="row">
+            <div class="col s12 m4 l4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="medium material-icons green-text text-darken-3">schedule</i></h2>
+                    <h5 class="center">Быстро и удобно</h5>
+
+                    <p class="light center-align">Региструешься, находишь нужный курс, проходишь все темы и тесты после
+                        каждой из них - получаешь сертификат</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4 l4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="medium material-icons green-text text-darken-3">group_work</i>
+                    </h2>
+                    <h5 class="center">Командная работа</h5>
+                    <p class="light center-align">Для развития сервиса мы добавили возможность каждому, у кого есть
+                        должный опыт, стать преподавателем</p>
+                </div>
+            </div>
+
+            <div class="col s12 m4 l4">
+                <div class="icon-block">
+                    <h2 class="center black-text"><i class="medium material-icons green-text text-darken-3">work</i></h2>
+                    <h5 class="center">Приступай к работе</h5>
+
+                    <p class="light center-align">Пройдя какой-либо курс, получив сертификат - Вы тут же можете
+                        приступить к роботе по полученной специальности </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<h3 class="center orange-text text-darken-3 ">Список курсов</h3>
+
+<div class="row" id="course-container">
+<div class="row center center-align">
+    <div class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+                <div class="circle"></div>
+            </div><div class="gap-patch">
+            <div class="circle"></div>
+        </div><div class="circle-clipper right">
+            <div class="circle"></div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
 
 
 <footer class="page-footer grey darken-3">
