@@ -2,8 +2,6 @@ package DBSingletones.DBInfo;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.support.DatabaseConnection;
-import sun.jvm.hotspot.tools.soql.JSDB;
 
 import java.net.URI;
 import java.net.URISyntaxException;
