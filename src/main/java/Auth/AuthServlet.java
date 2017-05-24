@@ -67,12 +67,17 @@ public class AuthServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        AuthRealm authRealm;
+        AuthRealm authRealm = null;
 
         try {
             authRealm = (AuthRealm) req.getAttribute(Authorizator.AUTH_ATTR);
         }catch (Exception e){
+           // authRealm = new AuthRealm();
+        }
+
+        if(authRealm == null){
             authRealm = new AuthRealm();
+            authRealm.setAccessRole(UserRole.ANNONYMOUS);
         }
 
         Gson gson = new Gson();
