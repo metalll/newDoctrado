@@ -41,6 +41,11 @@ public class DBStudent {
 
             String[] str =  NSDDB.getConnection();
 
+            for(int i=0;i<3;i++){
+                System.out.println("str ["+i+"] : =" + str[i]);
+
+            }
+
             dao = DaoManager.createDao(new JdbcConnectionSource(str[0],str[1],str[2]),Student.class);
         } catch (Exception e) {
             e.printStackTrace();
