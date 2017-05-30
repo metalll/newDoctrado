@@ -122,8 +122,8 @@
 
         $.ajax({
 
-            url: "/API/Auth",
-            type: "TRACE",
+            url: "/API/Validator",
+            type: "POST",
             data:{"email":loginField.value,
                 "telNumber":telField.value},
             success:function (data) {
@@ -133,7 +133,7 @@
             }
 
 
-        })
+        });
 
 
 
