@@ -4,6 +4,7 @@ import DBSingletones.DBInfo.NSDDB;
 import Model.Admin;
 import Model.Teacher;
 import Model.Teacher;
+import Model.Teacher;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -87,7 +88,11 @@ public class DBTeacher {
     public Teacher queryTeacher(String login){
         Teacher retVal = null;
         try {
-            retVal = dao.queryBuilder().where().eq("email", login).query().get(0);
+            List<Teacher> tempRetVal = null;
+            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            if(tempRetVal.size()>0){
+                retVal = tempRetVal.get(0);
+            }
             dao.getConnectionSource().close();
         }catch (Exception e){
             e.printStackTrace();
@@ -109,8 +114,12 @@ public class DBTeacher {
             if(login==null||login.equals("")){
 
             }else{
-            tTeacher = dao.queryBuilder().where().eq("email", login).query().get(0);
-            dao.getConnectionSource().close();
+                List<Teacher>tempRetVal = null;
+                tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+                if(tempRetVal.size()>0){
+                    tTeacher = tempRetVal.get(0);
+                }
+                dao.getConnectionSource().close();
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -120,8 +129,12 @@ public class DBTeacher {
         try {
             if(tel==null||tel.equals("")){}
             else{
-            tTeacher2 = dao.queryBuilder().where().eq("telNumber",tel).query().get(0);
-            dao.getConnectionSource().close();
+                List<Teacher>tempRetVal = null;
+                tempRetVal = dao.queryBuilder().where().eq("telNumber",tel).query();
+                if(tempRetVal.size()>0){
+                    tTeacher2 = tempRetVal.get(0);
+                }
+                dao.getConnectionSource().close();
             }
         }catch (SQLException e){
             e.printStackTrace();

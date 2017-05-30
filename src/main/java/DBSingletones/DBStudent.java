@@ -94,7 +94,11 @@ public class DBStudent {
     public Student queryStudent(String login){
         Student retVal = null;
         try {
-            retVal = dao.queryBuilder().where().eq("email", login).query().get(0);
+            List<Student> tempRetVal = null;
+            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            if(tempRetVal.size()>0){
+                retVal = tempRetVal.get(0);
+            }
             dao.getConnectionSource().close();
         }catch (Exception e){
             e.printStackTrace();
@@ -116,7 +120,11 @@ public class DBStudent {
             if(login==null||login.equals("")){
 
             }else{
-            tStudent = dao.queryBuilder().where().eq("email", login).query().get(0);
+            List<Student>tempRetVal = null;
+            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            if(tempRetVal.size()>0){
+                tStudent = tempRetVal.get(0);
+            }
             dao.getConnectionSource().close();
             }
         }catch (SQLException e){
@@ -127,7 +135,11 @@ public class DBStudent {
         try {
             if(tel==null||tel.equals("")){}
             else{
-            tStudent2 = dao.queryBuilder().where().eq("telNumber",tel).query().get(0);
+            List<Student>tempRetVal = null;
+            tempRetVal = dao.queryBuilder().where().eq("telNumber",tel).query();
+            if(tempRetVal.size()>0){
+                tStudent2 = tempRetVal.get(0);
+            }
             dao.getConnectionSource().close();
             }
         }catch (SQLException e){
