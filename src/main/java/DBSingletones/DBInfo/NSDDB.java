@@ -30,7 +30,6 @@ private static ConnectionSource connectionSource = null;
         DB_PASS = dbUri.getUserInfo().split(":")[1];
         DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-        DriverManager.getConnection(DBURL, DB_LOGIN, DB_PASS);
 
         return new String[]{DBURL,DB_LOGIN,DB_PASS};
     }
