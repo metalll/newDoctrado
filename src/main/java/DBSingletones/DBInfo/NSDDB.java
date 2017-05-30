@@ -34,41 +34,5 @@ private static ConnectionSource connectionSource = null;
         return new String[]{DBURL,DB_LOGIN,DB_PASS};
     }
 
-   public static ConnectionSource getConnectionSourse(){
-       if(connectionSource==null||connectionSource.isOpen()){
-           try {
-               if(connectionSource!=null){
-               if(connectionSource.isOpen()){
-                   connectionSource.close();
-
-               }
-               }
-
-
-               try {
-                   getConnection();
-               } catch (URISyntaxException e) {
-                   System.out.print("error conn to db");
-               }
-               connectionSource = new JdbcConnectionSource(DBURL,DB_LOGIN,DB_PASS);
-           } catch (SQLException e) {
-               try {
-                   if(connectionSource!=null){
-                       connectionSource.close();
-                       connectionSource.releaseConnection(connectionSource.getReadWriteConnection());
-                       connectionSource = null;
-                       connectionSource = new JdbcConnectionSource(DBURL,DB_LOGIN,DB_PASS);
-                   }
-               }catch (Exception e1){
-                   e1.printStackTrace();
-               }
-           }
-       }
-
-
-       return connectionSource;
-
-
-   }
 
 }
