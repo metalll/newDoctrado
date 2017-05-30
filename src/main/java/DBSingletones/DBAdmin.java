@@ -88,7 +88,12 @@ public class DBAdmin {
     public Admin queryAdmin(String login){
         Admin retVal = null;
         try {
-            retVal = dao.queryBuilder().where().eq("email", login).query().get(0);
+            List<Admin> tempRetVal = null;
+            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            if(tempRetVal.size()<0){
+                retVal = tempRetVal.get(0);
+            }
+
             dao.getConnectionSource().close();
         }catch (Exception e){
             e.printStackTrace();
