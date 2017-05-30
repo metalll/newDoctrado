@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import DBSingletones.DBInfo.NSDDB;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;
 import org.apache.catalina.core.StandardContext;
@@ -66,7 +67,7 @@ public class Main {
         }
 
         System.out.println("configuring app with basedir: " + webContentFolder.getAbsolutePath());
-
+        System.out.println(" hi " + NSDDB.getConnection()[0] + " " + NSDDB.getConnection()[1] + " " + NSDDB.getConnection()[2]);
         // Declare an alternative location for your "WEB-INF/classes" dir
         // Servlet 3.0 annotation will work
         File additionWebInfClassesFolder = new File(root.getAbsolutePath(), "target/classes");
