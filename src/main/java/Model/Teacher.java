@@ -30,6 +30,9 @@ public class Teacher extends User {
     private String firstname;
     @DatabaseField
     private String cardNumber;
+
+    @DatabaseField
+    private String telNumber;
     @DatabaseField
     private String cardExploedInfo;
     @DatabaseField
@@ -164,5 +167,13 @@ public class Teacher extends User {
 
     public void setActivated(boolean activated) {
         isActivated = activated;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
 }

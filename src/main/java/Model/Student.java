@@ -30,7 +30,9 @@ public class Student extends User {
     @DatabaseField
     private String surname;
 
+    @DatabaseField
 
+    private String telNumber;
 
 
     @DatabaseField
@@ -179,5 +181,13 @@ public class Student extends User {
 
     public void setActivated(boolean activated) {
         isActivated = activated;
+    }
+
+    public String getTelNumber() {
+        return telNumber;
+    }
+
+    public void setTelNumber(String telNumber) {
+        this.telNumber = telNumber;
     }
 }

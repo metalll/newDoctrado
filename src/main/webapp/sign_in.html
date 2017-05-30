@@ -22,50 +22,89 @@
 
 
 
-<nav class="orange darken-1">
-    <div class="nav-wrapper" id="nav">
-        <a href="index.html" class="brand-logo">Doctrado</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="about.html">О проекте</a></li>
-            <li><a href="certificates.html">Сертификаты</a></li>
-            <li><a href="about.html">Курсы</a></li>
-            <li><a href="about.html">Контакты</a></li>
-            <li><a href="#" class="btn green darken-1" >Вход</a></li>
-
-        </ul>
-    </div>
-</nav>
-
-
-<p>&nbsp;</p>
 
 
 
-<footer class="page-footer grey darken-3">
-    <div class="container">
+<div class="row" style="position: absolute; min-height: 100%; height:100%; width: 100%; top: 0;">
+    <div class="col s12 m7 white" style="min-height:100%; height: 100%;">
+
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Doctrado</h5>
-                <p class="grey-text text-lighten-4">Дистанционное обучение</p>
-                <img src="img/logo_NDU.png">
-                <p class="grey-text text-lighten-4">Сделано в НИУККЦПБ ©</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Полезные ссылки</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="https://pbezpeka.herokuapp.com">Центр промышленной безопасности</a></li>
-                    <li><a class="grey-text text-lighten-3" href="about.html">О проекте</a></li>
-                    <li><a class="grey-text text-lighten-3" href="course.html">Курсы</a></li>
-                </ul>
+            <div class="col s12" style="padding: 10px;">
+
+
+
+                <a href="index.html">
+                    <img src="favicon.ico" style="height: 28px; vertical-align: middle; margin-top: -7px;"><span class="grey-text text-darken-1 lighten" style="font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;"><b class="orange-text">Doct</b>rado</span>
+                </a>
+
+
             </div>
         </div>
-    </div>
-    <div class="footer-copyright grey darken-4">
-        <div class="container center center-align">
-            Doctrado © Все права защищены
+
+
+
+
+        <div class="row" style="margin-bottom: 0; max-width: 600px;">
+            <div class="col s12">
+                <div id="login_div">
+                    <form class="signin" method="post" action="/login.php" style="width: 100%;">
+                        <input type="hidden" name="wix" value="">
+
+                        <h5 class="hide" style="text-align: center; font-weight: 300;"> - Or - </h5>
+
+                        <label for="username" class="">Email</label>
+                        <input id="username" class="" type="text" name="username">
+
+                        <label for="password" class="">Пароль</label>
+
+                        <input id="password" class="" type="password" name="password" onkeyup="if(event.keyCode == 13) accountLogin($(this).parents('form'));">
+
+
+                        <input type="hidden" name="facebook" value="">
+                        <input type="hidden" name="pid" value="">
+
+                        <input class="btn btn-large green" type="submit" name="submit_form" value="Вход">
+
+
+
+                    </form>
+
+
+
+                </div>
+
+
+
+
+            </div>
         </div>
+
+
+
+
     </div>
-</footer>
+
+    <div class="col s12 m5 green" style="min-height: 110%; padding: 10% 5%;">
+        <img src="img/default_avatar.jpg" class="circle">
+
+        <div class="row">
+            <div class="col s12" style="padding: 20px 0;">
+                <h5 class="lato white-text" style="display: inline; vertical-align: middle; font-weight: 600; margin-right: 10px;">нужен аккаунт ?</h5>
+                <a class="login btn orange" style="text-decoration:none;" href="reg.html" >регистрация тут</a>
+            </div>
+        </div>
+
+
+
+        <h6 class="light white-text half-line"> При входе в аккаунт ви принимаете <a href="/termsofservice.html" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;"> Условия использования </a> и <a href="/privacysb.php" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;">Условия конфедициальности</a>. В случае несогласия вы не можете использовать Doctrado.</h6>
+
+
+
+
+    </div>
+
+</div>
+
 
 </body>
 </html>

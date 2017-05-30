@@ -2,6 +2,7 @@ package DBSingletones;
 
 import DBSingletones.DBInfo.NSDDB;
 import Model.Teacher;
+import Model.Teacher;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.table.TableUtils;
@@ -87,6 +88,40 @@ public class DBTeacher {
     public boolean hasTeacher(String login){
         return queryTeacher(login)!=null;
     }
+
+
+    public boolean[] hasTeacher(String login,String tel){
+        Teacher tTeacher = null;
+        Teacher tTeacher2 = null;
+        try {
+
+            if(login==null||login.equals("")){
+
+            }else{
+            tTeacher = dao.queryBuilder().where().eq("email", login).query().get(0);
+            dao.getConnectionSource().close();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+        try {
+            if(tel==null||tel.equals("")){}
+            else{
+            tTeacher2 = dao.queryBuilder().where().eq("telNumber",tel).query().get(0);
+            dao.getConnectionSource().close();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+
+        return new boolean[]{tTeacher!=null,tTeacher2!=null};
+    }
+
+
 
     public void addTeacher(Teacher Teacher){
         try {

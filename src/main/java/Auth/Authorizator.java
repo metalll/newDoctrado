@@ -32,7 +32,7 @@ public class Authorizator {
 
     public AuthRealm Auth(String login,String hexOfPass){
 
-        Object retVal = null;
+        Object retVal;
 
         retVal = DBStudent.getInstance().queryStudent(login);
 

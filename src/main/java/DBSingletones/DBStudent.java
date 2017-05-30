@@ -90,6 +90,38 @@ public class DBStudent {
         return queryStudent(login)!=null;
     }
 
+
+    public boolean[] hasStudent(String login,String tel){
+        Student tStudent = null;
+        Student tStudent2 = null;
+        try {
+
+            if(login==null||login.equals("")){
+
+            }else{
+            tStudent = dao.queryBuilder().where().eq("email", login).query().get(0);
+            dao.getConnectionSource().close();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+        try {
+            if(tel==null||tel.equals("")){}
+            else{
+            tStudent2 = dao.queryBuilder().where().eq("telNumber",tel).query().get(0);
+            dao.getConnectionSource().close();
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+
+
+        return new boolean[]{tStudent!=null,tStudent2!=null};
+    }
+
     public void addStudent(Student student){
         try {
             dao.create(student);
