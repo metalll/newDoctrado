@@ -36,6 +36,11 @@ public class DBStudent {
     private DBStudent(){
 
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
 
 
 

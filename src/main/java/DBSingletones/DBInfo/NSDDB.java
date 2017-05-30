@@ -28,7 +28,7 @@ private static ConnectionSource connectionSource = null;
 
         DB_LOGIN = dbUri.getUserInfo().split(":")[0];
         DB_PASS = dbUri.getUserInfo().split(":")[1];
-        DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + "3306" + dbUri.getPath();
+        DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + "3306" + dbUri.getPath()+"?reconnect=true";
 
 
         return new String[]{DBURL,DB_LOGIN,DB_PASS};
