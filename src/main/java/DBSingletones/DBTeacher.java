@@ -1,10 +1,12 @@
 package DBSingletones;
 
 import DBSingletones.DBInfo.NSDDB;
+import Model.Admin;
 import Model.Teacher;
 import Model.Teacher;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
@@ -33,8 +35,11 @@ public class DBTeacher {
     private DBTeacher(){
 
         try {
-            dao = DaoManager.createDao(NSDDB.getConnectionSourse(),Teacher.class);
-        } catch (SQLException e) {
+            String[] str =  NSDDB.getConnection();
+
+
+            dao = DaoManager.createDao(new JdbcConnectionSource(str[0],str[1],str[2]), Teacher.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -42,7 +47,7 @@ public class DBTeacher {
         if(dao!=null){
             try {
                 if (!dao.isTableExists()) {
-                    TableUtils.createTable(NSDDB.getConnectionSourse(),Teacher.class);
+                    TableUtils.createTable(dao.getConnectionSource(),Teacher.class);
                 }
             }catch (Exception e){
                 e.printStackTrace();

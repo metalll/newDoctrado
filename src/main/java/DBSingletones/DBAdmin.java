@@ -5,6 +5,7 @@ import DBSingletones.DBInfo.NSDDB;
 import Model.Admin;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
@@ -33,9 +34,13 @@ public class DBAdmin {
 
     private DBAdmin(){
 
+
         try {
-            dao = DaoManager.createDao(NSDDB.getConnectionSourse(),Admin.class);
-        } catch (SQLException e) {
+            String[] str =  NSDDB.getConnection();
+
+
+            dao = DaoManager.createDao(new JdbcConnectionSource(str[0],str[1],str[2]),Admin.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -43,7 +48,7 @@ public class DBAdmin {
         if(dao!=null){
             try {
                 if (!dao.isTableExists()) {
-                    TableUtils.createTable(NSDDB.getConnectionSourse(),Admin.class);
+                    TableUtils.createTable(dao.getConnectionSource(),Admin.class);
                 }
             }catch (Exception e){
                 e.printStackTrace();

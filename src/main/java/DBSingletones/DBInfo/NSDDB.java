@@ -23,14 +23,16 @@ private static ConnectionSource connectionSource = null;
 
 
 
-    private static Connection getConnection() throws URISyntaxException, SQLException {
+    public static String[] getConnection() throws URISyntaxException, SQLException {
         URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
         DB_LOGIN = dbUri.getUserInfo().split(":")[0];
         DB_PASS = dbUri.getUserInfo().split(":")[1];
         DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-        return DriverManager.getConnection(DBURL, DB_LOGIN, DB_PASS);
+        DriverManager.getConnection(DBURL, DB_LOGIN, DB_PASS);
+
+        return new String[]{DBURL,DB_LOGIN,DB_PASS};
     }
 
    public static ConnectionSource getConnectionSourse(){

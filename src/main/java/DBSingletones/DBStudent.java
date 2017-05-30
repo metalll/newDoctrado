@@ -4,8 +4,10 @@ import DBSingletones.DBInfo.NSDDB;
 import Model.Student;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,8 +36,13 @@ public class DBStudent {
     private DBStudent(){
 
         try {
-            dao = DaoManager.createDao(NSDDB.getConnectionSourse(),Student.class);
-        } catch (SQLException e) {
+
+
+
+            String[] str =  NSDDB.getConnection();
+
+            dao = DaoManager.createDao(new JdbcConnectionSource(str[0],str[1],str[2]),Student.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -43,7 +50,7 @@ public class DBStudent {
         if(dao!=null){
             try {
                 if (!dao.isTableExists()) {
-                    TableUtils.createTable(NSDDB.getConnectionSourse(),Student.class);
+                    TableUtils.createTable(dao.getConnectionSource(),Student.class);
                 }
             }catch (Exception e){
                 e.printStackTrace();
