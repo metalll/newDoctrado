@@ -29,6 +29,7 @@ public class FileControllerServlet extends HttpServlet{
     @Override // putFile
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         URLConnection connection = new URL("https://datadoctrado-sviasy.rhcloud.com/file").openConnection(); //todo Data Doctrado
+
         connection.setDoOutput(true); // POST
 // Copy headers if necessary.
 
@@ -39,12 +40,14 @@ public class FileControllerServlet extends HttpServlet{
 
         InputStream input2 = connection.getInputStream();
         OutputStream output2 = resp.getOutputStream();
+
+
 // Copy response body from input2 to output2=
 
 //        output1.write(input1.read());
 //        output2.write(input2.read());
 
-
+        connection.connect();
 
     }
 
