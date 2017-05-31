@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 
 import javax.servlet.ServletException;
@@ -122,7 +123,7 @@ public class FileControllerServlet extends HttpServlet{
             public HttpResponse handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
                 PrintWriter out = resp.getWriter();
                 resp.setStatus(HttpServletResponse.SC_OK);
-                out.write(httpResponse.toString());
+                out.write(EntityUtils.toString(httpResponse.getEntity()));
                 out.flush();
                 out.close();
 
