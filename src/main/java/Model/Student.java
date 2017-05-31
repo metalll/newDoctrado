@@ -30,8 +30,11 @@ public class Student extends User {
     @DatabaseField
     private String surname;
 
-    @DatabaseField
 
+    @DatabaseField
+    private int balance;
+
+    @DatabaseField
     private String telNumber;
 
 
@@ -189,5 +192,13 @@ public class Student extends User {
 
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }

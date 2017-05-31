@@ -222,6 +222,7 @@ public class AuthServlet extends HttpServlet{
             String educationInfoDoc = null;
             String bornDate = null;
             String telNumber = null;
+            int balance = 100;
 
             try {
                 email = parameterMap.get("email")[0];
@@ -253,6 +254,7 @@ public class AuthServlet extends HttpServlet{
                     tempStudent.setFirstname(firstname);
                     tempStudent.setActivated(false);
                     tempStudent.setCity(city);
+                    tempStudent.setBalance(100);
                     tempStudent.setAvatar(avatar);
                     tempStudent.setSurname(surname);
                     tempStudent.setBornDate(bornDate);
@@ -310,6 +312,32 @@ public class AuthServlet extends HttpServlet{
 
             }
 
+
+
+
+
+        }
+
+
+        if(role.equals(UserRole.TEACHER)){
+
+            long id = -1;
+            String email = null;
+            String passwordHex = null;
+            String avatar = null;
+            String name = null;
+            String surname = null;
+            String firstname = null;
+            String cardNumber = null;
+            String telNumber = null;
+            String cardExploedInfo = null;
+            String cardCSV = null;
+            String expirence = null;
+            String bornDate = null;
+            String educationInfo = null;
+            String educationInfoDoc = null;
+            int balance = 100;
+            boolean isActivated = false;
 
 
 

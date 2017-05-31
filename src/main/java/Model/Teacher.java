@@ -30,7 +30,8 @@ public class Teacher extends User {
     private String firstname;
     @DatabaseField
     private String cardNumber;
-
+    @DatabaseField
+    private int balance;
     @DatabaseField
     private String telNumber;
     @DatabaseField
@@ -175,5 +176,13 @@ public class Teacher extends User {
 
     public void setTelNumber(String telNumber) {
         this.telNumber = telNumber;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }
