@@ -31,6 +31,7 @@ public class FileControllerServlet extends HttpServlet{
         URLConnection connection = new URL("https://datadoctrado-sviasy.rhcloud.com/file").openConnection(); //todo Data Doctrado
 
         connection.setDoOutput(true); // POST
+        connection.setDoInput(true);
 // Copy headers if necessary.
 
         InputStream input1 = req.getInputStream();
