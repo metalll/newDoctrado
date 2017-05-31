@@ -90,7 +90,10 @@ public class FileControllerServlet extends HttpServlet{
                     // processes only fields that are not form fields
                     if (!item.isFormField()) {
 
-                        retEndFile = new File(System.getProperty("java.io.tmpdir"));
+                        String fileName = new File(item.getName()).getName();
+                        String filePath = System.getProperty("java.io.tmpdir") + File.separator + fileName;
+
+                        retEndFile = new File(filePath);
                         retEndFile.setReadable(true, false);
                         retEndFile.setWritable(true, false);
                         // saves the file on disk
