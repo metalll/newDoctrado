@@ -122,7 +122,7 @@ public class FileControllerServlet extends HttpServlet{
             public HttpResponse handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
                 PrintWriter out = resp.getWriter();
                 resp.setStatus(HttpServletResponse.SC_OK);
-                out.write(httpResponse.getEntity().getContent().read());
+                out.write(httpResponse.getEntity().getContent().toString());
                 out.flush();
                 out.close();
 
