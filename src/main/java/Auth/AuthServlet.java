@@ -39,6 +39,8 @@ public class AuthServlet extends HttpServlet{
             req.getSession().removeAttribute(Authorizator.AUTH_ATTR);
             isSuccesfull = true;
 
+            req.changeSessionId();
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -138,6 +140,11 @@ public class AuthServlet extends HttpServlet{
         UserRole userRole = UserRole.ANNONYMOUS;
 
         //TODO get exist user is db
+
+
+
+
+
 
 
         AuthRealm resultRealm = Authorizator.getInstance().Auth(login,pass);
@@ -338,6 +345,82 @@ public class AuthServlet extends HttpServlet{
             String educationInfoDoc = null;
             int balance = 100;
             boolean isActivated = false;
+            String city = null;
+
+            if(DBAdmin.getInstance().hasAdmin(email)|| DBStudent.getInstance().hasStudent(email)|| DBTeacher.getInstance().hasTeacher(email)){
+                throw new IllegalFormatCodePointException(1);
+
+            }else{
+
+                email = parameterMap.get("email")[0];
+                passwordHex = parameterMap.get("password")[0];
+                avatar = parameterMap.get("password")[0];
+                name = parameterMap.get("name")[0];
+                surname = parameterMap.get("surname")[0];
+                firstname = parameterMap.get("firstName")[0];
+                city = parameterMap.get("city")[0];
+                educationInfo = parameterMap.get("eduInfo")[0];
+                educationInfoDoc = parameterMap.get("eduInfoDoc")[0];
+                bornDate = parameterMap.get("bornDate")[0];
+                telNumber = parameterMap.get("telNumber")[0];
+                expirence = parameterMap.get("expirence")[0];
+
+
+
+                Teacher tempTeacher = new Teacher();
+
+                tempTeacher.setEmail(email);
+                tempTeacher.setPasswordHex(passwordHex);
+                tempTeacher.setCardNumber("");
+                tempTeacher.setCardCSV("");
+                tempTeacher.setCardExploedInfo("");
+                tempTeacher.setName(name);
+                tempTeacher.setFirstname(firstname);
+                tempTeacher.setActivated(false);
+                tempTeacher.setCity(city);
+                tempTeacher.setBalance(100);
+                tempTeacher.setAvatar(avatar);
+                tempTeacher.setSurname(surname);
+                tempTeacher.setBornDate(bornDate);
+                tempTeacher.setEducationInfo(educationInfo);
+                tempTeacher.setEducationInfoDoc(educationInfoDoc);
+                tempTeacher.setTelNumber(telNumber);
+                tempTeacher.setExpirence(expirence);
+
+                DBTeacher.getInstance().addTeacher(tempTeacher);
+
+
+
+
+                AuthRealm resultRealm = Authorizator.getInstance().Auth(email,passwordHex);
+                if(resultRealm.getAccessRole()==UserRole.ANNONYMOUS){
+                    PrintWriter out = resp.getWriter();
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    out.write("-1");
+                    out.flush();
+                    out.close();
+                }else{
+                    req.setAttribute("auth",resultRealm);
+                    PrintWriter out = resp.getWriter();
+                    resp.setStatus(HttpServletResponse.SC_OK);
+                    switch (resultRealm.getAccessRole()){
+                        case ADMIN:
+                            out.write("1"); break;
+                        case STUDENT:
+                            out.write("2"); break;
+                        case TEACHER:
+                            out.write("3"); break;
+                    }
+
+                    out.flush();
+                    out.close();
+                }
+
+
+            }
+
+
+
 
 
 
