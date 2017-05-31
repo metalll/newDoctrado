@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="ZWWdaYwb-E3JvxMSiXcCDveaghrcK6aBBCohc9KAV_g" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Doctrado</title>
+    <!-- CSS  -->
+    <meta name="yandex-verification" content="eb0417ab5cfa9ad9"/>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="csrf-token" content="Wx6PFl4mn9yqYIFxDmcvdgOH6tNtWn3dVOktVC7V">
+    <title>Doctrado</title>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <h6 class="center-align center col s12">Ваш аватар для сайта</h6>
+    </div>
+
+    <button style="position: relative;
+                       background: #ffffff;
+                       background-color: #ffffff;
+                       width: 100%;
+                       max-width: 220px;
+                       height: 220px;
+                       display: block;
+                       border: none;
+                       margin: 0 auto;"
+            type="button"
+            onclick="uploadPhoto()">
+
+
+        <img class="responsive-img circle" src="/img/camera.png" id="avatar-img">
+
+    </button>
+    <input accept="image/*" style="display: none;" id="avatar-input" type="file">
+
+
+    <div class="row col s12">
+
+
+        <a class="center center-align col s12 waves-effect waves-light btn" onclick="upload();">Зарегестрироваться</a>
+
+
+    </div>
+
+</div>
+<div class="container" id="img_container">
+
+</div>
+
+
+</body>
+
+<script>
+    // get all Banners
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/Banner",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("Banners JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/Comment",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("Comment JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/Industry",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("Industry JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/News",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("News JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/Service",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("Service JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    $.ajax({
+        url: "http://blooming-tundra-50496.herokuapp.com/API/SliderView",
+        type: "GET",
+        success: function (data) {
+            var jsonEx = JSON.parse(data);
+            console.log("SliderView JSON :" + jsonEx);
+            console.log(jsonEx);
+        }
+    });
+    function getUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+    }
+    $("#avatar-input").change(function () {
+        hasPhoto = false;
+        var file, img;
+        var _URL = window.URL || window.webkitURL;
+        if ((file = this.files[0])) {
+            if (this.files[0].size > 5242880) {
+                document.getElementById("avatar-input").value = "";
+                alert("Размер картинки не должен превышать 5Мб");
+                return;
+            }
+            img = new Image();
+            img.onload = function () {
+                hasPhoto = true;
+                $("#avatar-img").css('width', '100%').css('height', '100%');
+                document.getElementById('avatar-img').src = img.src;
+            };
+            img.onerror = function () {
+                alert("Выбранный файл не является картинкой!");
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+    });
+    function uploadPhoto() {
+        $("#avatar-input").click();
+    }
+    function upload() {
+        var UUIDImg = getUUID();
+        var form = new FormData();
+        var image = $('#avatar-input').prop('files')[0];
+        form.append('key',UUIDImg);
+        form.append('image', image);
+        $.ajax({
+            type: 'post',
+            url:"/API/File",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: form,
+            success: function (data) {
+
+                var container = document.getElementById('img_container');
+                container.innerHTML = '<img src="'+data+'">';
+
+            }
+        });
+    }
+</script>
+
+</html>
