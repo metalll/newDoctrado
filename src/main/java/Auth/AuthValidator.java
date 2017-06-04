@@ -54,6 +54,17 @@ public class AuthValidator extends HttpServlet {
         boolean checkLogin = stRetVal[0]||tRetVal[0]||aRetVal;
         boolean checkTel = stRetVal[1]||tRetVal[1];
 
+
+
+        if(!checkLogin&&!checkTel) {
+            PrintWriter out1 = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_OK);
+            out1.write("0");
+            out1.flush();
+            out1.close();
+        }
+
+
         if(checkTel&&checkLogin){
 
 
@@ -95,11 +106,6 @@ public class AuthValidator extends HttpServlet {
 
 
 
-        PrintWriter out = resp.getWriter();
-        resp.setStatus(HttpServletResponse.SC_OK);
-        out.write("0");
-        out.flush();
-        out.close();
 
 
 

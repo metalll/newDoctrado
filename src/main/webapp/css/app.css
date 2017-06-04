@@ -6,3 +6,11 @@
     opacity: 0.6; /* Значение прозрачности */
     filter: alpha(Opacity=60);
 }
+
+
+
+.hand_cursor{
+
+    cursor: pointer;
+
+}

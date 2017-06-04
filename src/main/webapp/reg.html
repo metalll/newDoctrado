@@ -24,88 +24,51 @@
 
 
 <div class="row" style="position: absolute; min-height: 100%; height:100%; width: 100%;">
-    <div class="col s12 m7 white" style="min-height:100%; height: 100%;">
+    <div id = "login_div" class="col s12 m7 white" style="min-height:100%; height: 100%;">
 
         <div class="row">
             <div class="col s12" style="padding: 10px;">
                 <a href="index.html">
                     <img src="favicon.ico" style="height: 28px; vertical-align: middle; margin-top: -7px;"><span class="grey-text text-darken-1 lighten" style="font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;"><b class="orange-text">Doct</b>rado</span>
                 </a>
-
-
-
-
-
-
-
             </div>
         </div>
-
-
-
         <div class="row">
             <div class="col s12 edge">
                 <h4 class="lato">Создание аккаунта</h4>
-
-
             </div>
         </div>
-
         <div class="row" style="max-width: 600px;">
-            <div class="col s12 edge">
-
-
-
-                    <input type="hidden" name="wix" value="">
-                    <h5 class="hide" style="text-align: center; font-weight: 300;"> - Or - </h5>
-
-
-                    <label for="username" style="font-size: 16px;">Email</label>
-                    <input id="username" class=" " type="email" name="username">
-
-                    <label for="telephone" style="font-size: 16px;">Телефон</label>
-                    <input id="telephone" class=" " type="tel" name="telephone">
-
-                    <div class="row">
-                        <div class=" col s12 m3" style="padding:0;">
-
-                            <a class="btn btn-large green" href="javascript:void(0);" onclick="traceParam()">Далее</a>
-
+            <div class="row col s12 edge">
+                <form class="col s12 ">
+                    <div class="row">`
+                        <div class="input-field col s12">
+                            <input id="username" type="email" class="validate">
+                            <label id="username-l" for="username" data-error="неверный формат email" data-success="">Email</label>
                         </div>
-
                     </div>
-
-
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="telephone"  pattern="0[0-9]{2,2}–[0-9]{3,3}–[0-9]{2,2}–[0-9]{2,2}" type="tel" class="validate" placeholder="063-333-33-33">
+                            <label id = "telephone-l" for="telephone" data-error="неверный формат телефона" data-success="">Номер телефона</label>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-
-
-
-
+        <a href="javascript:void(0)" class="btn col s12 center center-aling green" onclick="traceParam();">Далее</a>
     </div>
-
-
-    <div class="col s12 m5 orange" style="min-height: 100%; padding: 10% 5%;">
+    <div class="col s12 m5  orange" style="min-height: 100%; padding: 10% 5%;">
         <img class="circle" src="img/avatar-2.png">
-
-
         <h5 class="lato white-text">Зарегестрируйтесь сейчас</h5>
-
-
-
-
         <h6 class="light white-text half-line">Зарегестрируйтейсь и получите 100 грн на счет.</h6>
         <h6 class="light white-text half-line">Вы можете стать преподавателем и зарабатывать деньги. Вы можете быть студентом и получить сертификаты об успешном прохождении курса</h6>
         <br>
-
         <h5 class="lato white-text" style=";font-weight: 600;">у вас есть аккаунт? </h5>
         <a class="login btn green white-text" style="text-decoration:none;" href="sign_in.html" >войти можно тут</a>
-
         <br><br>
-
         <h6 class="light white-text half-line"> При входе в аккаунт ви принимаете <a href="/termsofservice.html" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;"> Условия использования </a> и <a href="/privacysb.php" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;">Условия конфедициальности</a>. В случае несогласия вы не можете использовать Doctrado.</h6>
     </div>
-
 </div>
 
 
@@ -114,11 +77,177 @@
 
 <script>
 
+
+
+    var telephone = "";
+    var email = "";
+    var role = "";
+
+
+
+
+    function selectStudent() {
+
+        role = "student";
+
+    }
+
+    function selectTeacher() {
+        role = "teacher";
+    }
+
+
+    var preloader = "";
+
+    var page1 = "";
+
+    var page2 = "";
+
+
+    var page3 = "";
+
+    $(document).ready(function () {
+
+
+        page1 += "   <div class=\"row\">";
+        page1 += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        page1 += "                <a href=\"index.html\">";
+        page1 += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        page1 += "                <\/a>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <div class=\"row\">";
+        page1 += "            <div class=\"col s12 edge\">";
+        page1 += "                <h4 class=\"lato\">Создание аккаунта<\/h4>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <div class=\"row\" style=\"max-width: 600px;\">";
+        page1 += "            <div class=\"row col s12 edge\">";
+        page1 += "                <form class=\"col s12 \">";
+        page1 += "                    <div class=\"row\">`";
+        page1 += "                        <div class=\"input-field col s12\">";
+        page1 += "                            <input id=\"username\" type=\"email\" class=\"validate\">";
+        page1 += "                            <label id=\"username-l\" for=\"username\" data-error=\"неверный формат email\" data-success=\"\">Email<\/label>";
+        page1 += "                        <\/div>";
+        page1 += "                    <\/div>";
+        page1 += "                    <div class=\"row\">";
+        page1 += "                        <div class=\"input-field col s12\">";
+        page1 += "                            <input id=\"telephone\"  pattern=\"0[0-9]{2,2}–[0-9]{3,3}–[0-9]{2,2}–[0-9]{2,2}\" type=\"tel\" class=\"validate\" placeholder=\"063-333-33-33\">";
+        page1 += "                            <label id = \"telephone-l\" for=\"telephone\" data-error=\"неверный формат телефона\" data-success=\"\">Номер телефона<\/label>";
+        page1 += "                        <\/div>";
+        page1 += "                    <\/div>";
+        page1 += "                <\/form>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <a href=\"javascript:void(0)\" class=\"btn col s12 center center-aling green\" onclick=\"traceParam();\">Далее<\/a>";
+
+
+
+
+        preloader += "  <div class=\"col s12 m7 white\" style=\"min-height:100%; height: 100%;\">";
+        preloader += "        <div class=\"row\">";
+        preloader += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        preloader += "                <a href=\"index.html\">";
+        preloader += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        preloader += "                <\/a>";
+        preloader += "            <\/div>";
+        preloader += "        <\/div>";
+        preloader += "        <div class=\"row col s12\" style=\"max-width: 600px; min-height: 80%\">";
+        preloader += "            <div class=\"preloader-wrapper center center-align big active\" style=\"margin-left: 60% ; margin-top: 50% \">";
+        preloader += "                <div class=\"spinner-layer spinner-green-only\">";
+        preloader += "                    <div class=\"circle-clipper left\">";
+        preloader += "                        <div class=\"circle\"><\/div>";
+        preloader += "                    <\/div><div class=\"gap-patch\">";
+        preloader += "                    <div class=\"circle\"><\/div>";
+        preloader += "                <\/div><div class=\"circle-clipper right\">";
+        preloader += "                    <div class=\"circle\"><\/div>";
+        preloader += "                <\/div>";
+        preloader += "                <\/div>";
+        preloader += "            <\/div>";
+        preloader += "        <\/div>";
+
+
+    });
+
+
+    $('#username').on('input',function () {
+        if($('#username').hasClass('invalid')&& $('#username-l').attr('data-error')=='email уже занят'){
+            $('#username-l').removeAttr('data-error');
+            document.getElementById('username-l').setAttribute('data-error',"неверный формат email");
+            $('#username').removeClass('invalid')
+        }
+    });
+
+
+    var prevLength = 0;
+    $('#telephone').on('input',function () {
+        if($('#telephone').hasClass('invalid')&& $('#telephone-l').attr('data-error')=='номер телефона уже занят'){
+            $('#telephone-l').removeAttr('data-error');
+            document.getElementById('telephone-l').setAttribute('data-error',"неверный формат телефона");
+            $('#telephone').removeClass('invalid')
+        }
+
+        var telep = $(this).val();
+
+        if(telep[telep.length-1].match(/^[–\+]?\d+/) === null&&telep[telep.length-1]!='–'||telep.length>13){
+            var len = telep.length;
+            len-=1;
+            $(this).val(telep.substring(0,len));
+            return;
+        }
+
+
+
+        switch ($(this).val().length){
+
+
+
+
+            case 10:
+            case 7:
+            case 3:
+
+
+
+
+
+
+                if(prevLength<$(this).val().length){
+                var tVal = $(this).val();
+                tVal += "–";
+                $(this).val(tVal);
+                }
+                break;
+
+        }
+
+
+
+        prevLength = $(this).val().length;
+
+    });
+
+
+
+
     function traceParam() {
         console.log('startTracingParam');
 
         var loginField = document.getElementById('username');
         var telField = document.getElementById('telephone');
+        if($('#username').hasClass('invalid')||$('#telephone').hasClass('invalid')||loginField.value==""||telField.value==""){
+            Materialize.toast('не все поля заполнены правильно', 3000, 'rounded red');
+            return;
+
+        }
+
+
+
+
+        document.getElementById('login_div').innerHTML = preloader;
+
+        var lfV = loginField.value;
+        var tfV = telField.value;
 
         $.ajax({
 
@@ -128,7 +257,56 @@
                 "telNumber":telField.value},
             success:function (data) {
 
-            console.log("data");
+                if(data=='0'){
+
+                    //do next;
+
+                }else{
+
+                    document.getElementById('login_div').innerHTML = page1;
+
+                    document.getElementById('username').value = lfV;
+                    document.getElementById('telephone').value = tfV;
+
+
+                    $('#username-l').addClass('active');
+                    $('#telephone-l').addClass('active');
+                    Materialize.updateTextFields();
+
+
+                    switch (data){
+                        case '1':
+                            $('#username-l').removeAttr('data-error');
+                            document.getElementById('username-l').setAttribute('data-error',"email уже занят");
+                            Materialize.toast('email уже занят', 3000, 'rounded red');
+                            $('#username').addClass('invalid');
+                            break;
+                        case '2':
+                            $('#telephone-l').removeAttr('data-error');
+                            document.getElementById('telephone-l').setAttribute('data-error',"номер телефона уже занят");
+                            Materialize.toast('номер телефона уже занят', 3000, 'rounded red');
+                            $("#telephone").addClass('invalid');
+                            break;
+                        case '3':
+                            $('#telephone-l').removeAttr('data-error');
+                            document.getElementById('telephone-l').setAttribute('data-error',"номер телефона уже занят");
+                            Materialize.toast('номер телефона уже занят', 3000, 'rounded red');
+                            $("#telephone").addClass('invalid');
+
+                            $('#username-l').removeAttr('data-error');
+                            Materialize.toast('email уже занят', 3000, 'rounded red');
+                            document.getElementById('username-l').setAttribute('data-error',"email уже занят");
+                            $('#username').addClass('invalid');
+                            break;
+                    }
+
+
+
+
+                }
+
+
+
 
             }
 

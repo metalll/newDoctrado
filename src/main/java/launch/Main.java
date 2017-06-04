@@ -66,8 +66,6 @@ public class Main {
             jarScanFilter.setTldSkip("*");
         }
 
-        System.out.println("configuring app with basedir: " + webContentFolder.getAbsolutePath());
-        System.out.println(" hi " + NSDDB.getConnection()[0] + " " + NSDDB.getConnection()[1] + " " + NSDDB.getConnection()[2]);
         // Declare an alternative location for your "WEB-INF/classes" dir
         // Servlet 3.0 annotation will work
         File additionWebInfClassesFolder = new File(root.getAbsolutePath(), "target/classes");

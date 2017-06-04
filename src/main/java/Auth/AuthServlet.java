@@ -75,7 +75,7 @@ public class AuthServlet extends HttpServlet{
         AuthRealm authRealm = null;
 
         try {
-            authRealm = (AuthRealm) req.getAttribute(Authorizator.AUTH_ATTR);
+            authRealm = (AuthRealm) req.getSession().getAttribute(Authorizator.AUTH_ATTR);
         }catch (Exception e){
            // authRealm = new AuthRealm();
         }
@@ -156,7 +156,8 @@ public class AuthServlet extends HttpServlet{
             out.flush();
             out.close();
         }else{
-            req.setAttribute("auth",resultRealm);
+
+            req.getSession().setAttribute("auth",resultRealm);
             PrintWriter out = resp.getWriter();
             resp.setStatus(HttpServletResponse.SC_OK);
             switch (resultRealm.getAccessRole()){
@@ -365,8 +366,6 @@ public class AuthServlet extends HttpServlet{
                 telNumber = parameterMap.get("telNumber")[0];
                 expirence = parameterMap.get("expirence")[0];
 
-
-
                 Teacher tempTeacher = new Teacher();
 
                 tempTeacher.setEmail(email);
@@ -388,9 +387,6 @@ public class AuthServlet extends HttpServlet{
                 tempTeacher.setExpirence(expirence);
 
                 DBTeacher.getInstance().addTeacher(tempTeacher);
-
-
-
 
                 AuthRealm resultRealm = Authorizator.getInstance().Auth(email,passwordHex);
                 if(resultRealm.getAccessRole()==UserRole.ANNONYMOUS){
@@ -415,28 +411,9 @@ public class AuthServlet extends HttpServlet{
                     out.flush();
                     out.close();
                 }
-
-
             }
 
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

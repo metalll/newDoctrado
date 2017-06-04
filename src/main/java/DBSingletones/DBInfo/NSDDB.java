@@ -24,6 +24,8 @@ private static ConnectionSource connectionSource = null;
 
 
     public static String[] getConnection() throws URISyntaxException, SQLException {
+
+       try{
         URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
         DB_LOGIN = dbUri.getUserInfo().split(":")[0];
@@ -32,6 +34,14 @@ private static ConnectionSource connectionSource = null;
 
 
         return new String[]{DBURL,DB_LOGIN,DB_PASS};
+    }catch(Exception e) {
+
+           DB_LOGIN = "bf8592ce2655df";
+           DB_PASS = "50429447";
+           DBURL = "jdbc:mysql://us-cdbr-iron-east-03.cleardb.net:3306/heroku_4bec834d769add6?reconnect=true";
+
+           return new String[]{DBURL,DB_LOGIN,DB_PASS};
+       }
     }
 
 

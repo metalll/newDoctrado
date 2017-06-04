@@ -1,8 +1,7 @@
 package DBSingletones;
 
 import DBSingletones.DBInfo.NSDDB;
-import Model.Admin;
-import Model.Teacher;
+import Model.*;
 import Model.Teacher;
 import Model.Teacher;
 import com.j256.ormlite.dao.Dao;
@@ -65,7 +64,6 @@ public class DBTeacher {
 
     }
 
-
     public List<Teacher> queryAllTeachers(){
 
         List<Teacher> retVal = null;
@@ -88,12 +86,19 @@ public class DBTeacher {
     public Teacher queryTeacher(String login){
         Teacher retVal = null;
         try {
-            List<Teacher> tempRetVal = null;
-            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            List<Teacher> tempRetVal = queryAllTeachers();
+
             if(tempRetVal.size()>0){
-                retVal = tempRetVal.get(0);
+
+                for(Teacher tempTeacher: tempRetVal){
+
+                    if(tempTeacher.getEmail().equals(login)) return tempTeacher;
+
+
+                }
+
             }
-            dao.getConnectionSource().close();
+            // dao.getConnectionSource().close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -107,44 +112,21 @@ public class DBTeacher {
 
 
     public boolean[] hasTeacher(String login,String tel){
-        Teacher tTeacher = null;
-        Teacher tTeacher2 = null;
-        try {
+        boolean hasLogin = false;
+        boolean hasTelephone = false;
 
-            if(login==null||login.equals("")){
+        for (Teacher tempStudnet: queryAllTeachers()
+                ) {
 
-            }else{
-                List<Teacher>tempRetVal = null;
-                tempRetVal = dao.queryBuilder().where().eq("email", login).query();
-                if(tempRetVal.size()>0){
-                    tTeacher = tempRetVal.get(0);
-                }
-                dao.getConnectionSource().close();
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-
-        }
-
-        try {
-            if(tel==null||tel.equals("")){}
-            else{
-                List<Teacher>tempRetVal = null;
-                tempRetVal = dao.queryBuilder().where().eq("telNumber",tel).query();
-                if(tempRetVal.size()>0){
-                    tTeacher2 = tempRetVal.get(0);
-                }
-                dao.getConnectionSource().close();
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-
+            if(tempStudnet.getEmail().equals(login)) hasLogin = true;
+            if(tempStudnet.getTelNumber().equals(tel)) hasTelephone = true;
+            if(hasLogin&&hasTelephone) break;
         }
 
 
-        return new boolean[]{tTeacher!=null,tTeacher2!=null};
+
+        return new boolean[]{hasLogin,hasTelephone};
     }
-
 
 
     public void addTeacher(Teacher Teacher){

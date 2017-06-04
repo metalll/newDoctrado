@@ -94,12 +94,19 @@ public class DBStudent {
     public Student queryStudent(String login){
         Student retVal = null;
         try {
-            List<Student> tempRetVal = null;
-            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
+            List<Student> tempRetVal = queryAllStudents();
+
             if(tempRetVal.size()>0){
-                retVal = tempRetVal.get(0);
+
+                for(Student tempStudent: tempRetVal){
+
+                    if(tempStudent.getEmail().equals(login)) return tempStudent;
+
+
+                }
+
             }
-            dao.getConnectionSource().close();
+           // dao.getConnectionSource().close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -113,42 +120,20 @@ public class DBStudent {
 
 
     public boolean[] hasStudent(String login,String tel){
-        Student tStudent = null;
-        Student tStudent2 = null;
-        try {
+        boolean hasLogin = false;
+        boolean hasTelephone = false;
 
-            if(login==null||login.equals("")){
+        for (Student tempStudnet: queryAllStudents()
+             ) {
 
-            }else{
-            List<Student>tempRetVal = null;
-            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
-            if(tempRetVal.size()>0){
-                tStudent = tempRetVal.get(0);
-            }
-            dao.getConnectionSource().close();
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-
-        }
-
-        try {
-            if(tel==null||tel.equals("")){}
-            else{
-            List<Student>tempRetVal = null;
-            tempRetVal = dao.queryBuilder().where().eq("telNumber",tel).query();
-            if(tempRetVal.size()>0){
-                tStudent2 = tempRetVal.get(0);
-            }
-            dao.getConnectionSource().close();
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-
+            if(tempStudnet.getEmail().equals(login)) hasLogin = true;
+            if(tempStudnet.getTelNumber().equals(tel)) hasTelephone = true;
+            if(hasLogin&&hasTelephone) break;
         }
 
 
-        return new boolean[]{tStudent!=null,tStudent2!=null};
+
+        return new boolean[]{hasLogin,hasTelephone};
     }
 
     public void addStudent(Student student){

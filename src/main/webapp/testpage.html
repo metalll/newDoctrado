@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-
-
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta name="google-site-verification" content="ZWWdaYwb-E3JvxMSiXcCDveaghrcK6aBBCohc9KAV_g" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>Doctrado</title>
-    <!-- CSS  -->
-    <meta name="yandex-verification" content="eb0417ab5cfa9ad9"/>
+    <meta charset="UTF-8">
+    <title>Doctrado - вход</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/app.css"  media="screen,projection"/>
 
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="csrf-token" content="Wx6PFl4mn9yqYIFxDmcvdgOH6tNtWn3dVOktVC7V">
-    <title>Doctrado</title>
-
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-
-
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 
@@ -32,154 +17,367 @@
 
 
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 
 
 
-<div class="container">
-    <div class="row">
-        <h6 class="center-align center col s12">Ваш аватар для сайта</h6>
+
+
+<div class="row" style="position: absolute; min-height: 100%; height:100%; width: 100%;">
+    <div id = "login_div" class="col s12 m7 white" style="min-height:100%; height: 100%;">
+
+        <div class="row">
+            <div class="col s12" style="padding: 10px;">
+                <a href="index.html">
+                    <img src="favicon.ico" style="height: 28px; vertical-align: middle; margin-top: -7px;"><span class="grey-text text-darken-1 lighten" style="font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;"><b class="orange-text">Doct</b>rado</span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 edge">
+                <h4 class="lato">Выберите тип аккаунта</h4>
+            </div>
+        </div>
+        <div class="row" style="max-width: 600px;">
+            <div class="row col s12 edge">
+
+
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-image center hoverable center-align hand_cursor" href="javascript:void(0);" onclick="selectTeacher();">
+                                <img src="img/img_avatar3.png">
+                                <span class="card-title backgr-col">Преподаватель</span>
+                            </div>
+
+                        </div>
+                    </div>
+                <div class="col s12 m6">
+                    <div class="card center center-align hoverable hand_cursor" href="javascript:void(0);" onclick="selectStudent();">
+                        <div class="card-image">
+                            <img src="img/student.png">
+                            <span class="card-title backgr-col">Студент</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
-
-    <button style="position: relative;
-                       background: #ffffff;
-                       background-color: #ffffff;
-                       width: 100%;
-                       max-width: 220px;
-                       height: 220px;
-                       display: block;
-                       border: none;
-                       margin: 0 auto;"
-            type="button"
-            onclick="uploadPhoto()">
-
-
-        <img class="responsive-img circle" src="/img/camera.png" id="avatar-img">
-
-    </button>
-    <input accept="image/*" style="display: none;" id="avatar-input" type="file">
-
-
-    <div class="row col s12">
-
-
-        <a class="center center-align col s12 waves-effect waves-light btn" onclick="upload();">Зарегестрироваться</a>
-
-
+    <div class="col s12 m5  orange" style="min-height: 100%; padding: 10% 5%;">
+        <img class="circle" src="img/avatar-2.png">
+        <h5 class="lato white-text">Зарегестрируйтесь сейчас</h5>
+        <h6 class="light white-text half-line">Зарегестрируйтейсь и получите 100 грн на счет.</h6>
+        <h6 class="light white-text half-line">Вы можете стать преподавателем и зарабатывать деньги. Вы можете быть студентом и получить сертификаты об успешном прохождении курса</h6>
+        <br>
+        <h5 class="lato white-text" style=";font-weight: 600;">у вас есть аккаунт? </h5>
+        <a class="login btn green white-text" style="text-decoration:none;" href="sign_in.html" >войти можно тут</a>
+        <br><br>
+        <h6 class="light white-text half-line"> При входе в аккаунт ви принимаете <a href="/termsofservice.html" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;"> Условия использования </a> и <a href="/privacysb.php" class="white-text" target="_blank" style="font-weight: 700; text-decoration: underline;">Условия конфедициальности</a>. В случае несогласия вы не можете использовать Doctrado.</h6>
     </div>
-
-</div>
-<div class="container" id="img_container">
-
 </div>
 
 
-</body>
+
+
 
 <script>
-    // get all Banners
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/Banner",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("Banners JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/Comment",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("Comment JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/Industry",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("Industry JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/News",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("News JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/Service",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("Service JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    $.ajax({
-        url: "http://blooming-tundra-50496.herokuapp.com/API/SliderView",
-        type: "GET",
-        success: function (data) {
-            var jsonEx = JSON.parse(data);
-            console.log("SliderView JSON :" + jsonEx);
-            console.log(jsonEx);
-        }
-    });
-    function getUUID() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
+
+    var telephone = "";
+    var email = "";
+    var role = "";
+
+
+
+
+    function selectStudent() {
+
+      role = "student";
+
     }
-    $("#avatar-input").change(function () {
-        hasPhoto = false;
-        var file, img;
-        var _URL = window.URL || window.webkitURL;
-        if ((file = this.files[0])) {
-            if (this.files[0].size > 5242880) {
-                document.getElementById("avatar-input").value = "";
-                alert("Размер картинки не должен превышать 5Мб");
-                return;
-            }
-            img = new Image();
-            img.onload = function () {
-                hasPhoto = true;
-                $("#avatar-img").css('width', '100%').css('height', '100%');
-                document.getElementById('avatar-img').src = img.src;
-            };
-            img.onerror = function () {
-                alert("Выбранный файл не является картинкой!");
-            };
-            img.src = _URL.createObjectURL(file);
+
+    function selectTeacher() {
+        role = "teacher";
+    }
+
+
+
+
+    var preloader = "";
+
+    var page1 = "";
+
+    var page2 = "";
+
+
+    var page3 = "";
+
+    $(document).ready(function () {
+
+
+        page2 += "";
+        page2 += "        <div class=\"row\">";
+        page2 += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        page2 += "                <a href=\"index.html\">";
+        page2 += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        page2 += "                <\/a>";
+        page2 += "            <\/div>";
+        page2 += "        <\/div>";
+        page2 += "        <div class=\"row\">";
+        page2 += "            <div class=\"col s12 edge\">";
+        page2 += "                <h4 class=\"lato\">Выберите тип аккаунта<\/h4>";
+        page2 += "            <\/div>";
+        page2 += "        <\/div>";
+        page2 += "        <div class=\"row\" style=\"max-width: 600px;\">";
+        page2 += "            <div class=\"row col s12 edge\">";
+        page2 += "";
+        page2 += "";
+        page2 += "                    <div class=\"col s12 m6\">";
+        page2 += "                        <div class=\"card\">";
+        page2 += "                            <div class=\"card-image center hoverable center-align hand_cursor\" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
+        page2 += "                                <img src=\"img\/img_avatar3.png\">";
+        page2 += "                                <span class=\"card-title backgr-col\">Преподаватель<\/span>";
+        page2 += "                            <\/div>";
+        page2 += "";
+        page2 += "                        <\/div>";
+        page2 += "                    <\/div>";
+        page2 += "                <div class=\"col s12 m6\">";
+        page2 += "                    <div class=\"card center center-align hoverable hand_cursor\" href=\"javascript:void(0);\" onclick=\"selectStudent();\">";
+        page2 += "                        <div class=\"card-image\">";
+        page2 += "                            <img src=\"img\/student.png\">";
+        page2 += "                            <span class=\"card-title backgr-col\">Студент<\/span>";
+        page2 += "                        <\/div>";
+        page2 += "";
+        page2 += "                    <\/div>";
+        page2 += "                <\/div>";
+        page2 += "";
+        page2 += "            <\/div>";
+        page2 += "        <\/div>";
+        page2 += "";
+
+
+
+        page1 += "   <div class=\"row\">";
+        page1 += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        page1 += "                <a href=\"index.html\">";
+        page1 += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        page1 += "                <\/a>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <div class=\"row\">";
+        page1 += "            <div class=\"col s12 edge\">";
+        page1 += "                <h4 class=\"lato\">Создание аккаунта<\/h4>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <div class=\"row\" style=\"max-width: 600px;\">";
+        page1 += "            <div class=\"row col s12 edge\">";
+        page1 += "                <form class=\"col s12 \">";
+        page1 += "                    <div class=\"row\">`";
+        page1 += "                        <div class=\"input-field col s12\">";
+        page1 += "                            <input id=\"username\" type=\"email\" class=\"validate\">";
+        page1 += "                            <label id=\"username-l\" for=\"username\" data-error=\"неверный формат email\" data-success=\"\">Email<\/label>";
+        page1 += "                        <\/div>";
+        page1 += "                    <\/div>";
+        page1 += "                    <div class=\"row\">";
+        page1 += "                        <div class=\"input-field col s12\">";
+        page1 += "                            <input id=\"telephone\"  pattern=\"0[0-9]{2,2}–[0-9]{3,3}–[0-9]{2,2}–[0-9]{2,2}\" type=\"tel\" class=\"validate\" placeholder=\"063-333-33-33\">";
+        page1 += "                            <label id = \"telephone-l\" for=\"telephone\" data-error=\"неверный формат телефона\" data-success=\"\">Номер телефона<\/label>";
+        page1 += "                        <\/div>";
+        page1 += "                    <\/div>";
+        page1 += "                <\/form>";
+        page1 += "            <\/div>";
+        page1 += "        <\/div>";
+        page1 += "        <a href=\"javascript:void(0)\" class=\"btn col s12 center center-aling green\" onclick=\"traceParam();\">Далее<\/a>";
+
+
+
+
+        preloader += "  <div class=\"col s12 m7 white\" style=\"min-height:100%; height: 100%;\">";
+        preloader += "        <div class=\"row\">";
+        preloader += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        preloader += "                <a href=\"index.html\">";
+        preloader += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        preloader += "                <\/a>";
+        preloader += "            <\/div>";
+        preloader += "        <\/div>";
+        preloader += "        <div class=\"row col s12\" style=\"max-width: 600px; min-height: 80%\">";
+        preloader += "            <div class=\"preloader-wrapper center center-align big active\" style=\"margin-left: 60% ; margin-top: 50% \">";
+        preloader += "                <div class=\"spinner-layer spinner-green-only\">";
+        preloader += "                    <div class=\"circle-clipper left\">";
+        preloader += "                        <div class=\"circle\"><\/div>";
+        preloader += "                    <\/div><div class=\"gap-patch\">";
+        preloader += "                    <div class=\"circle\"><\/div>";
+        preloader += "                <\/div><div class=\"circle-clipper right\">";
+        preloader += "                    <div class=\"circle\"><\/div>";
+        preloader += "                <\/div>";
+        preloader += "                <\/div>";
+        preloader += "            <\/div>";
+        preloader += "        <\/div>";
+
+
+    });
+
+
+    $('#username').on('input',function () {
+        if($('#username').hasClass('invalid')&& $('#username-l').attr('data-error')=='email уже занят'){
+            $('#username-l').removeAttr('data-error');
+            document.getElementById('username-l').setAttribute('data-error',"неверный формат email");
+            $('#username').removeClass('invalid')
         }
     });
-    function uploadPhoto() {
-        $("#avatar-input").click();
-    }
-    function upload() {
-        var UUIDImg = getUUID();
-        var form = new FormData();
-        var image = $('#avatar-input').prop('files')[0];
-        form.append('key',UUIDImg);
-        form.append('image', image);
+
+
+    var prevLength = 0;
+    $('#telephone').on('input',function () {
+        if($('#telephone').hasClass('invalid')&& $('#telephone-l').attr('data-error')=='номер телефона уже занят'){
+            $('#telephone-l').removeAttr('data-error');
+            document.getElementById('telephone-l').setAttribute('data-error',"неверный формат телефона");
+            $('#telephone').removeClass('invalid')
+        }
+
+        var telep = $(this).val();
+
+        if(telep[telep.length-1].match(/^[–\+]?\d+/) === null&&telep[telep.length-1]!='–'||telep.length>13){
+            var len = telep.length;
+            len-=1;
+            $(this).val(telep.substring(0,len));
+            return;
+        }
+
+
+
+        switch ($(this).val().length){
+
+
+
+
+            case 10:
+            case 7:
+            case 3:
+
+
+
+
+
+
+                if(prevLength<$(this).val().length){
+                    var tVal = $(this).val();
+                    tVal += "–";
+                    $(this).val(tVal);
+                }
+                break;
+
+        }
+
+
+
+        prevLength = $(this).val().length;
+
+    });
+
+
+
+
+    function traceParam() {
+        console.log('startTracingParam');
+
+        var loginField = document.getElementById('username');
+        var telField = document.getElementById('telephone');
+        if($('#username').hasClass('invalid')||$('#telephone').hasClass('invalid')||loginField.value==""||telField.value==""){
+            Materialize.toast('не все поля заполнены правильно', 3000, 'rounded red');
+            return;
+
+        }
+
+
+
+
+        document.getElementById('login_div').innerHTML = preloader;
+
+        var lfV = loginField.value;
+        var tfV = telField.value;
+
         $.ajax({
-            type: 'post',
-            url:"/API/File",
-            processData: false,
-            contentType: false,
-            cache: false,
-            data: form,
-            success: function (data) {
 
-                var container = document.getElementById('img_container');
-                container.innerHTML = '<img src="'+data+'">';
+            url: "/API/Validator",
+            type: "POST",
+            data:{"email":loginField.value,
+                "telNumber":telField.value},
+            success:function (data) {
+
+                if(data=='0'){
+
+
+                    telephone = tfV;
+                    email = lfV;
+
+
+                    document.getElementById('login_div').innerHTML = page2;
+                    return
+                    //do next;
+
+                }else{
+
+                    document.getElementById('login_div').innerHTML = page1;
+
+                    document.getElementById('username').value = lfV;
+                    document.getElementById('telephone').value = tfV;
+
+
+                    $('#username-l').addClass('active');
+                    $('#telephone-l').addClass('active');
+                    Materialize.updateTextFields();
+
+
+                    switch (data){
+                        case '1':
+                            $('#username-l').removeAttr('data-error');
+                            document.getElementById('username-l').setAttribute('data-error',"email уже занят");
+                            Materialize.toast('email уже занят', 3000, 'rounded red');
+                            $('#username').addClass('invalid');
+                            break;
+                        case '2':
+                            $('#telephone-l').removeAttr('data-error');
+                            document.getElementById('telephone-l').setAttribute('data-error',"номер телефона уже занят");
+                            Materialize.toast('номер телефона уже занят', 3000, 'rounded red');
+                            $("#telephone").addClass('invalid');
+                            break;
+                        case '3':
+                            $('#telephone-l').removeAttr('data-error');
+                            document.getElementById('telephone-l').setAttribute('data-error',"номер телефона уже занят");
+                            Materialize.toast('номер телефона уже занят', 3000, 'rounded red');
+                            $("#telephone").addClass('invalid');
+
+                            $('#username-l').removeAttr('data-error');
+                            Materialize.toast('email уже занят', 3000, 'rounded red');
+                            document.getElementById('username-l').setAttribute('data-error',"email уже занят");
+                            $('#username').addClass('invalid');
+                            break;
+                    }
+
+
+
+
+                }
+
+
+
 
             }
+
+
         });
-    }
+
+
+
+
+
+    };
+
+
 </script>
 
+</body>
 </html>

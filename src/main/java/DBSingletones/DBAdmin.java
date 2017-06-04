@@ -6,6 +6,9 @@ import Model.Admin;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
@@ -86,19 +89,35 @@ public class DBAdmin {
     }
 
     public Admin queryAdmin(String login){
-        Admin retVal = null;
+        List<Admin> retVal = null;
+        if(login.equals("")) return null;
         try {
-            List<Admin> tempRetVal = null;
-            tempRetVal = dao.queryBuilder().where().eq("email", login).query();
-            if(tempRetVal.size()<0){
-                retVal = tempRetVal.get(0);
+            retVal = dao.queryForAll();
+            dao.getConnectionSource().close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        try {
+
+
+
+        for (Admin tempAdmin:retVal) {
+            if(tempAdmin.getEmail().equals(login)){
+                return tempAdmin;
             }
 
-            dao.getConnectionSource().close();
-        }catch (Exception e){
-            e.printStackTrace();
         }
-        return retVal;
+        }catch (Exception e){
+            return null;
+        }
+
+
+
+        return null;
+
     }
 
 
@@ -124,6 +143,4 @@ public class DBAdmin {
             e.printStackTrace();
         }
     }
-
-
 }
