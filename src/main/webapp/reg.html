@@ -259,7 +259,7 @@
         page3Student += "                        <label for=\"password\">Ваш пароль для входа<\/label>";
         page3Student += "                    <\/div>";
         page3Student += "                    <div class=\"input-field col s12 m6\">";
-        page3Student += "                        <input id=\"password_2\" type=\"text\" class=\"validate\">";
+        page3Student += "                        <input id=\"password_2\" type=\"password\" class=\"validate\">";
         page3Student += "                        <label for=\"password_2\">Подтвердите пароль<\/label>";
         page3Student += "                    <\/div>";
         page3Student += "                <\/div>";
@@ -505,6 +505,9 @@
         var form = new FormData();
         var image = $('#avatar-input').prop('files')[0];
         document.getElementById('login_div').innerHTML = preloader;
+        window.scrollTo(0, 0);
+
+
         $.ajax({
             type: 'post',
             url: '/API/File',
