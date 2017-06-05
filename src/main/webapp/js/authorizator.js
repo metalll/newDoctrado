@@ -5,12 +5,19 @@
 
 
 
-function getCurentUser() {
+function getCurentUser(callback) {
 
     $.get("/API/Auth",{user:"user"},function (data) {
 
         var user = JSON.parse(data);
         console.log(data);
+
+        if(callback!=null){
+
+            callback(user);
+
+        }
+
     });
 
 

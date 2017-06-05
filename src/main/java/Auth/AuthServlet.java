@@ -191,7 +191,7 @@ public class AuthServlet extends HttpServlet{
 
     @Override // registration
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+
         resp.setCharacterEncoding("UTF-8");
 
         Map<String,String> parameterMap = getParameterMapPut(req);
@@ -445,12 +445,16 @@ public class AuthServlet extends HttpServlet{
 
         BufferedReader br = null;
         Map<String, String> dataMap = null;
+        try {
+            request.setCharacterEncoding("UTF-8");
 
+        }catch (Exception e){};
         try {
 
             InputStreamReader reader = new InputStreamReader(
                     request.getInputStream());
             br = new BufferedReader(reader);
+
 
             String data = java.net.URLDecoder.decode(br.readLine(),"UTF-8");
 
