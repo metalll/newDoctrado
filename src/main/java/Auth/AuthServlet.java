@@ -89,6 +89,8 @@ public class AuthServlet extends HttpServlet{
             authRealm.setAccessRole(UserRole.ANNONYMOUS);
         }
 
+
+
         Gson gson = new Gson();
 
         PrintWriter out = resp.getWriter();
@@ -97,7 +99,7 @@ public class AuthServlet extends HttpServlet{
         switch (authRealm.getAccessRole()){
             case ADMIN:
                 Admin admin = (Admin) authRealm.getUser();
-                out.write(gson.toJson(new RealmModelForJSON<Admin>(admin,"ADMIN")));
+                out.write(  java.net.URLEncoder.encode(gson.toJson(new RealmModelForJSON<Admin>(admin,"ADMIN")),"UTF-8"));
             break;
             case ANNONYMOUS:
                 String respG = "ANNONYMOUS";
@@ -105,11 +107,11 @@ public class AuthServlet extends HttpServlet{
             break;
             case STUDENT:
                 Student student = (Student) authRealm.getUser();
-                out.write(gson.toJson(new RealmModelForJSON<Student>(student,"STUDENT")));
+                out.write(java.net.URLEncoder.encode(gson.toJson(new RealmModelForJSON<Student>(student,"STUDENT")),"UTF-8"));
             break;
             case TEACHER:
                 Teacher teacher = (Teacher) authRealm.getUser();
-                out.write(gson.toJson(new RealmModelForJSON<Teacher>(teacher,"TEACHER")));
+                out.write(java.net.URLEncoder.encode(gson.toJson(new RealmModelForJSON<Teacher>(teacher,"TEACHER")),"UTF-8"));
             break;
 
 
