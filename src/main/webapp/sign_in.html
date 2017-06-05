@@ -6,7 +6,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
-
+    <link type="text/css" rel="stylesheet" href="css/app.css" media="screen,projection"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -18,8 +18,9 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-
-
+<script type="text/javascript" src="js/ajax_jQuery_extentions.js"></script>
+<script type="text/javascript" src="js/string_extentions.js"></script>
+<script type="text/javascript" src="js/authorizator.js"></script>
 
 
 
@@ -47,27 +48,30 @@
         <div class="row" style="margin-bottom: 0; max-width: 600px;">
             <div class="col s12">
                 <div id="login_div">
-                    <form class="signin" method="post" action="/login.php" style="width: 100%;">
-                        <input type="hidden" name="wix" value="">
-
-                        <h5 class="hide" style="text-align: center; font-weight: 300;"> - Or - </h5>
-
-                        <label for="username" class="">Email</label>
-                        <input id="username" class="" type="text" name="username">
-
-                        <label for="password" class="">Пароль</label>
-
-                        <input id="password" class="" type="password" name="password" onkeyup="if(event.keyCode == 13) accountLogin($(this).parents('form'));">
-
-
-                        <input type="hidden" name="facebook" value="">
-                        <input type="hidden" name="pid" value="">
-
-                        <input class="btn btn-large green" type="submit" name="submit_form" value="Вход">
-
+                    <div class="row">
+                        <div class="col s12 edge">
+                            <h4 class="lato">Вход в аккаунт</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12">
+                            <input id="email" placeholder="Email" type="email" class="validate">
+                            <label id = "email-l"  data-error="не верный формат email" for="email">Email</label>
+                        </div></div>
+                    <div class="row">
+                        <div class="input-field col s12 m12">
+                            <input id="password" placeholder="Пароль" type="password" class="validate">
+                            <label id="password-l"  for="password">Пароль</label>
+                        </div>
+                    </div>
 
 
-                    </form>
+
+                    <a href="javascript:void(0)" onclick="signIn();" class="center center-align col s12 btn green">Вход</a>
+
+
+
+
 
 
 
@@ -104,6 +108,65 @@
     </div>
 
 </div>
+
+<script>
+
+    function signIn() {
+
+        var login  = document.getElementById('email');
+        var pass = document.getElementById('password');
+
+        $('#email-l').addClass('active');
+        $('#password-l').addClass('active');
+        Materialize.updateTextFields();
+
+        if(login.value==""){
+            $('#email-l').removeAttr('data-error');
+            document.getElementById('email-l').setAttribute('data-error',"email не может быть пустым");
+            Materialize.toast('email не может быть пустым', 3000, 'rounded red');
+            $('#email').addClass('invalid');
+
+
+        }
+
+        if(pass.value==""){
+            $('#password-l').removeAttr('data-error');
+            document.getElementById('password-l').setAttribute('data-error',"пароль не может быть пустым");
+            Materialize.toast('пароль не может быть пустым', 3000, 'rounded red');
+            $('#password').addClass('invalid');
+
+
+
+        }
+
+        if($('#password').hasClass('invalid')||$('#email').hasClass('invalid')){
+            Materialize.toast('проверьте поля входа', 3000, 'rounded red');
+            return;
+        }
+
+
+        $.post("/API/Auth",{login:login.value,pass:pass.value.hashCode()},function (data) {
+            if(data == "-1"){
+
+                $('#email-l').removeAttr('data-error');
+                document.getElementById('email-l').setAttribute('data-error',"неверный логин или пароль");
+
+                $('#email').addClass('invalid');
+
+                $('#password-l').removeAttr('data-error');
+                document.getElementById('password-l').setAttribute('data-error',"неверный логин или пароль");
+                Materialize.toast('неверный логин или пароль', 3000, 'rounded red');
+                $('#password').addClass('invalid');
+                return;
+            }
+
+
+            getCurentUser();
+
+        });
+    }
+
+</script>
 
 
 </body>
