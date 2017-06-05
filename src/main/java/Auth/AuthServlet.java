@@ -418,7 +418,7 @@ public class AuthServlet extends HttpServlet{
                     out.flush();
                     out.close();
                 }else{
-                    req.setAttribute("auth",resultRealm);
+                    req.getSession().setAttribute("auth",resultRealm);
                     PrintWriter out = resp.getWriter();
                     resp.setStatus(HttpServletResponse.SC_OK);
                     switch (resultRealm.getAccessRole()){
