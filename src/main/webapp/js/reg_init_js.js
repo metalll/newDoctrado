@@ -656,53 +656,59 @@ function regStudent() {
 
 function endRegStudent() {
 
+    $.ajax({
+
+        url: 'API/Auth',
+        type: "POST",
+        data:{
+            "role":role,
+            "email":email,
+            "password":password,
+            "avatar":avatar,
+            "name":name,
+            "surname":surname,
+            "firstName":firstname,
+            "city":city,
+            "eduInfo":eduInfo,
+            "eduInfoDoc":eduInfoDoc,
+            "bornDate":bornDate,
+            "telNumber":telephone
+        },
+        success:function (result) {
+
+            if(result=="-1"){
+                Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
+                return;
+            }
+
+            if(result=="0"){
+
+                Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
+                return;
+            } // show modal "try again"
+
+            if(result=="1"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //admin
+            }
+            if(result=="2"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //student
+            }
+            if(result=="3"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //teacher
+            }
 
 
-    $.put('API/Auth',{
-        "role":role,
-        "email":email,
-        "password":password,
-        "avatar":avatar,
-        "name":name,
-        "surname":surname,
-        "firstName":firstname,
-        "city":city,
-        "eduInfo":eduInfo,
-        "eduInfoDoc":eduInfoDoc,
-        "bornDate":bornDate,
-        "telNumber":telephone
-    },function (result) {
 
-        if(result=="-1"){
-            Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
-            return;
+
+            window.location.href = "/API/Auth"
+
         }
-
-        if(result=="0"){
-
-            Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
-            return;
-        } // show modal "try again"
-
-        if(result=="1"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //admin
-        }
-        if(result=="2"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //student
-        }
-        if(result=="3"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //teacher
-        }
-
-
-
-
-        window.location.href = "/API/Auth"
-
     });
+
+
 
 
 
@@ -860,54 +866,67 @@ function regTeacher() {
 }
 
 function  endRegTeacher() {
-    $.put('API/Auth',{
-        "role":role,
-        "email":email,
-        "password":password,
-        "avatar":avatar,
-        "name":name,
-        "surname":surname,
-        "firstName":firstname,
-        "city":city,
-        "eduInfo":eduInfo,
-        "eduInfoDoc":eduInfoDoc,
-        "bornDate":bornDate,
-        "telNumber":telephone,
-        "expirence":expirence
-    },function (result) {
 
-        if(result=="-1"){
-            Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
-            return;
+    $.ajax({
+
+        url: 'API/Auth',
+        type: "POST",
+        data:{
+            "role":role,
+            "email":email,
+            "password":password,
+            "avatar":avatar,
+            "name":name,
+            "surname":surname,
+            "firstName":firstname,
+            "city":city,
+            "eduInfo":eduInfo,
+            "eduInfoDoc":eduInfoDoc,
+            "bornDate":bornDate,
+            "telNumber":telephone,
+            "expirence":expirence
+        },
+        success:function (result) {
+
+            if(result=="-1"){
+                Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
+                return;
+            }
+
+            if(result=="0"){
+
+                Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
+                return;
+            } // show modal "try again"
+
+            if(result=="1"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //admin
+            }
+            if(result=="2"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //student
+            }
+            if(result=="3"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //teacher
+            }
+
+
+
+
+            window.location.href = "/API/Auth"
+
         }
-
-        if(result=="0"){
-
-            Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
-            return;
-        } // show modal "try again"
-
-        if(result=="1"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //admin
-        }
-        if(result=="2"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //student
-        }
-        if(result=="3"){
-            Materialize.toast('Добро пожаловать', 3000, 'rounded green');
-            //teacher
-        }
-
-
-
-
-        window.location.href = "/API/Auth"
-
     });
 
-}
+    }
+
+
+
+
+
+
 
 
 function traceParam() {
