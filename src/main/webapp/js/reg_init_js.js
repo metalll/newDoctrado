@@ -658,7 +658,7 @@ function endRegStudent() {
 
     $.ajax({
 
-        url: 'API/Auth',
+        url: 'API/Reg',
         type: "POST",
         data:{
             "role":role,
@@ -869,7 +869,7 @@ function  endRegTeacher() {
 
     $.ajax({
 
-        url: 'API/Auth',
+        url: 'API/Reg',
         type: "POST",
         data:{
             "role":role,
