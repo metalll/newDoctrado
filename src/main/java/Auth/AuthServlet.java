@@ -352,7 +352,7 @@ public class AuthServlet extends HttpServlet{
         if(role.equals(UserRole.TEACHER)){
 
             long id = -1;
-            String email = null;
+            String email = parameterMap.get("email");
             String passwordHex = null;
             String avatar = null;
             String name = null;
