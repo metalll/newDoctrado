@@ -34,9 +34,9 @@ public class AuthValidator extends HttpServlet {
 
         try {
             email = paramMap.get("email")[0];
-            telNumber = null;
-        }catch (Exception e){
 
+        }catch (Exception e){
+            email = null;
         }
 
         try {

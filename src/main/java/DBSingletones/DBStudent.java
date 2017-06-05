@@ -128,7 +128,7 @@ public class DBStudent {
 
             if(tempStudnet.getEmail().equals(login)) hasLogin = true;
             if(tempStudnet.getTelNumber().equals(tel)) hasTelephone = true;
-            if(hasLogin&&hasTelephone) break;
+            if(hasLogin&&hasTelephone) return new boolean[]{true,true};
         }
 
 
