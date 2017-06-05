@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Created by NSD on 05.06.17.
  */
-@WebServlet(name = "RegisterServlet",urlPatterns = "API/Reg")
+@WebServlet(name = "RegisterServlet",urlPatterns = "/API/Reg")
 public class RegisterServlet extends HttpServlet {
 
     @Override // registration
