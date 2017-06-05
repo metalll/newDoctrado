@@ -30,17 +30,13 @@ private static ConnectionSource connectionSource = null;
 
         DB_LOGIN = dbUri.getUserInfo().split(":")[0];
         DB_PASS = dbUri.getUserInfo().split(":")[1];
-        DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + "3306" + dbUri.getPath()+"?reconnect=true";
+        DBURL = "jdbc:mysql://" + dbUri.getHost() + ':' + "3306" + dbUri.getPath()+"?reconnect=true&useUnicode=true&characterEncoding=UTF-8";
 
 
         return new String[]{DBURL,DB_LOGIN,DB_PASS};
     }catch(Exception e) {
-
-           DB_LOGIN = "bf8592ce2655df";
-           DB_PASS = "50429447";
-           DBURL = "jdbc:mysql://us-cdbr-iron-east-03.cleardb.net:3306/heroku_4bec834d769add6?reconnect=true";
-
-           return new String[]{DBURL,DB_LOGIN,DB_PASS};
+        e.printStackTrace();
+        return null;
        }
     }
 
