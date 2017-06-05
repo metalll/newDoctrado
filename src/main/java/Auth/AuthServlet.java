@@ -5,6 +5,7 @@ import DBSingletones.DBStudent;
 import DBSingletones.DBTeacher;
 import Model.*;
 import NSDReqCodeUtils.ReqCode;
+import com.google.common.base.Splitter;
 import com.google.gson.Gson;
 import com.j256.ormlite.field.DatabaseField;
 
@@ -13,11 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.security.acl.LastOwnerException;
 import java.util.IllegalFormatCodePointException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Created by NSD on 17.05.17.
@@ -190,13 +194,31 @@ public class AuthServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
-        Map<String,String[]> parameterMap = req.getParameterMap();
+        Map<String,String> parameterMap = getParameterMapPut(req);
+
+        if(parameterMap==null){
+
+
+
+            PrintWriter out = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_OK);
+            out.write("-1");
+            out.flush();
+            out.close();
+            return;
+        }
+
+
+
+
+
+
 
         UserRole role = UserRole.ANNONYMOUS;
 
 
         try{
-            String tempUserRole = parameterMap.get("role")[0];
+            String tempUserRole = parameterMap.get("role");
 
             if(tempUserRole.equals("t")){
                 role = UserRole.TEACHER;
@@ -233,17 +255,17 @@ public class AuthServlet extends HttpServlet{
             int balance = 100;
 
             try {
-                email = parameterMap.get("email")[0];
-                passwordHex = parameterMap.get("password")[0];
-                avatar = parameterMap.get("avatar")[0];
-                name = parameterMap.get("name")[0];
-                surname = parameterMap.get("surname")[0];
-                firstname = parameterMap.get("firstName")[0];
-                city = parameterMap.get("city")[0];
-                educationInfo = parameterMap.get("eduInfo")[0];
-                educationInfoDoc = parameterMap.get("eduInfoDoc")[0];
-                bornDate = parameterMap.get("bornDate")[0];
-                telNumber = parameterMap.get("telNumber")[0];
+                email = parameterMap.get("email");
+                passwordHex = parameterMap.get("password");
+                avatar = parameterMap.get("avatar");
+                name = parameterMap.get("name");
+                surname = parameterMap.get("surname");
+                firstname = parameterMap.get("firstName");
+                city = parameterMap.get("city");
+                educationInfo = parameterMap.get("eduInfo");
+                educationInfoDoc = parameterMap.get("eduInfoDoc");
+                bornDate = parameterMap.get("bornDate");
+                telNumber = parameterMap.get("telNumber");
 
 
                 if(DBAdmin.getInstance().hasAdmin(email)|| DBStudent.getInstance().hasStudent(email)|| DBTeacher.getInstance().hasTeacher(email)){
@@ -353,18 +375,18 @@ public class AuthServlet extends HttpServlet{
 
             }else{
 
-                email = parameterMap.get("email")[0];
-                passwordHex = parameterMap.get("password")[0];
-                avatar = parameterMap.get("password")[0];
-                name = parameterMap.get("name")[0];
-                surname = parameterMap.get("surname")[0];
-                firstname = parameterMap.get("firstName")[0];
-                city = parameterMap.get("city")[0];
-                educationInfo = parameterMap.get("eduInfo")[0];
-                educationInfoDoc = parameterMap.get("eduInfoDoc")[0];
-                bornDate = parameterMap.get("bornDate")[0];
-                telNumber = parameterMap.get("telNumber")[0];
-                expirence = parameterMap.get("expirence")[0];
+                email = parameterMap.get("email");
+                passwordHex = parameterMap.get("password");
+                avatar = parameterMap.get("password");
+                name = parameterMap.get("name");
+                surname = parameterMap.get("surname");
+                firstname = parameterMap.get("firstName");
+                city = parameterMap.get("city");
+                educationInfo = parameterMap.get("eduInfo");
+                educationInfoDoc = parameterMap.get("eduInfoDoc");
+                bornDate = parameterMap.get("bornDate");
+                telNumber = parameterMap.get("telNumber");
+                expirence = parameterMap.get("expirence");
 
                 Teacher tempTeacher = new Teacher();
 
@@ -419,7 +441,42 @@ public class AuthServlet extends HttpServlet{
     }
 
 
+    public static Map<String, String> getParameterMapPut(HttpServletRequest request) {
 
+        BufferedReader br = null;
+        Map<String, String> dataMap = null;
+
+        try {
+
+            InputStreamReader reader = new InputStreamReader(
+                    request.getInputStream());
+            br = new BufferedReader(reader);
+
+            String data = br.readLine();
+
+            dataMap = Splitter.on('&')
+                    .trimResults()
+                    .withKeyValueSeparator(
+                            Splitter.on('=')
+                                    .limit(2)
+                                    .trimResults())
+                    .split(data);
+
+            return dataMap;
+        } catch (IOException ex) {
+            //Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException ex) {
+              //      Logger.getLogger(Utils.class.getName()).log(Level.WARNING, null, ex);
+                }
+            }
+        }
+
+        return null;
+    }
 
 
 
