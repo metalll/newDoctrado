@@ -377,7 +377,7 @@ public class AuthServlet extends HttpServlet{
 
                 email = parameterMap.get("email");
                 passwordHex = parameterMap.get("password");
-                avatar = parameterMap.get("password");
+                avatar = parameterMap.get("avatar");
                 name = parameterMap.get("name");
                 surname = parameterMap.get("surname");
                 firstname = parameterMap.get("firstName");

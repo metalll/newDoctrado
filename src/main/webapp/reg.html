@@ -84,6 +84,16 @@
     var role = "";
     var hasPhoto = false;
 
+    var password ;
+    var name ;
+    var surname;
+    var firstname ;
+    var city ;
+    var eduInfo ;
+    var eduInfoDoc ;
+    var bornDate ;
+    var avatar ;
+    var expirence ;
 
 
     function selectStudent() {
@@ -91,7 +101,68 @@
         role = "student";
 
         document.getElementById('login_div').innerHTML=page3Student;
-//init datepicker
+
+        $('.datepicker').pickadate({
+            selectMonths: true,
+            selectYears: 160,
+
+            labelMonthNext: 'Следущий месяц',
+            labelMonthPrev: 'Прошлый месяц',
+
+            labelMonthSelect: 'Выберите месяц',
+            labelYearSelect: 'Выберите год',
+
+            monthsFull: ['Январь', 'Ферваль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            monthsShort: ['Янв', 'Фев', 'Март', 'Апр', 'Mай', 'Июн', 'Июл', 'Авг', 'Сент', 'Окт', 'Ноябр', 'Декбр'],
+            weekdaysFull: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Субота'],
+            weekdaysShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чтв', 'Птн', 'Сб'],
+
+            weekdaysLetter: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+
+            today: 'Сегодня',
+            clear: 'Очистить',
+            close: 'X',
+
+            format: 'dd.mm.yyyy'
+
+        });
+
+        document.getElementById('additional_div').style.minHeight = "120%";
+
+        $("#avatar-input").change(function () {
+            hasPhoto = false;
+            var file, img;
+            var _URL = window.URL || window.webkitURL;
+            if ((file = this.files[0])) {
+                if (this.files[0].size > 5242880) {
+                    document.getElementById("avatar-input").value = "";
+
+                    Materialize.toast('Размер картинки не должен превышать 5Мб', 3000, 'rounded red');
+                    return;
+                }
+                img = new Image();
+                img.onload = function () {
+                    hasPhoto = true;
+                    $("#avatar-img").css('width', '100%').css('height', '100%');
+                    document.getElementById('avatar-img').src = img.src;
+                };
+                img.onerror = function () {
+
+                    Materialize.toast('Выбранный файл не является картинкой!', 3000, 'rounded red');
+                };
+                img.src = _URL.createObjectURL(file);
+            }
+        });
+
+    }
+
+    function selectTeacher() {
+        role = "teacher";
+
+
+        document.getElementById('login_div').innerHTML=page3Teacher;
+
+
         $('.datepicker').pickadate({
             selectMonths: true,//Creates a dropdown to control month
             selectYears: 160,//Creates a dropdown of 15 years to control year
@@ -143,14 +214,6 @@
                 img.src = _URL.createObjectURL(file);
             }
         });
-    }
-
-    function selectTeacher() {
-        role = "teacher";
-
-
-
-
 
 
     }
@@ -159,22 +222,113 @@
 
 
     var preloader = "";
-
     var page1 = "";
-
     var page2 = "";
-
-
     var page3Teacher = "";
     var page3Student = "";
 
     $(document).ready(function () {
 
-        $.get("https://datadoctrado-sviasy.rhcloud.com/",{},function () {
+        $.get("https://datadoctrado-sviasy.rhcloud.com",{},function () {
 
             console.log("set data storage online");
 
         });
+
+
+        page3Teacher += "     <div class=\"row\">";
+        page3Teacher += "            <div class=\"col s12\" style=\"padding: 10px;\">";
+        page3Teacher += "                <a href=\"index.html\">";
+        page3Teacher += "                    <img src=\"favicon.ico\" style=\"height: 28px; vertical-align: middle; margin-top: -7px;\"><span class=\"grey-text text-darken-1 lighten\" style=\"font-size: 1.3rem; margin-left: 10px; font-weight: 700; font-family: Lato;\"><b class=\"orange-text\">Doct<\/b>rado<\/span>";
+        page3Teacher += "                <\/a>";
+        page3Teacher += "            <\/div>";
+        page3Teacher += "        <\/div>";
+        page3Teacher += "        <div class=\"row\">";
+        page3Teacher += "            <div class=\"col s12 edge\">";
+        page3Teacher += "                <h4 class=\"lato\">Регистрация преподователя<\/h4>";
+        page3Teacher += "            <\/div>";
+        page3Teacher += "        <\/div>";
+        page3Teacher += "        <div class=\"row\" style=\"max-width: 600px;\">";
+        page3Teacher += "            <h6 class=\"center lato center-align\"><span style=\"font-size: 16px\">Ваш аватар<\/span><\/h6>";
+        page3Teacher += "            <div class=\"row col s12 edge\">";
+        page3Teacher += "                <button style=\"position: relative;";
+        page3Teacher += "                       background: #ffffff;";
+        page3Teacher += "                       background-color: #ffffff;";
+        page3Teacher += "                       width: 100%;";
+        page3Teacher += "                       max-width: 220px;";
+        page3Teacher += "                       height: 220px;";
+        page3Teacher += "                       display: block;";
+        page3Teacher += "                       border: none;";
+        page3Teacher += "                       margin: 0 auto;\"";
+        page3Teacher += "                        type=\"button\"";
+        page3Teacher += "                        onclick=\"uploadPhoto();\">";
+        page3Teacher += "";
+        page3Teacher += "";
+        page3Teacher += "                    <img class=\"responsive-img circle\" src=\"img\/default_avatar.jpg\" id=\"avatar-img\">";
+        page3Teacher += "";
+        page3Teacher += "                <\/button>";
+        page3Teacher += "                <input accept=\"image\/*\" style=\"display: none;\" id=\"avatar-input\" type=\"file\">";
+        page3Teacher += "";
+        page3Teacher += "";
+        page3Teacher += "                <div class=\"row\">";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"name\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"name\">Ваше имя<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"surname\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"surname\">Ваша фамилия<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                <\/div>";
+        page3Teacher += "                <div class=\"row\">";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"first_name\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"first_name\">Ваше отчество<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"city\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"city\">Город проживания<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                <\/div>";
+        page3Teacher += "                <div class=\"row\">";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"edu_info\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"edu_info\">Ваше образование<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                    <div class=\"file-field input-field col s12 m6\">";
+        page3Teacher += "                        <div class=\"btn orange\">";
+        page3Teacher += "                            <span>Файл<\/span>";
+        page3Teacher += "                            <input type=\"file\">";
+        page3Teacher += "                        <\/div>";
+        page3Teacher += "                        <div class=\"file-path-wrapper\">";
+        page3Teacher += "                            <input id=\"edu_info_doc\" class=\"file-path validate\" type=\"text\" placeholder=\"Подтв. документы\">";
+        page3Teacher += "                        <\/div>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                <\/div>";
+        page3Teacher += "                <div class=\"row\">";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"born_date\" placeholder=\"Дата рождения\" type=\"date\" class=\"datepicker\">";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"expirence\" type=\"text\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"expirence\">Ваш опыт преподавания<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                <\/div>";
+        page3Teacher += "";
+        page3Teacher += "                <div class=\"row\">";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"password\" type=\"password\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"password\">Ваш пароль для входа<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                    <div class=\"input-field col s12 m6\">";
+        page3Teacher += "                        <input id=\"password_2\" type=\"password\" class=\"validate\">";
+        page3Teacher += "                        <label for=\"password_2\">Подтвердите пароль<\/label>";
+        page3Teacher += "                    <\/div>";
+        page3Teacher += "                <\/div>";
+        page3Teacher += "                <a class=\"col s12 center center-align btn green\" href=\"javascript:void(0)\" onclick=\"regTeacher();\">Зарегестрироваться<\/a>";
+        page3Teacher += "            <\/div>";
+        page3Teacher += "        <\/div>";
+
 
 
 
@@ -187,7 +341,7 @@
         page3Student += "        <\/div>";
         page3Student += "        <div class=\"row\">";
         page3Student += "            <div class=\"col s12 edge\">";
-        page3Student += "                <h4 class=\"lato\">Введите дополнительные данные<\/h4>";
+        page3Student += "                <h4 class=\"lato\">Регистрация студента<\/h4>";
         page3Student += "            <\/div>";
         page3Student += "        <\/div>";
         page3Student += "        <div class=\"row\" style=\"max-width: 600px;\">";
@@ -431,17 +585,6 @@
 
 
 
-    var password ;
-    var name ;
-    var surname;
-    var firstname ;
-    var city ;
-    var eduInfo ;
-    var eduInfoDoc ;
-    var bornDate ;
-    var avatar ;
-
-
     function regStudent() {
 
 
@@ -605,9 +748,14 @@
             "telNumber":telephone
         },function (result) {
 
-            if(result=="0"||result=="-1"){
+            if(result=="-1"){
+                Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
+                return;
+            }
 
-                Materialize.toast('Ошибка регистрации попробуйте обновить страницу', 3000, 'rounded red');
+            if(result=="0"){
+
+                Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
                 return;
             } // show modal "try again"
 
@@ -640,7 +788,201 @@
     }
 
 
+    function regTeacher() {
 
+
+
+
+        if($('#edu_info_doc').prop('files')[0]==null){
+
+            Materialize.toast('Добавьте подтверждающие документы', 3000, 'rounded red');
+            return;
+        }
+
+
+
+
+
+        if($('#password').val()!=$('#password_2').val()){
+
+            Materialize.toast('Пароли должны совпадать!', 3000, 'rounded red');
+            return;
+        }
+
+
+        if($('#password').val() == ''||$('#password-2').val() == ''||$('#name').val() == ''||
+            $('#surname').val() == ''||$('#first_name').val() == ''||$('#city').val() == ''||
+            $('#edu_info').val() == ''||$('#born_date').val() == ''||$('#expirence').val() == ''){
+
+            Materialize.toast('Заполните все поля', 3000, 'rounded red');
+            return;
+        }
+
+
+
+
+        //validate
+
+
+
+        role = "t";
+
+        var loadedDoc = false;
+        var loadedAvatar = false;
+
+
+
+
+
+        var tP = document.getElementById('password').value;
+        password = tP.hashCode();
+        name = $('#name').val();
+        surname = $('#surname').val();
+        firstname = $('#first_name').val();
+        city = $('#city').val();
+        eduInfo = $('#edu_info').val();
+        eduInfoDoc = "";
+        bornDate = $('#born_date').val();
+        avatar = "";
+        expirence = $('#expirence').val();
+
+        var doc = $('#edu_info_doc').prop('files')[0];
+        //load Doc
+        var docForm = new FormData();
+        docForm.append('type', 'conf_doc');
+        docForm.append('doc', doc);
+        var form = new FormData();
+        var image = $('#avatar-input').prop('files')[0];
+        document.getElementById('login_div').innerHTML = preloader;
+        window.scrollTo(0, 0);
+
+
+        $.ajax({
+            type: 'post',
+            url: '/API/File',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: docForm,
+            success: function (data) {
+                loadedDoc = true;
+                eduInfoDoc = data;
+
+                if(loadedDoc&&loadedAvatar){
+
+                    endRegTeacher();
+
+                }
+
+
+            }
+
+
+
+        });
+
+
+
+        if(image==null){
+            avatar =  'img/default_avatar.jpg';
+            loadedAvatar = true;
+
+            if(loadedDoc&&loadedAvatar){
+
+                endRegTeacher();
+
+            }
+        }else{
+            form.append('image', image);
+
+            $.ajax({
+
+                type: 'post',
+                url: "/API/File",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: form,
+                success: function (data) {
+                    loadedAvatar = true;
+
+                    avatar = data;
+
+
+                    if(loadedDoc&&loadedAvatar){
+
+                        endRegTeacher();
+
+                    }
+
+                }
+
+
+
+
+            });
+        }
+
+
+
+
+        //loadAvatar
+
+
+
+
+
+    }
+
+    function  endRegTeacher() {
+        $.put('API/Auth',{
+            "role":role,
+            "email":email,
+            "password":password,
+            "avatar":avatar,
+            "name":name,
+            "surname":surname,
+            "firstName":firstname,
+            "city":city,
+            "eduInfo":eduInfo,
+            "eduInfoDoc":eduInfoDoc,
+            "bornDate":bornDate,
+            "telNumber":telephone,
+            "expirence":expirence
+        },function (result) {
+
+            if(result=="-1"){
+                Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
+                return;
+            }
+
+            if(result=="0"){
+
+                Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
+                return;
+            } // show modal "try again"
+
+            if(result=="1"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //admin
+            }
+            if(result=="2"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //student
+            }
+            if(result=="3"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //teacher
+            }
+
+
+
+
+            window.location.href = "/API/Auth"
+
+        });
+
+    }
 
 
     function traceParam() {

@@ -36,7 +36,7 @@
         </div>
         <div class="row">
             <div class="col s12 edge">
-                <h4 class="lato">Введите дополнительные данные</h4>
+                <h4 class="lato">Регистрация преподователя</h4>
             </div>
         </div>
         <div class="row" style="max-width: 600px;">
@@ -97,8 +97,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12 ">
+                    <div class="input-field col s12 m6">
                         <input id="born_date" placeholder="Дата рождения" type="date" class="datepicker">
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="expirence" type="text" class="validate">
+                        <label for="expirence">Ваш опыт преподавания</label>
                     </div>
                 </div>
 
@@ -108,11 +112,11 @@
                         <label for="password">Ваш пароль для входа</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="password_2" type="text" class="validate">
+                        <input id="password_2" type="password" class="validate">
                         <label for="password_2">Подтвердите пароль</label>
                     </div>
                 </div>
-                <a class="col s12 center center-align btn green" href="javascript:void(0)" onclick="regStudent();">Зарегестрироваться</a>
+                <a class="col s12 center center-align btn green" href="javascript:void(0)" onclick="regTeacher();">Зарегестрироваться</a>
             </div>
         </div>
 
@@ -237,6 +241,205 @@
 
 
     var page3 = "";
+
+    var expirence = "";
+
+
+    function regTeacher() {
+
+
+
+
+        if($('#edu_info_doc').prop('files')[0]==null){
+
+            Materialize.toast('Добавьте подтверждающие документы', 3000, 'rounded red');
+            return;
+        }
+
+
+
+
+
+        if($('#password').val()!=$('#password_2').val()){
+
+            Materialize.toast('Пароли должны совпадать!', 3000, 'rounded red');
+            return;
+        }
+
+
+        if($('#password').val() == ''||$('#password-2').val() == ''||$('#name').val() == ''||
+            $('#surname').val() == ''||$('#first_name').val() == ''||$('#city').val() == ''||
+            $('#edu_info').val() == ''||$('#born_date').val() == ''||$('#expirence').val() == ''){
+
+            Materialize.toast('Заполните все поля', 3000, 'rounded red');
+            return;
+        }
+
+
+
+
+        //validate
+
+
+
+        role = "t";
+
+        var loadedDoc = false;
+        var loadedAvatar = false;
+
+
+
+
+
+        var tP = document.getElementById('password').value;
+        password = tP.hashCode();
+        name = $('#name').val();
+        surname = $('#surname').val();
+        firstname = $('#first_name').val();
+        city = $('#city').val();
+        eduInfo = $('#edu_info').val();
+        eduInfoDoc = "";
+        bornDate = $('#born_date').val();
+        avatar = "";
+        expirence = $('#expirence').val();
+
+        var doc = $('#edu_info_doc').prop('files')[0];
+        //load Doc
+        var docForm = new FormData();
+        docForm.append('type', 'conf_doc');
+        docForm.append('doc', doc);
+        var form = new FormData();
+        var image = $('#avatar-input').prop('files')[0];
+        document.getElementById('login_div').innerHTML = preloader;
+        window.scrollTo(0, 0);
+
+
+        $.ajax({
+            type: 'post',
+            url: '/API/File',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: docForm,
+            success: function (data) {
+                loadedDoc = true;
+                eduInfoDoc = data;
+
+                if(loadedDoc&&loadedAvatar){
+
+                    endRegTeacher();
+
+                }
+
+
+            }
+
+
+
+        });
+
+
+
+        if(image==null){
+            avatar =  'img/default_avatar.jpg';
+            loadedAvatar = true;
+
+            if(loadedDoc&&loadedAvatar){
+
+                endRegTeacher();
+
+            }
+        }else{
+            form.append('image', image);
+
+            $.ajax({
+
+                type: 'post',
+                url: "/API/File",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: form,
+                success: function (data) {
+                    loadedAvatar = true;
+
+                    avatar = data;
+
+
+                    if(loadedDoc&&loadedAvatar){
+
+                        endRegTeacher();
+
+                    }
+
+                }
+
+
+
+
+            });
+        }
+
+
+
+
+        //loadAvatar
+
+
+
+
+
+    }
+
+    function  endRegTeacher() {
+        $.put('API/Auth',{
+            "role":role,
+            "email":email,
+            "password":password,
+            "avatar":avatar,
+            "name":name,
+            "surname":surname,
+            "firstName":firstname,
+            "city":city,
+            "eduInfo":eduInfo,
+            "eduInfoDoc":eduInfoDoc,
+            "bornDate":bornDate,
+            "telNumber":telephone,
+            "expirence":expirence
+        },function (result) {
+
+            if(result=="-1"){
+                Materialize.toast('Имя пользователя занято, обновите страницу', 3000, 'rounded red');
+                return;
+            }
+
+            if(result=="0"){
+
+                Materialize.toast('Ошибка регистрации, попробуйте обновить страницу', 3000, 'rounded red');
+                return;
+            } // show modal "try again"
+
+            if(result=="1"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //admin
+            }
+            if(result=="2"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //student
+            }
+            if(result=="3"){
+                Materialize.toast('Добро пожаловать', 3000, 'rounded green');
+                //teacher
+            }
+
+
+
+
+            window.location.href = "/API/Auth"
+
+        });
+
+    }
 
     $(document).ready(function () {
 
