@@ -145,25 +145,44 @@
         }
 
 
-        $.post("/API/Auth",{login:login.value,pass:pass.value.hashCode()},function (data) {
-            if(data == "-1"){
+        $.ajax({
 
-                $('#email-l').removeAttr('data-error');
-                document.getElementById('email-l').setAttribute('data-error',"неверный логин или пароль");
+            url: "/API/Auth",
+            type: "POST",
+            data:{login:login.value,pass:pass.value.hashCode()},
+            success:function (data) {
+                if (data == "-1") {
 
-                $('#email').addClass('invalid');
+                    $('#email-l').removeAttr('data-error');
+                    document.getElementById('email-l').setAttribute('data-error', "неверный логин или пароль");
 
-                $('#password-l').removeAttr('data-error');
-                document.getElementById('password-l').setAttribute('data-error',"неверный логин или пароль");
-                Materialize.toast('неверный логин или пароль', 3000, 'rounded red');
-                $('#password').addClass('invalid');
-                return;
+                    $('#email').addClass('invalid');
+
+                    $('#password-l').removeAttr('data-error');
+                    document.getElementById('password-l').setAttribute('data-error', "неверный логин или пароль");
+                    Materialize.toast('неверный логин или пароль', 3000, 'rounded red');
+                    $('#password').addClass('invalid');
+                    return;
+                }
+
+
+                getCurentUser();
             }
 
+            });
 
-            getCurentUser();
 
-        });
+
+
+
+
+
+
+
+
+
+
+
     }
 
 </script>
