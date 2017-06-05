@@ -90,7 +90,7 @@ public class DBAdmin {
 
     public Admin queryAdmin(String login){
         List<Admin> retVal = null;
-        if(login.equals("")) return null;
+        if(login.equals("")||login.equals(null)) return null;
         try {
             retVal = dao.queryForAll();
             dao.getConnectionSource().close();
@@ -122,8 +122,14 @@ public class DBAdmin {
 
 
     public boolean hasAdmin(String login){
+        try {
+
+
         return queryAdmin(login)!=null;
-    }
+        }catch (Exception e){
+            return false;
+        }
+        }
 
     public void addAdmin(Admin admin){
         try {
