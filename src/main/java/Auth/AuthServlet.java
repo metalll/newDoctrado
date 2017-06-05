@@ -452,7 +452,7 @@ public class AuthServlet extends HttpServlet{
                     request.getInputStream());
             br = new BufferedReader(reader);
 
-            String data = br.readLine();
+            String data = java.net.URLDecoder.decode(br.readLine(),"UTF-8");
 
             dataMap = Splitter.on('&')
                     .trimResults()
