@@ -8,20 +8,6 @@
 
 
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/material/img/logos/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/material/img/logos/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/material/img/logos/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/material/img/logos/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/material/img/logos/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/material/img/logos/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/material/img/logos/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/material/img/logos/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/material/img/logos/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/material/img/logos/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/material/img/logos/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/material/img/logos/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/material/img/logos/favicon-16x16.png">
-    <link rel="manifest" href="/material/img/logos/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/material/img/logos/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -30,7 +16,7 @@
 
 
 
-    <title>Simplebooklet</title>
+    <title id="header" >personal doctrado</title>
 
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
     <style type='text/css'>@import url(//fonts.googleapis.com/css?family=Elsie+Swash+Caps|Open+Sans);</style>
@@ -439,6 +425,7 @@ var decodedRole = null;
             document.getElementById('account_balance_box').innerHTML = currentUser.balance;
             document.getElementById('account_type_box').innerHTML = decodedRole;
             document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstname;
+            document.getElementById('header').innerHTML = currentUser.name + "– профиль";
 
 
            // avatar_box
