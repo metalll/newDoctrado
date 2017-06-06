@@ -39,8 +39,8 @@
             <li><a href="certificates.html"><span class="grey-text text-darken-3">Сертификаты</span></a></li>
             <li><a href="about.html"><span class="grey-text text-darken-3">Курсы</span></a></li>
             <li><a href="about.html"><span class="grey-text text-darken-3">Контакты</span></a></li>
-            <li><a href="sign_in.html" class="btn green darken-1" >Вход</a></li>
-            <li><a href="reg.html" class="btn orange darken-1" >Регистрация</a></li>
+            <li><a id="sign" href="sign_in.html" class="btn green darken-1" >Вход</a></li>
+            <li><a id="reg" href="reg.html" class="btn orange darken-1" >Регистрация</a></li>
 
 
         </ul>
@@ -177,4 +177,41 @@
 </footer>
 
 </body>
+
+<script>
+
+    $(document).ready(function () {
+
+        getCurentUser(function (user) {
+            if(user!=null){
+
+                $('#sign').val("Профиль");
+                $('#reg').val("Выход");
+
+                $('#reg').removeClass("orange");
+                $('#reg').addClass("red");
+
+                document.getElementById('reg').removeAttribute("href");
+                document.getElementById('sign').removeAttribute("href");
+                document.getElementById('sign').setAttribute("href","/personal_area.html");
+                document.getElementById('reg').setAttribute("href","javascript:void(0);");
+                document.getElementById('reg').setAttribute("onclick","sign_out();");
+
+
+
+
+            }
+        })
+
+
+
+    });
+
+    function sign_out() {
+
+    }
+
+
+</script>
+
 </html>

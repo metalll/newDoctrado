@@ -9,6 +9,13 @@ function getCurentUser(callback) {
 
     $.get("/API/Auth",{user:"user"},function (data) {
 
+        if(data=="ANNONYMOUS"){
+
+            callback(null);
+
+         return;
+        }
+
         var user = JSON.parse(data);
         console.log(data);
 
