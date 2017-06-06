@@ -399,12 +399,15 @@ var decodedRole = null;
                 case "TEACHER":
                 decodedRole = "Преподаватель";
                 break;
+
+
+                default:window.location.href = "/"; return;
             }
 
             currentUser = user.user;
             document.getElementById('account_box').innerHTML = currentUser.email;
             document.getElementById('account_balance_box').innerHTML = currentUser.balance;
-            document.getElementById('account_type_box').innerHTML = role;
+            document.getElementById('account_type_box').innerHTML = decodedRole;
 
 
 
