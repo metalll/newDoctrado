@@ -703,7 +703,7 @@ function endRegStudent() {
 
 
 
-            window.location.href = "/API/Auth"
+            window.location.href = "/personal_area.html"
 
         }
     });
@@ -915,7 +915,7 @@ function  endRegTeacher() {
 
 
 
-            window.location.href = "/API/Auth"
+            window.location.href = "/personal_area.html";
 
         }
     });

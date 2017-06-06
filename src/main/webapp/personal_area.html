@@ -1,71 +1,708 @@
+
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:og="//opengraphprotocol.org/schema/" xmlns:fb="//www.facebook.com/2008/fbml">
 <head>
-    <meta charset="UTF-8">
-    <title>Doctrado - личный кабинет</title>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="google-signin-client_id" content="1031819201507.apps.googleusercontent.com">
+
+
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/material/img/logos/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/material/img/logos/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/material/img/logos/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/material/img/logos/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/material/img/logos/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/material/img/logos/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/material/img/logos/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/material/img/logos/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/material/img/logos/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/material/img/logos/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/material/img/logos/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/material/img/logos/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/material/img/logos/favicon-16x16.png">
+    <link rel="manifest" href="/material/img/logos/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/material/img/logos/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+    <title>Simplebooklet</title>
+
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
+    <style type='text/css'>@import url(//fonts.googleapis.com/css?family=Elsie+Swash+Caps|Open+Sans);</style>
+
+    <link rel='stylesheet' type='text/css' href='css/php.css' />
+
+
+
+    <!--Import materialize.css-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Scott's custom css -->
+    <link href="css/ipad.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="/css/rdp_styles.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <link href="/material/css/gallery-material.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- <link href="/material/css/style-homepage.css" type="text/css" rel="stylesheet" media="screen,projection"/>  -->
+
+
+
+    <!-- these are the ones from KK that worked prior to 2015-09-01
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    -->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+
+    <!-- nh 2017-03-14 trying to allow google to logout -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        var googleClientId = "1031819201507.apps.googleusercontent.com";
+    </script>
+
+
+    <script src='/js.php?i=dashboard&v=1496440074' ></script>
+
+
+
+
+
+    <meta name="viewport" content="width=device-width">
+
 </head>
-<body>
+<body class='dashboard'
+        onload="">
 
 
+<script>
+    W = {account_id: '334737', plus: '0'};
+</script>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '341981852533773',
+            xfbml      : true,
+            version    : 'v2.7'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script><script>
+    $(".action-braintree-pay").on("click", function () {
+        alert("lanuching popup");
+        var json = {"plan": "PLUS"};
+        DisplayDIV('upgrade_braintree', null, null, null, json);
+    });
+</script>
+
+<style>
+    #HW_badge {
+        top: -16px!important;
+        left: -20px!important;
+    }
+</style>
+<!-- TOOLBAR INDEPENDANT DIV -->
+<div class="fixed">
+    <div>
+
+        <div class="row systembar white" style="">
 
 
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
-
-
-
-
-<nav class="orange darken-1">
-    <div class="nav-wrapper" id="nav">
-        <a href="index.html" class="brand-logo">Doctrado</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="about.html">О проекте</a></li>
-            <li><a href="certificates.html">Сертификаты</a></li>
-            <li><a href="about.html">Курсы</a></li>
-            <li><a href="about.html">Контакты</a></li>
-            <li><a href="#" class="btn green darken-1" >Вход</a></li>
-
-        </ul>
-    </div>
-</nav>
-
-
-<p>&nbsp;</p>
-
-
-
-<footer class="page-footer grey darken-3">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Doctrado</h5>
-                <p class="grey-text text-lighten-4">Дистанционное обучение</p>
-                <img src="img/logo_NDU.png">
-                <p class="grey-text text-lighten-4">Сделано в НИУККЦПБ ©</p>
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Dashboard' href="/dashboard.php"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">home</i></a>
             </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Полезные ссылки</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="https://pbezpeka.herokuapp.com">Центр промышленной безопасности</a></li>
-                    <li><a class="grey-text text-lighten-3" href="about.html">О проекте</a></li>
-                    <li><a class="grey-text text-lighten-3" href="course.html">Курсы</a></li>
-                </ul>
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Live Stream' href="simplebooklet-gallery.php"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">dashboard</i></a>
+            </div>
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Connect Accounts' href="link-account.php"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">group_add</i></a>
+
+            </div>
+
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Manage Your Account' onclick="displayAccount();" target="_blank"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">account_circle</i></a>
+            </div>
+
+            <!--
+                            <div class="col s12 center tool-nav">
+                                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Email Support' onclick='DisplayDIV("emailcontact");' target="_blank"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">mail</i></a>
+                            </div>
+            -->
+
+
+
+
+
+
+
+
+
+            <div class="col s12 center tool-nav">
+
+                <a class="" style="position: fixed; left: 12px; bottom: 10px;" href="/dashboard.php">
+                    <img src="/material/img/logos/logo-48.png" style="height: 24px;">
+
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- END TOOLBAR INDEPENDANT DIV -->
+<div class="systembar-state-marker" style="top: 17px;"></div>
+<div onclick="DisplayDIV('guide-dashboard');" class="grey-text text-darken-1 systembar-guide"><i class="material-icons"
+                                                                                                 style="font-size: 2rem;">help_outline</i>
+</div>
+
+
+<!-- BEGIN BODY BOX TOP ROW 2 BOXES LEFT TITLE 'DASHBOARD' RIGHT TITLE YOUR ACCOUNT-->
+
+<!-- Include this wherever you'd like the Barepay code to generate -->
+<barepay></barepay>
+
+<div class="row" style=" padding: 10px 0 10px 36px; margin-top: 0px; margin-bottom: 0;">
+    <div class="col s12" style="padding-top: 8px;">
+
+        <h3 class="lato-page grey-text text-darken-3" style="display: inline; margin-bottom: 0.8rem; margin-top: 0.8rem;">
+            Dashboard
+            <div onclick="DisplayDIV('guide-intro');" class="grey-text text-darken-1"
+                 style="display: inline; position: relative; top: -8px; cursor: pointer; margin-left: 10px;"><i
+                    class="material-icons" style="font-size: 2rem;">help_outline</i></div>
+        </h3>
+
+        <!--<a href="/logout.php" class="btn-flat waves-effect waves-dark white lighten-5 right" style="padding:0 1rem; margin-top: 7px;">log off</a>-->
+        <!-- nh 2017-03-14 trying to get google logout -->
+        <a class="action-logout btn-flat waves-effect waves-dark white lighten-5 right"
+           style="padding:0 1rem; margin-top: 7px;">log off</a>
+        <a href="https://simplebooklet.com/help" target="_blank" class="orange-text right" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">help</a>
+
+        <a href="https://simplebooklet.com/quickguidesimplebooklet" target="_blank" class="orange-text right" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">quick guide</a>
+
+        <a href="https://headwayapp.co/simplebooklet-updates" target="_blank"class="orange-text right CHANGE_THIS" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">updates</a>
+
+    </div>
+
+    <!-- BEGIN  LEFT TITLE 'DASHBOARD'-->
+    <div class="col s12 m6">
+
+
+        <div class="card white">
+
+            <div class="card-content grey-text text-darken-3" style="padding: 3px 15px;">
+                <span class="card-title grey-text text-darken-3 lato" style="font-weight: 600;">New Simplebooklet</span>
+            </div>
+
+            <div class="card-action center" style="padding-top: 10px;">
+
+                <form class="" enctype="multipart/form-data" style="margin-bottom: 0;" action="ajax/file_uploader.php">
+                    <input id="uploader" type="file" name="file" accept="" style="display: none;"/>
+                </form>
+                <p style="text-align: center; margin: 25px 0 0;">or start with a <a href="#"
+                                                                                    onclick="DisplayDIV('modalguideddesign');"
+                                                                                    class="green-text">Blank Booklet</a></p>
+
+            </div>
+
+            <div class="card-action orange lighten-5" style="padding: 5px 20px; text-align: center;">
+                <p style="margin-bottom: 0; font-size: 0.75rem;">
+                    <a onclick='DisplayDIV("filetypes");' class="grey-text text-darken-4">what file types can I upload?</a>
+
+                </p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!-- END  LEFT TITLE 'DASHBOARD'-->
+    <!-- BEGIN  RIGHT TITLE 'YOUR ACCOUNT'-->
+    <div class="col s12 m6">
+
+        <div class="card white"
+             style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0px;">
+
+            <div class="card-action">
+                <a onclick='DisplayDIV("upgrade");' class="btn btn-flat green white-text waves-effect waves-lighten" style="">Upgrade</a>
+
+                <p class="grey-text text-darken-2" style="display: inline; float: right;">You have a
+                    <b>Free</b> plan.</p>
+
+            </div>
+
+            <div class="card-action white lighten-5" style="padding: 5px 20px;">
+                <p style="margin-bottom: 0; font-size: 0.75rem;">
+                    <b>1</b> Simplebooklets available.
+
+                    <a onclick="DisplayDIV('upgrade');" class="" style="float: right;">Upgrade</a>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card white"
+             style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
+
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
+                <a onclick="displayAccount();" class="waves-effect waves-light">manage</a>
+
+                <p class="grey-text text-darken-2"
+                   style="display: inline; float: right; margin-top: -4px;">linuxoid6666@gmail.com<br>
+
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="card white" style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12);">
+            <div class="card-action">
+                <a class="grey-text text-darken-3" style="font-weight: 500;">Custom Domain</a>
+                <a onclick="DisplayDIV('customdomain-upgrade');" class="waves-effect waves-dark"
+                   style="float: right;">add</a>
+            </div>
+            <div class="card-action orange lighten-5" style="padding: 5px 20px;">
+                <p style="margin-bottom: 0; font-size: 0.75rem;">
+                    current domain: <span class='current-domain'>https://simplebooklet.com</span>
+                </p>
             </div>
         </div>
+
+
+
+
+
+        <!-- END RIGHT TITLE 'YOUR ACCOUNT'-->
     </div>
-    <div class="footer-copyright grey darken-4">
-        <div class="container center center-align">
-            Doctrado © Все права защищены
+    <!-- END BODY BOX TOP ROW 2 BOXES LEFT TITLE 'DASHBOARD' RIGHT TITLE YOUR ACCOUNT-->
+</div>
+<div class="white" style="padding: 10px 0;">
+    <div class="row" style="padding-left: 36px;">
+        <div class="col s12" style="padding: 0px;">
+
+            <div class="row">
+                <div class="col s12 white" style="padding: 0 15px; margin-bottom: 0;">
+
+                    <ul class="tabs" style="overflow-x: hidden; border-bottom: 1px solid #ddd;">
+                        <li class="tab col s6" style="text-align: left;"><a href="#yoursimplebooklets"
+                                                                            class="lato grey-text text-darken-2"
+                                                                            style="font-size: 20px; letter-spacing: 0; padding-left: 1.5rem;">Your
+                            Simplebooklets</a></li>
+                        <li class="tab col s6" style="text-align: left;"><a href="#galleries" class="grey-text text-darken-2 lato"
+                                                                            style="font-size: 20px; letter-spacing: 0; padding-left: 2rem;">Your
+                            Galleries</a></li>
+                        <!-- <li class="tab col s4"><a href="#favs" class="grey-text text-darken-2 lato" style="font-size: 18px;"><i class="material-icons left pink-text">favorite</i> Favorites</a></li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div id="yoursimplebooklets" class="row">
+
+
+                <div class="col s12 white" style="margin-top: 2px; padding: 0 0 50px 6px;">
+
+
+                    <div class="white" style="padding:0;">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="row" style="margin-bottom: 0;">
+                                    <div class="col s12 m8">
+
+                                        <!-- <span class="card-title orange-text text-darken-2 lato" style="font-weight: 700; font-size: 24px; vertical-align: middle; margin-right: 8px;">Your Simplebooklets</span> -->
+
+
+                                        <a href='?view=grid' class="btn-flat btn-floating grey lighten-4">
+                                            <i class="material-icons grey-text text-darken-3">view_module</i>
+                                        </a>
+                                        <a href='?view=list' class="btn-flat btn-floating grey lighten-4">
+                                            <i class="material-icons grey-text text-darken-3">view_headline</i>
+                                        </a>
+
+                                        <a onclick="DisplayDIV('modalbookletsettings');" class="btn btn-small btn-flat waves-effect waves-light grey lighten-4 grey-text text-darken-3" style="margin-left: 10px;" title="Default Settings For Your Booklets." >
+                                            <i class="material-icons left">settings_applications</i> Default Settings
+                                        </a>
+
+
+
+
+                                    </div>
+                                    <div class="col s12 m4">
+                                        <div id="modalmybookletmenubox_filter">
+                                            <input id="modalmybookletmenubox_filter_input" type="text" style="margin-top: -14px;"
+                                                   placeholder="type here to search your booklets" value="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id='nobooklets' class="center lato">
+
+                        You haven't made any booklets yet. Start your first above.
+                    </div>
+
+
+                </div>
+            </div>
         </div>
+
+        <div id="galleries">
+            <div class="row">
+
+
+                <div class="col s12 white" style="padding-bottom: 50px; margin-top: 2px;">
+
+
+                    <div class="white" style="padding: 20px 0;">
+                        <div class="row">
+                            <div class="col s12">
+
+
+                                <p style="font-size: 1rem; font-family: lato; margin-bottom: 20px;">Display your favorite Simplebooklets
+                                    on a custom gallery
+                                    with a unique link.</p>
+
+                                <div class="row" style="margin-top: 0rem;">
+                                    <div class="col s12 m4" style="padding-top: 20px;">
+
+                                        <div class="card-action">
+                                            <a onclick="DisplayDIV('gallerysettings',false,false,false,{'next_modal':1})"
+                                               class="btn green white-text waves-effect waves-light btn-large action-intercom-event"
+                                               data-intercom="newgallery_clicked"
+                                               data-json='{"account_id":334737,"plus":0,"subdomain":""}'>
+                                                <i class="material-icons left" style="font-size: 1.9rem;">add</i>new gallery
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div style="font-size: 1rem; font-family: lato; margin-top: 20px;">You haven't set up a gallery. Make one
+                                    now.
+                                </div>
+
+                                <div>
+                                    <span class="action-gallery-new"></span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
-</footer>
+
+
+</div>
+
+</div>
+</div>
+
+<!-- Include this before the closing `body` tag -->
+
 
 </body>
-</html>
+
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19540736-1']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['tracker2._setAccount', 'UA-19540736-8']);
+    _gaq.push(['tracker2._setDomainName', 'none']);
+    _gaq.push(['tracker2._setAllowLinker', true]);
+    _gaq.push(['tracker2._trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    function ga_track_event(category, action, label) {
+        if (typeof category == 'undefined')
+            return;
+        action = typeof action !== 'undefined' ? action : 'Click';
+        label = typeof label !== 'undefined' ? label : '';
+
+        // gaq.push: '_trackEvent', Category, Action, Label
+        _gaq.push(['_trackEvent', category, action, label]);
+
+        _gaq.push(['tracker2._trackEvent', category, action, label]);
+    }
+
+    if (typeof jQuery != 'undefined'){
+        $(document).ready(function(){
+            $(document).on("click", ".ga_track", function(){
+                var $this = $(this);
+                ga_track_event($this.attr('ga_category'), $this.attr('ga_action'),$this.attr('ga_label'));
+            });
+        });
+    }
+</script>
+<noscript>
+    <br><br><br><br><br>
+    <blockquote>
+        <b>The simplebooklet.com web application requires javascript enabled in your browser.</b>
+        <br><br>
+        Please enable javascript in your browser settings and then reload this page.
+    </blockquote>
+</noscript>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script type="text/javascript" src="/material/js/sb-custom.js"></script>
+
+<script>
+    window.intercomSettings = {
+        app_id: "blm93bps",
+        name: "334737", // Full name
+        email: "linuxoid6666@gmail.com", // Email address
+        created_at: "1486027952", //date('c', strtotime($account->create_date)) for ISO time //strtotime($account->create_date) for UTC
+        "create_source": "google",
+        "plus": "0",
+        "upgrade_date": "", //date('c', strtotime($account->upgrade_date)) //strtotime($account->upgrade_date) for UTC
+        "plus_old": "",
+        "workpad_count": "0",
+        "gallery_count": "0",
+        "subdomain": ""
+    };
+</script>
+<script>(function () {
+    var w = window;
+    var ic = w.Intercom;
+    if (typeof ic === "function") {
+        ic('reattach_activator');
+        ic('update', intercomSettings);
+    } else {
+        var d = document;
+        var i = function () {
+            i.c(arguments)
+        };
+        i.q = [];
+        i.c = function (args) {
+            i.q.push(args)
+        };
+        w.Intercom = i;
+        function l() {
+            var s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = 'https://widget.intercom.io/widget/blm93bps';
+            var x = d.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        }
+
+        if (w.attachEvent) {
+            w.attachEvent('onload', l);
+        } else {
+            w.addEventListener('load', l, false);
+        }
+    }
+})()</script>
+<script>
+    $(".action-intercom-event").on('click', function () {
+
+        //var eventName = $(this).data('intercom');
+        //console.log ("intercom.js intercom eventName is "+eventName+" json is ");
+        //console.log($(this).data('json'));
+
+        window.Intercom("trackEvent", $(this).data('intercom'), $(this).data('json'));
+
+    });
+</script>
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:181462,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<div id="session" title="Are you still working?" style="z-index: 999999; display: none;">
+
+
+    <div class="v8-contain">
+        <div class="row">
+            <div class="col s12 action-session-message">
+                You are about to be logged off due to inactivity.
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="twelve columns complete" autofocus>
+        <a class="btn green action-session-renew right" style="color: #fff; font-weight: 500;">Continue</a>
+        <a class="btn green action-session-login right" style="display: none; color: #fff; font-weight: 500;">Login</a>
+    </div>
+</div>
+
+<script>
+
+    var loginUrl = '/login.php';
+    var lastUpdate = new Date().getTime();
+    var SESSION_LIFETIME = '3600';
+    var session_ms_minus_1 = (SESSION_LIFETIME - 60) * 1000;
+    //console.log("sttarting util_session.php script last update is " + lastUpdate + " session lifetime is " + SESSION_LIFETIME);
+
+
+    function loginPrompt() {
+        $(".action-session-message").text("You have been logged off due to inactivity.");
+        $(".action-session-renew").hide();
+        $(".action-session-login").show();
+    }
+
+    //setTimeout(loginPrompt, 50000); // for production
+    setTimeout(loginPrompt, 5000); //for testing
+
+
+    $(document).on("click", ".action-session-renew", function () {
+        //console.log("util_session->action-session-renew.click");
+        sessionContinue();
+    });
+
+
+    $(document).on("click", ".action-session-login", function () {
+        //window.location.href = "/login.php";
+        //console.log("util_session->action-session-login.click");
+        window.location.href = loginUrl;
+    });
+
+
+    $(document).on("keydown mousedown", function () {
+        //$(document).keydown(function () {
+        lastUpdate = new Date().getTime();
+        //console.log("util_session->keydown updating last update time to " + lastUpdate);
+    });
+
+    function sessionPrompt() {
+        HideDIV();
+        $('.modal').closeModal();
+        $(".session").show();
+        $("#session").dialog({
+            modal: true,
+            resizable: false,
+            draggable: false,
+            minWidth: 320,
+            minHeight: 200
+        });
+    }
+
+
+    function sessionContinue() {
+        //ajax keep server alive
+        console.log("util_session.php->sessionContinue");
+        $.ajax({
+            url: "ajax/session_keepalive.php",
+            type: "POST",
+            //data: {current_session_length: currentSessionLength, session_lifetime: SESSION_LIFETIME },
+            success: function (json) {
+                if (json.status == 'ok') {
+                    //since we have just renewed sessin on server, might as well give full time on client as well
+                    console.log("util_session.php->sessionContinue json status ok and session renewed check server log");
+                    setTimeout(sessionVerify, session_ms_minus_1);
+                } else {
+                    console.log("util_session.php->sessionContinue json status dEAD!");
+                    window.location.href = loginUrl;//sessionPrompt();
+                }
+                return false;
+            },
+            error: function () {
+                console.log("util_session.php->sessionContinue error returned from ajax, prompting for session");
+                sessionPrompt();
+            }
+        });
+        return false;
+    }
+
+    function sessionVerify() {
+        //if update time within the session then renew, else prompt
+        var now = new Date().getTime();
+        var nowMinusSession = new Date(now - session_ms_minus_1).getTime(); //30*60000);
+        //var currentSessionLength = now - lastUpdate;
+        //console.log("util_session->sessionVerify last update is " + lastUpdate);
+        //console.log("util_session->sessionVerify nwoMinus ssession is " + nowMinusSession);
+        if (lastUpdate <= nowMinusSession) {
+            //console.log("util_session->sessionVerify session is DONE RESTART about to prompt for login");
+            sessionPrompt();
+        }
+        else {
+            //console.log("util_session->sessionVerify CONTINUE  " + currentSessionLength);
+            sessionContinue();
+
+        }
+        return false;
+    }
+
+    //setInterval(sessionVerify, 5000);//1740000); //TODO: for production
+    setTimeout(sessionVerify, session_ms_minus_1);
+    //setInterval(sessionVerify, 5000); //for testing
+
+</script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
+<script type="text/javascript" src="//www.wepay.com/min/js/iframe.wepay.js"></script>
+<script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+
+<script>
+    var HW_config = {
+        selector: ".CHANGE_THIS", // CSS selector where to inject the badge
+        account: "7wE0dy" // your account ID
+    };
+</script>
+<script async src="//cdn.headwayapp.co/widget.js"></script>
+
+
