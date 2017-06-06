@@ -371,6 +371,7 @@
 
     var currentUser = null;
 var role = null;
+var decodedRole = null;
     $(document).ready(function () {
       //  $('#account_box') - write accout;
 
@@ -384,6 +385,22 @@ var role = null;
             }
 
             role = user.role;
+
+            switch (role){
+
+                case "ADMIN" :
+                decodedRole = "Администратор";
+                break;
+
+                case "STUDENT":
+                decodedRole = "Студент";
+                break;
+
+                case "TEACHER":
+                decodedRole = "Преподаватель";
+                break;
+            }
+
             currentUser = user.user;
             document.getElementById('account_box').innerHTML = currentUser.email;
             document.getElementById('account_balance_box').innerHTML = currentUser.balance;
