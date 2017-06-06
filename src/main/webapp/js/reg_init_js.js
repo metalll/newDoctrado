@@ -469,7 +469,7 @@ $('#telephone').on('input',function () {
     }
 
     var telep = $(this).val();
-
+try{
     if(telep[telep.length-1].match(/^[–\+]?\d+/) === null&&telep[telep.length-1]!='–'||telep.length>13){
         var len = telep.length;
         len-=1;
@@ -505,6 +505,10 @@ $('#telephone').on('input',function () {
 
 
     prevLength = $(this).val().length;
+
+}catch(e){
+
+}
 
 });
 
