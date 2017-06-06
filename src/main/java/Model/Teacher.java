@@ -34,7 +34,7 @@ public class Teacher extends User {
 
     @DatabaseField
     private String city;
-
+    @DatabaseField
     private int balance;
     @DatabaseField
     private String telNumber;
