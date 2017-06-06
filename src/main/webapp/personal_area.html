@@ -422,7 +422,7 @@ var decodedRole = null;
 
             currentUser = user.user;
             document.getElementById('account_box').innerHTML = currentUser.email;
-            document.getElementById('account_balance_box').innerHTML = currentUser.balance;
+            document.getElementById('account_balance_box').innerHTML = currentUser.balance + " грн.";
             document.getElementById('account_type_box').innerHTML = decodedRole;
             document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstname;
             document.getElementById('header').innerHTML = currentUser.name + " – профиль";
@@ -434,12 +434,12 @@ var decodedRole = null;
             document.getElementById('avatar_box').setAttribute("src",currentUser.avatar);
 
 
-        })
+        });
 
 
 
 
-    })
+    });
 
     function displayAccount() {
         alert("display account");
