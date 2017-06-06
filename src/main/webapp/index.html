@@ -208,9 +208,9 @@
     });
 
     function sign_out() {
-            $.delete("/API/Auth",{data:data},function (data) {
+            $.delete("/API/Auth",{data:"data"},function (data) {
                 this.location.reload();
-            })
+            });
     }
 
 
