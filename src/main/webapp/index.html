@@ -185,12 +185,11 @@
         getCurentUser(function (user) {
             if(user!=null){
 
-
+                $('#reg').text("Выход");
+                $('#sign').text("Профиль");
 
                 $('#reg').removeClass("orange");
                 $('#reg').addClass("red");
-                document.getElementById('reg').value = "Выход";
-                document.getElementById('sign').value = "Профиль";
 
                 document.getElementById('reg').removeAttribute("href");
                 document.getElementById('sign').removeAttribute("href");
