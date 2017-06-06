@@ -216,30 +216,30 @@
     <!-- BEGIN  LEFT TITLE 'DASHBOARD'-->
     <div class="col s12 m6">
 
+        <div class="card white">
 
-        <div class="card green">
+            <div class="card-content">
 
-            <div class="card-content grey-text center center-align text-darken-3" style="padding: 7px 65px;">
-                <span class="card-title green white-text text-darken-3  lato" style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
-            </div>
+                <img id="avatar_box" src="img/avatar-2.png" class="circle" style="width: 200px ; height:  200px ; overflow: hidden">
 
-
-
-
-        </div>
-
-        <div class="card white" style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12);">
-            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
-                <a onclick="displayAccount();" class="green-text waves-effect waves-light">Статистика</a>
-
-                <p id="account_type_box" class="grey-text text-darken-2"
-                   style="display: inline; float: right; margin-top: -4px;">Преподаватель<br>
+                <p id="account_name_box" class="grey-text text-darken-2"
+                   style="display: inline; font-size: 20px; margin-top: 35px; float: right;">Петров<br>Алексей<br>Владимирович
 
 
                 </p>
 
             </div>
+
+
+
         </div>
+
+
+
+
+
+
+
 
 
 
@@ -247,6 +247,8 @@
     <!-- END  LEFT TITLE 'DASHBOARD'-->
     <!-- BEGIN  RIGHT TITLE 'YOUR ACCOUNT'-->
     <div class="col s12 m6">
+
+
 
         <div class="card white"
              style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
@@ -281,7 +283,29 @@
 
         </div>
 
+        <div class="card white" style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12);">
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
+                <a onclick="displayAccount();" class="green-text waves-effect waves-light">Статистика</a>
 
+                <p id="account_type_box" class="grey-text text-darken-2"
+                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Преподаватель<br>
+
+
+                </p>
+
+            </div>
+        </div>
+
+        <div class="card green">
+
+            <div class="card-content grey-text center center-align text-darken-3" style="padding: 7px 65px;">
+                <span class="card-title green white-text text-darken-3  lato" style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
+            </div>
+
+
+
+
+        </div>
 
 
 
@@ -368,10 +392,16 @@
 <!-- Include this before the closing `body` tag -->
 
 <script>
-
-    var currentUser = null;
+var currentUser = null;
 var role = null;
 var decodedRole = null;
+
+//dialog pages;
+
+
+
+
+
     $(document).ready(function () {
       //  $('#account_box') - write accout;
 
@@ -408,10 +438,13 @@ var decodedRole = null;
             document.getElementById('account_box').innerHTML = currentUser.email;
             document.getElementById('account_balance_box').innerHTML = currentUser.balance;
             document.getElementById('account_type_box').innerHTML = decodedRole;
+            document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstName;
 
 
+           // avatar_box
 
-
+            document.getElementById('avatar_box').removeAttribute("src");
+            document.getElementById('avatar_box').setAttribute("src",currentUser.avatar);
 
 
         })
@@ -424,6 +457,12 @@ var decodedRole = null;
     function displayAccount() {
         alert("display account");
     }
+
+function sign_out() {
+    $.delete("/API/Auth",{data:"data"},function (data) {
+        window.location.href="/";
+    });
+}
 
 
 
