@@ -185,11 +185,12 @@
         getCurentUser(function (user) {
             if(user!=null){
 
-                $('#sign').val("Профиль");
-                $('#reg').val("Выход");
+
 
                 $('#reg').removeClass("orange");
                 $('#reg').addClass("red");
+                document.getElementById('reg').value = "Выход";
+                document.getElementById('sign').value = "Профиль";
 
                 document.getElementById('reg').removeAttribute("href");
                 document.getElementById('sign').removeAttribute("href");
@@ -197,7 +198,7 @@
                 document.getElementById('reg').setAttribute("href","javascript:void(0);");
                 document.getElementById('reg').setAttribute("onclick","sign_out();");
 
-
+                document.getElementById('download-button').setAttribute("href","/personal_area.html");
 
 
             }
