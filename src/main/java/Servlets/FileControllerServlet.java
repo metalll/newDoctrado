@@ -23,10 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +64,9 @@ public class FileControllerServlet extends HttpServlet{
         }
 
 
+
+
+
         if(url!=null){
 
 
@@ -79,26 +79,25 @@ public class FileControllerServlet extends HttpServlet{
 
             final HttpResponse response = httpclient.execute(httpPost, new ResponseHandler<HttpResponse>() {
                 public HttpResponse handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
-                    PrintWriter out = resp.getWriter();
+                    HttpEntity entity = httpResponse.getEntity();
+                    InputStream inputStream;
+                    OutputStream outputStream;
 
-                    HttpEntity entity= httpResponse.getEntity();
+                    if (entity != null) {
+                        long len = entity.getContentLength();
+                        inputStream = entity.getContent();
 
-                    resp.setHeader("Content-Disposition", "inline; filename=\"..." + req.hashCode() + ":......+ "  + "+.............-1 + " + " -1\".exe");
-                    resp.setHeader("Content-Type", "application/pdf");
-                    resp.setHeader("Content-Length", String.valueOf(entity.getContentLength()));
+                        outputStream = resp.getOutputStream();
 
-                    resp.setStatus(HttpServletResponse.SC_OK);
+                        int read = 0;
+                        byte[] bytes = new byte[1024];
 
-                    InputStream is = entity.getContent();
+                        while ((read = inputStream.read(bytes)) != -1) {
+                            outputStream.write(bytes, 0, read);
+                        }
 
-                    int inByte;
-                    while((inByte = is.read()) != -1)
-                        out.write(inByte);
-                    is.close();
-
-                    out.flush();
-                    out.close();
-
+                        outputStream.close();
+                    }
 
                     return httpResponse;
                 }
