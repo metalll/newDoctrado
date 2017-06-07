@@ -9,6 +9,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
@@ -23,9 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -44,6 +47,57 @@ public class FileControllerServlet extends HttpServlet{
     private static final int MAX_FILE_SIZE = 1024 * 1024 * 40; // 40MB
     private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50; // 50MB
 
+
+    @Override
+    protected void doGet(HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+
+        req.setCharacterEncoding("UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+
+        Map<String,String[]> paramMap = req.getParameterMap();
+        String url=null;
+        try{
+
+           url = paramMap.get("url")[0];
+        }catch (Exception e){
+
+
+
+        }
+
+
+        if(url!=null){
+
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpGet httpPost = new HttpGet(url);
+
+
+
+
+            HttpResponse response = httpclient.execute(httpPost, new ResponseHandler<HttpResponse>() {
+                public HttpResponse handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
+                    PrintWriter out = resp.getWriter();
+                    resp.setStatus(HttpServletResponse.SC_OK);
+
+                    InputStream is = httpResponse.getEntity().getContent();
+
+                    int inByte;
+                    while((inByte = is.read()) != -1)
+                        out.write(inByte);
+                    is.close();
+
+                    out.flush();
+                    out.close();
+
+
+                    return httpResponse;
+                }
+            });
+
+        }
+
+    }
 
     @Override // putFile
     protected void doPost(HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
