@@ -2,20 +2,26 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+
+
     <title>Doctrado - тест</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
 
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width = 1050, user-scalable = no"/>
 </head>
 <body>
 
 
 
 
-
+<script type="text/javascript" src="js/turnjs/extras/jquery.min.1.7.js"></script>
+<script type="text/javascript" src="js/turnjs/extras/modernizr.2.5.3.min.js"></script>
+<script type="text/javascript" src="js/turnjs/extras/jquery-ui-1.8.20.custom.min.js"></script>
+<script type="text/javascript" src="js/turnjs/lib/turn.html4.js"></script>
+<script type="text/javascript" src="js/turnjs/lib/turn.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script type="text/javascript" src="js/authorizator.js"></script>
@@ -38,18 +44,34 @@
 
 
 <script src="js/pdfjs/build/pdf.js"></script>
+<script src="js/basic.js"></script>
+
 
 <h1>PDF.js Previous/Next example</h1>
 
-<div>
+<div class="hide">
     <button id="prev">Previous</button>
     <button id="next">Next</button>
     &nbsp; &nbsp;
     <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
 </div>
 
-<canvas id="the-canvas"></canvas>
+<div id = "container"></div>
 
+
+
+
+
+
+<div class="flipbook-viewport">
+    <div class="container">
+        <div class="flipbook" id = "general_container">
+
+
+
+        </div>
+    </div>
+</div>
 
 
 <footer class="page-footer grey darken-3">
@@ -83,102 +105,89 @@
 <script >
 
 
+    $(document).ready(function () {
 
 
-    var url = '/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/???????.pdf';
-
-    // The workerSrc property shall be specified.
-    PDFJS.workerSrc = 'js/pdfjs/build/pdf.worker.js';
-
-    var pdfDoc = null,
-        pageNum = 1,
-        pageRendering = false,
-        pageNumPending = null,
-        scale = 0.8,
-        canvas = document.getElementById('the-canvas'),
-        ctx = canvas.getContext('2d');
-
-    /**
-     * Get page info from document, resize canvas accordingly, and render page.
-     * @param num Page number.
-     */
+        var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/???????.pdf";
+        renderPDF(url, document.getElementById('general_container'));
 
 
+    });
+    var allPages = 0;
+    var currPage = 0;
+
+    function renderPDF(url, canvasContainer, options) {
+        var options = options || { scale: 1 };
+
+     //   var bootFlags = [];
 
 
+        function renderPage(page) {
+            var viewport = page.getViewport(options.scale);
+            var div = document.createElement('div');
 
-    function renderPage(num) {
-        pageRendering = true;
-        // Using promise to fetch the page
-        pdfDoc.getPage(num).then(function(page) {
-            var viewport = page.getViewport(scale);
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            // Render PDF page into canvas context
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
             var renderContext = {
                 canvasContext: ctx,
                 viewport: viewport
             };
-            var renderTask = page.render(renderContext);
 
-            // Wait for rendering to finish
-            renderTask.promise.then(function() {
-                pageRendering = false;
-                if (pageNumPending !== null) {
-                    // New page rendering is pending
-                    renderPage(pageNumPending);
-                    pageNumPending = null;
-                }
+
+
+
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            div.appendChild(canvas);
+            canvasContainer.appendChild(div);
+
+            page.render(renderContext);
+
+            console.log(currPage);
+            console.log(allPages);
+
+
+
+
+        }
+
+        function renderPages(pdfDoc) {
+            allPages = pdfDoc.numPages;
+            for(var num = 1; num <= pdfDoc.numPages; num++){
+                currPage = num;
+                pdfDoc.getPage(num).then(renderPage);
+            }
+
+
+            $('.flipbook').turn({
+                // Width
+
+                width:922,
+
+                // Height
+
+                height:600,
+
+                // Elevation
+
+                elevation: 50,
+
+                // Enable gradients
+
+                gradients: true,
+
+                // Auto center this flipbook
+
+                autoCenter: true
+
             });
-        });
 
-        // Update page counters
-        document.getElementById('page_num').textContent = pageNum;
-    }
 
-    function queueRenderPage(num) {
-        if (pageRendering) {
-            pageNumPending = num;
-        } else {
-            renderPage(num);
         }
+        PDFJS.disableWorker = true;
+        PDFJS.getDocument(url).then(renderPages);
     }
-
-    /**
-     * Displays previous page.
-     */
-    function onPrevPage() {
-        if (pageNum <= 1) {
-            return;
-        }
-        pageNum--;
-        queueRenderPage(pageNum);
-    }
-    document.getElementById('prev').addEventListener('click', onPrevPage);
-
-    /**
-     * Displays next page.
-     */
-    function onNextPage() {
-        if (pageNum >= pdfDoc.numPages) {
-            return;
-        }
-        pageNum++;
-        queueRenderPage(pageNum);
-    }
-    document.getElementById('next').addEventListener('click', onNextPage);
-
-    /**
-     * Asynchronously downloads PDF.
-     */
-    PDFJS.getDocument(url).then(function(pdfDoc_) {
-        pdfDoc = pdfDoc_;
-        document.getElementById('page_count').textContent = pdfDoc.numPages;
-
-        // Initial/first page rendering
-        renderPage(pageNum);
-    });
 
 </script>
 
