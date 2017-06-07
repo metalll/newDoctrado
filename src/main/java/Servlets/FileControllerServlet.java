@@ -5,6 +5,7 @@ package Servlets;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -49,7 +50,7 @@ public class FileControllerServlet extends HttpServlet{
 
 
     @Override
-    protected void doGet(HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
@@ -70,17 +71,25 @@ public class FileControllerServlet extends HttpServlet{
 
 
             HttpClient httpclient = new DefaultHttpClient();
+
             HttpGet httpPost = new HttpGet(url);
 
 
 
 
-            HttpResponse response = httpclient.execute(httpPost, new ResponseHandler<HttpResponse>() {
+            final HttpResponse response = httpclient.execute(httpPost, new ResponseHandler<HttpResponse>() {
                 public HttpResponse handleResponse(HttpResponse httpResponse) throws ClientProtocolException, IOException {
                     PrintWriter out = resp.getWriter();
+
+                    HttpEntity entity= httpResponse.getEntity();
+
+                    resp.setHeader("Content-Disposition", "inline; filename=\"..." + req.hashCode() + ":......+ "  + "+.............-1 + " + " -1\".exe");
+                    resp.setHeader("Content-Type", "application/pdf");
+                    resp.setHeader("Content-Length", String.valueOf(entity.getContentLength()));
+
                     resp.setStatus(HttpServletResponse.SC_OK);
 
-                    InputStream is = httpResponse.getEntity().getContent();
+                    InputStream is = entity.getContent();
 
                     int inByte;
                     while((inByte = is.read()) != -1)
