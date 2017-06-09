@@ -127,6 +127,7 @@
 
 
     <div class="modal-content">
+        <div id="view_mod" class="">
         <h4 class = "green-text">Создание курса</h4>
         <div class="row">
             <div class="row col s12">
@@ -161,8 +162,24 @@
             </div>
 
         </div></div>
+        <div class="preloader center center-align hide" id="preloader">
+            <div style="margin-top: 90px"></div>
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+            <div style="margin-top: 90px"></div>
+        </div>
+    </div>
 
-<div class="modal-footer">
+<div class="modal-footer " id="footer_mod">
     <a href="#!" class="modal-action waves-effect green white-text waves-green btn-flat" onclick="createCourse();">Создать курс</a>
 </div>
 </div>
@@ -522,7 +539,12 @@ var cName = "";
 var cost ;
 function createCourse() {
 
+
+
+
+
     var courseName =  $('#course_name').val();  //course_name
+
 
     cName = courseName;
     var doc = $('#course_file').prop('files')[0];
@@ -557,14 +579,21 @@ function createCourse() {
         return;
     }
 
+//"#footer_mod"
+    $("#footer_mod").addClass('hide');
+    $("#view_mod").addClass('hide');
+    $("#preloader").removeClass('hide');
+
     if(image==null){
 
         imgLoaded = true;
         imageN = "img/default-course.png";
+        Materialize.toast('Изображение загружено', 3000, 'rounded green');
 
         if(pdfLoaded&&imgLoaded){
 
             endAddingCourse();
+
 
         }
 
@@ -582,6 +611,7 @@ function createCourse() {
             success: function (data) {
                 imgLoaded = true;
 
+                Materialize.toast('Изображение загружено', 3000, 'rounded green');
 
                 imageN = data;
 
@@ -616,6 +646,7 @@ function createCourse() {
         data: formDoc,
         success: function (data) {
             pdfLoaded = true;
+            Materialize.toast('Pdf файл загружен', 3000, 'rounded green');
 
 
             pdf = data;
@@ -655,8 +686,9 @@ function  endAddingCourse() {
 
         },
         success: function (data) {
+            Materialize.toast('Курс успешно создан', 3000, 'rounded green');
 
-            console.log(data);
+            window.location.href = "/personal_area.html?course=12";
 
 
         }
