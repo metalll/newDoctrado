@@ -152,6 +152,9 @@ public class CourseControllerServet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
+
+
+
        try{
 
            AuthRealm realm = (AuthRealm) req.getSession().getAttribute("auth");

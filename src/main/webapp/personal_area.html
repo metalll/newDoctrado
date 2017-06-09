@@ -470,10 +470,12 @@ var photo = false;
                 return;
             }
 
+
+
+
             role = user.role;
 
             switch (role){
-
                 case "ADMIN" :
                 decodedRole = "Администратор";
                 break;
@@ -511,6 +513,37 @@ var photo = false;
 
     });
 
+
+function loadStudentCourse(uid) {
+
+}
+
+function loadTeacherCourse(uid) {
+
+    $.ajax({
+
+        type: 'get',
+        url: "/API/Course",
+        data: {
+            a:currentUser.id
+        },
+        success: function (data) {
+
+                console.log(data);
+        }
+
+
+
+
+    });
+
+
+
+
+}
+
+
+
     function displayAccount() {
         alert("display account");
     }
@@ -529,6 +562,10 @@ function showDialog() {
 
 
 }
+
+
+
+
 
 
 var imgLoaded = false;
