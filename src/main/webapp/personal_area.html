@@ -421,7 +421,7 @@
                         </div>
                     </div>
 
-                    <div id='nocourse' class="center lato">
+                    <div id='nocourse' class="center col s12 lato">
                       У вас пока нет курсов. Вы можете создать или купить курс.
                     </div>
 
@@ -531,8 +531,69 @@ function loadTeacherCourse(uid) {
         },
         success: function (data) {
 
+
+
                 console.log(data);
+
+                var courses = JSON.parse(data);
+
+                var container = document.getElementById('nocourse');
+
+
+
+                var insertedHtml = '<div class=\"row\">';
+
+                if(courses!='[]'){
+
+
+
+                    for(var i = 0 ;i<courses.length;i++){
+
+                        var j =  courses.length-i-1;
+
+                    var elC = i+1;
+                    insertedHtml += "   <div class=\"row col s12 hand_cursor m12 l4\"  href=\"javascript:void(0);\" onclick=\""+"\" >";
+                    insertedHtml += "    <div class=\"col s12 m12 l12\">";
+                    insertedHtml += "";
+                    insertedHtml += "                <div class=\"hoverable medium card\">";
+                    insertedHtml += "                    <div class=\"card-image\">";
+                    insertedHtml += "                        <img class=\"center center-align\" style=\" object-fit: cover;  height:200px;\" src=\""+courses[i].avatar+"\">";
+                    insertedHtml += "                        <span class=\"card-title center backgr-col center-align \" style=\"font-size: 125%\">"+courses[i].headerText+"<\/span>";
+                    insertedHtml += "                    <\/div>";
+                    insertedHtml += "                  ";
+                    insertedHtml += "                   <\/div>";
+                    insertedHtml += "            <\/div>";
+                    insertedHtml += "            <\/div>";
+
+
+
+
+                    if(elC%3==0&&j<=3){
+                        if(j==3){  }
+                        if(j==2){
+                            insertedHtml += "<div class=\"col l2\"><\/div>";
+                        }
+                        if(j==1){
+                            insertedHtml += "<div class=\"col l4\"><\/div>";
+                        }
+                    }
+
+                    }
+                }
+
+                    insertedHtml += '<\/div>';
+                    container.innerHTML = insertedHtml;
+
+
+
+                }
+
+
+
+
         }
+
+
 
 
 
