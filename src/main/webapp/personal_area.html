@@ -326,7 +326,7 @@
         <div class="card white"
              style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
 
-            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2); ">
                 <a onclick="displayAccount();" class="waves-effect waves-light">Подробнее</a>
 
                 <p id="account_box" class="grey-text text-darken-2"
@@ -568,7 +568,7 @@ function loadTeacherCourse(uid) {
 
                         insertedHtml += "                    <div class=\"col s12 m4\">";
                         insertedHtml += "                        <div class=\"card\">";
-                        insertedHtml += "                            <div class=\"card-image center hoverable center-align hand_cursor\" style=\" height : 200px \" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
+                        insertedHtml += "                            <div class=\"card-image center hoverable center-align hand_cursor\" style=\" height : 200px;overflow: hidden \" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
                         insertedHtml += "                                <img src=\""+courses[i].avatar+"\">";
                         insertedHtml += "                                <span class=\"card-title backgr-col\">"+courses[i].headerText+"<\/span>";
                         insertedHtml += "                            <\/div>";
