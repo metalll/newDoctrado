@@ -10,22 +10,24 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable
 public class Course {
 
+   public Course(){};
+
 @DatabaseField(generatedId = true)
     private long id;
 @DatabaseField
-    private String headerCardText;
-@DatabaseField
     private String headerText;
 @DatabaseField
-    private int timeToLearn;
+    private String course;
 @DatabaseField
     private int cost;
 @DatabaseField
-    private int avatar;
+    private String avatar;
 @DatabaseField
     private long authorId;
 @DatabaseField
     private boolean hasTest;
+@DatabaseField
+    private String test;
 
 
     public long getId() {
@@ -36,14 +38,6 @@ public class Course {
         this.id = id;
     }
 
-    public String getHeaderCardText() {
-        return headerCardText;
-    }
-
-    public void setHeaderCardText(String headerCardText) {
-        this.headerCardText = headerCardText;
-    }
-
     public String getHeaderText() {
         return headerText;
     }
@@ -52,12 +46,12 @@ public class Course {
         this.headerText = headerText;
     }
 
-    public int getTimeToLearn() {
-        return timeToLearn;
+    public String getCourse() {
+        return course;
     }
 
-    public void setTimeToLearn(int timeToLearn) {
-        this.timeToLearn = timeToLearn;
+    public void setCourse(String course) {
+        this.course = course;
     }
 
     public int getCost() {
@@ -68,11 +62,11 @@ public class Course {
         this.cost = cost;
     }
 
-    public int getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(int avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -90,5 +84,13 @@ public class Course {
 
     public void setHasTest(boolean hasTest) {
         this.hasTest = hasTest;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 }

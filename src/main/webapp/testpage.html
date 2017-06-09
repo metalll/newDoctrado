@@ -15,14 +15,14 @@
 <body>
 
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 
-<script type="text/javascript" src="js/turnjs/extras/jquery.min.1.7.js"></script>
 <script type="text/javascript" src="js/turnjs/extras/modernizr.2.5.3.min.js"></script>
 <script type="text/javascript" src="js/turnjs/extras/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="js/turnjs/lib/turn.html4.js"></script>
 <script type="text/javascript" src="js/turnjs/lib/turn.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script type="text/javascript" src="js/authorizator.js"></script>
 
@@ -47,86 +47,82 @@
 <script src="js/basic.js"></script>
 
 
-<h1>PDF.js Previous/Next example</h1>
-
-<div class="hide">
-    <button id="prev">Previous</button>
-    <button id="next">Next</button>
-    &nbsp; &nbsp;
-    <span>Page: <span id="page_num"></span> / <span id="page_count"></span></span>
-</div>
-
-<div id = "container"></div>
 
 
 
 
+<div id="box" class="row col s12" style="margin-left: 18% ; margin-top: 1%;
+
+   ">
 
 
-<div class="flipbook-viewport">
-    <div class="container">
-        <div class="flipbook" id = "general_container">
+
+    <div style="" class=" container center center–align col s12">
+        <div class="flipbook" style="width: inherit; height: inherit;" id = "general_container">
 
 
 
         </div>
     </div>
+
+
 </div>
 
 
-<footer class="page-footer grey darken-3">
-    <div class="container">
-        <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Doctrado</h5>
-                <p class="grey-text text-lighten-4">Дистанционное обучение</p>
-                <img src="img/logo_NDU.png">
-                <p class="grey-text text-lighten-4">Сделано в НИУККЦПБ ©</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Полезные ссылки</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="https://pbezpeka.herokuapp.com">Центр промышленной безопасности</a></li>
-                    <li><a class="grey-text text-lighten-3" href="about.html">О проекте</a></li>
-                    <li><a class="grey-text text-lighten-3" href="course.html">Курсы</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright grey darken-4">
-        <div class="container center center-align">
-            Doctrado © Все права защищены
-        </div>
-    </div>
-</footer>
+<div style="width: 100% ;height: 100%;" class=" container center center–align col s12">
+    <div class="flipbook-1" style="width: inherit; height: inherit;" id = "general_container_fullScreen">
 
 
+
+    </div>
+</div>
+
+
+
+<a href="javascript:void(0);" onclick="scaleS();">Увеличить</a>
 
 <script >
 
+    var savedPdfDocument = null;
+
+
+
+
+    function scaleS() {
+
+     $(".flipbook").turn("size",$(window).width,$(window).height);
+
+    }
 
     $(document).ready(function () {
-
-
-        var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/???????.pdf";
+        var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/dip.pdf";
         renderPDF(url, document.getElementById('general_container'));
-
-
     });
     var allPages = 0;
-    var currPage = 0;
+    var currPage = 1;
+
+    var height = 0;
+    var width = 0;
 
     function renderPDF(url, canvasContainer, options) {
-        var options = options || { scale: 1 };
+        var options = options || { scale: 0.7 };
 
      //   var bootFlags = [];
 
 
-        function renderPage(page) {
+        function renderPage(page,scale) {
+
+
             var viewport = page.getViewport(options.scale);
+            if(scale!=null&&scale!=undefined){
+                viewport = page.getViewport(scale);
+            }
+
+
             var div = document.createElement('div');
 
             var canvas = document.createElement('canvas');
+            canvas.setAttribute('id',currPage);
             var ctx = canvas.getContext('2d');
             var renderContext = {
                 canvasContext: ctx,
@@ -137,8 +133,24 @@
 
 
 
+            if(width==0||height==0){
+                height = viewport.height;
+                width = viewport.width;
+
+                document.getElementById('box').style.width = width * 2;
+                document.getElementById('box').style.height = height;
+
+
+
+            }
+
+
+
             canvas.height = viewport.height;
             canvas.width = viewport.width;
+
+
+
             div.appendChild(canvas);
             canvasContainer.appendChild(div);
 
@@ -146,42 +158,64 @@
 
             console.log(currPage);
             console.log(allPages);
+            if(currPage == allPages){
+
+                if(scale!=null||scale!=undefined){
+
+                    height = $( window ).height();
+
+                    width = $( window ).height()/2;
+                    // set fullScreen
 
 
 
 
+
+
+                }
+
+
+                $('.flipbook').turn({
+                    // Width
+
+                    width:width*2,
+
+                    // Height
+
+                    height:height,
+
+                    // Elevation
+
+                    elevation: 250,
+
+                    // Enable gradients
+
+                    gradients: true,
+
+                    // Auto center this flipbook
+
+                    autoCenter: true
+
+                });
+
+
+            }else{
+            currPage++;
+
+            }
         }
 
         function renderPages(pdfDoc) {
+
+            if(savedPdfDocument==null){
+                savedPdfDocument = pdfDoc;            }
+
             allPages = pdfDoc.numPages;
             for(var num = 1; num <= pdfDoc.numPages; num++){
-                currPage = num;
+                //currPage = num;
                 pdfDoc.getPage(num).then(renderPage);
             }
 
-
-            $('.flipbook').turn({
-                // Width
-
-                width:922,
-
-                // Height
-
-                height:600,
-
-                // Elevation
-
-                elevation: 50,
-
-                // Enable gradients
-
-                gradients: true,
-
-                // Auto center this flipbook
-
-                autoCenter: true
-
-            });
 
 
         }

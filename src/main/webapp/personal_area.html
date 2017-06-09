@@ -16,13 +16,16 @@
 
 
 
+
+
+
     <title id="header" >personal doctrado</title>
 
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
     <style type='text/css'>@import url(//fonts.googleapis.com/css?family=Elsie+Swash+Caps|Open+Sans);</style>
 
     <link rel='stylesheet' type='text/css' href='css/php.css' />
-
+    <link rel='stylesheet' type='text/css' href='css/app.css' />
 
 
     <!--Import materialize.css-->
@@ -115,6 +118,55 @@
         left: -20px!important;
     }
 </style>
+
+
+
+
+<div id="create_course_dialog" class="modal">
+
+
+
+    <div class="modal-content">
+        <h4 class = "green-text">Создание курса</h4>
+        <div class="row">
+            <div class="row col s12">
+                <div class="input-field center center-align col s12">
+                    <input id="course_name" type="text" class="validate" >
+                    <label for="course_name">&nbsp;&nbsp; Название курса</label>
+                </div>
+            </div>
+            <h6 class="orange-text center center-align col s12 lato" style="font-size: 16px">Обложка курса</h6>
+            <button style="position: relative;                       background: #ffffff;                       background-color: #ffffff;                       width: 100%;                       max-width: 220px;                       height: 220px;                       display: block;                       border: none;                       margin: 0 auto;" type="button" onclick="uploadPhoto();">                    <img class="responsive-img circle" src="img/default-course.png" id="avatar-img">                </button>
+            <input accept="image/*" style="display: none;" id="avatar-input" type="file">
+            <div class="row col s12">
+                    <div class="file-field input-field">
+                        <h6 class="orange-text center center-align col s12 lato" style="font-size: 16px">PDF – материал курса</h6>
+                        <div class="orange btn">
+                            <span>Файл</span>
+                            <input id="course_file" type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+            </div>
+            <div class="row col s12">
+                <div class="input-field center center-align col s10">
+                    <input id="course_cost" type="number" min="50" class="validate left-align left" >
+                    <label for="course_cost"  data-error=" &nbsp;&nbsp; Цена курса должна быть больше 50 грн и не может содержать буквы">&nbsp;&nbsp; Цена курса</label>
+                </div>
+                <div class="col s2">
+                    <p style="font-size: 16px ; padding-top: 34px" class="left-align left orange-text">грн.</p>
+                </div>
+            </div>
+
+        </div></div>
+
+<div class="modal-footer">
+    <a href="#!" class="modal-action waves-effect green white-text waves-green btn-flat" onclick="createCourse();">Создать курс</a>
+</div>
+</div>
+
 <!-- TOOLBAR INDEPENDANT DIV -->
 <div class="lander">
     <div>
@@ -285,8 +337,8 @@
 
         <div class="card green">
 
-            <div class="card-content grey-text center center-align text-darken-3" style="padding: 7px 65px;">
-                <span class="card-title green white-text text-darken-3  lato" style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
+            <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
+                <span class="card-title green white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
             </div>
 
 
@@ -353,7 +405,6 @@
                     </div>
 
                     <div id='nocourse' class="center lato">
-
                       У вас пока нет курсов. Вы можете создать или купить курс.
                     </div>
 
@@ -385,13 +436,14 @@ var decodedRole = null;
 
 //dialog pages;
 
-
+var photo = false;
 
 
 
     $(document).ready(function () {
       //  $('#account_box') - write accout;
 
+        $('.modal').modal();
 
         getCurentUser(function (user) {
 
@@ -453,8 +505,220 @@ function sign_out() {
 }
 
 
+function showDialog() {
+
+    $('#create_course_dialog').modal('open');
 
 
+
+}
+
+
+var imgLoaded = false;
+var pdfLoaded = false;
+var imageN = "";
+var pdf = "";
+var cName = "";
+var cost ;
+function createCourse() {
+
+    var courseName =  $('#course_name').val();  //course_name
+
+    cName = courseName;
+    var doc = $('#course_file').prop('files')[0];
+    cost = $("#course_cost").val();
+    var formDoc = new FormData();
+    formDoc.append('type', 'conf_doc');
+    formDoc.append('doc', doc);
+
+    var image = $('#avatar-input').prop('files')[0];
+    var formImg = new FormData();
+    formImg.append('type', 'conf_doc');
+    formImg.append('doc', image);
+
+
+
+
+    if(doc==null){
+
+        Materialize.toast('Добавьте PDF файл курса', 3000, 'rounded red');
+        return;
+    }
+
+    if(courseName==""){
+
+        Materialize.toast('Добавьте название курса', 3000, 'rounded red');
+        return;
+    }
+
+    if(cost==""||cost<50){
+
+        Materialize.toast('Измените стоимость курса', 3000, 'rounded red');
+        return;
+    }
+
+    if(image==null){
+        image = "img/default-course.png";
+        imgLoaded = true;
+
+
+        if(pdfLoaded&&imgLoaded){
+
+            endAddingCourse();
+
+        }
+
+    }
+    else{
+
+        $.ajax({
+
+            type: 'post',
+            url: "/API/File",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formImg,
+            success: function (data) {
+                imgLoaded = true;
+
+
+                imageN = data;
+
+                if(pdfLoaded&&imgLoaded){
+
+                   endAddingCourse();
+
+                }
+
+            }
+
+
+
+
+        });
+
+
+
+    }
+
+
+
+
+
+    $.ajax({
+
+        type: 'post',
+        url: "/API/File",
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formDoc,
+        success: function (data) {
+            pdfLoaded = true;
+
+
+            pdf = data;
+
+            if(pdfLoaded&&imgLoaded){
+
+                endAddingCourse();
+
+            }
+
+        }
+
+
+
+
+    });
+
+
+
+
+
+}
+
+
+function  endAddingCourse() {
+
+
+    $.ajax({
+
+        type: 'post',
+        url: "/API/Course",
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: {
+            headerText:cName,
+            course:pdf,
+            cost:cost,
+            avatar:avatar
+
+        },
+        success: function (data) {
+
+            console.log(data);
+
+
+        }
+
+
+
+
+    });
+
+}
+
+$("#avatar-input").change(function () {
+    hasPhoto = false;
+    var file, img;
+    var _URL = window.URL || window.webkitURL;
+    if ((file = this.files[0])) {
+        if (this.files[0].size > 5242880) {
+            document.getElementById("avatar-input").value = "";
+
+            Materialize.toast('Размер картинки не должен превышать 5Мб', 3000, 'rounded red');
+            return;
+        }
+        img = new Image();
+        img.onload = function () {
+            hasPhoto = true;
+            $("#avatar-img").css('width', '100%').css('height', '100%');
+            document.getElementById('avatar-img').src = img.src;
+        };
+        img.onerror = function () {
+
+            Materialize.toast('Выбранный файл не является картинкой!', 3000, 'rounded red');
+        };
+        img.src = _URL.createObjectURL(file);
+    }
+});
+
+function uploadPhoto() {
+    $("#avatar-input").click();
+}
+function upload() {
+    var UUIDImg = getUUID();
+    var form = new FormData();
+    var image = $('#avatar-input').prop('files')[0];
+    form.append('key',UUIDImg);
+    form.append('image', image);
+    $.ajax({
+        type: 'post',
+        url: "/API/File",
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: form,
+        success: function (data) {
+
+            //todo doto))
+
+        }
+    });
+    }
 
 </script>
 </body>
