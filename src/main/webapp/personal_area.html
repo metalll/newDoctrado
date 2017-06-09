@@ -552,21 +552,29 @@ function loadTeacherCourse(uid) {
                         var j =  courses.length-i-1;
 
                     var elC = i+1;
-                    insertedHtml += "   <div class=\"row col s12 hand_cursor m12 l4\"  href=\"javascript:void(0);\" onclick=\""+"\" >";
-                    insertedHtml += "    <div class=\"col s12 m12 l12\">";
-                    insertedHtml += "";
-                    insertedHtml += "                <div class=\"hoverable small card\">";
-                    insertedHtml += "                    <div class=\"card-image\">";
-                    insertedHtml += "                        <img class=\"center center-align\" style=\" object-fit: cover;  \" src=\""+courses[i].avatar+"\">";
-                    insertedHtml += "                        <span class=\"card-title center backgr-col center-align \" style=\"font-size: 125%\">"+courses[i].headerText+"<\/span>";
-                    insertedHtml += "                    <\/div>";
-                    insertedHtml += "                  ";
-                    insertedHtml += "                   <\/div>";
-                    insertedHtml += "            <\/div>";
-                    insertedHtml += "            <\/div>";
+//                    insertedHtml += "   <div class=\"row col s12 hand_cursor m12 l4\"  href=\"javascript:void(0);\" onclick=\""+"\" >";
+//                    insertedHtml += "    <div class=\"col s12 m12 l12\">";
+//                    insertedHtml += "";
+//                    insertedHtml += "                <div class=\"card\">";
+//                    insertedHtml += "                    <div class=\"card-image\">";
+//                    insertedHtml += "                        <img class=\"center center-align\" style=\" object-fit: cover;  \" src=\""+courses[i].avatar+"\">";
+//                    insertedHtml += "                        <span class=\"card-title center backgr-col center-align \" style=\"font-size: 125%\">"+courses[i].headerText+"<\/span>";
+//                    insertedHtml += "                    <\/div>";
+//                    insertedHtml += "                  ";
+//                    insertedHtml += "                   <\/div>";
+//                    insertedHtml += "            <\/div>";
+//                    insertedHtml += "            <\/div>";
+//
 
-
-
+                        insertedHtml += "                    <div class=\"col s12 m4\">";
+                        insertedHtml += "                        <div class=\"card\">";
+                        insertedHtml += "                            <div class=\"card-image center hoverable center-align hand_cursor\" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
+                        insertedHtml += "                                <img src=\""+courses[i].avatar+"\">";
+                        insertedHtml += "                                <span class=\"card-title backgr-col\">"+courses[i].headerText+"<\/span>";
+                        insertedHtml += "                            <\/div>";
+                        insertedHtml += "";
+                        insertedHtml += "                        <\/div>";
+                        insertedHtml += "                    <\/div>";
 
                     if(elC%3==0&&j<=3){
                         if(j==3){  }
