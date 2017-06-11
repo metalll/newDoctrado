@@ -244,7 +244,7 @@ try {
 
 
                PrintWriter out = resp.getWriter();
-               out.write(String.valueOf(tempCourse.getId());
+               out.write(String.valueOf(tempCourse.getId()));
                out.flush();
                out.close();
 
