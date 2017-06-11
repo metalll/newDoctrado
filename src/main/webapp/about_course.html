@@ -612,7 +612,8 @@
 
                 $('#allPages').text(allPages);
                 $("#flipbook").bind("turning", function(event, page, view) {
-                    $('#currPage').val(page+1);
+                    if(page!=1){ $('#currPage').val(page+1);}
+                    else{$('#currPage').val(1);}
                 });
 
 
