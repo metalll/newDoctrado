@@ -474,7 +474,7 @@ var photo = false;
 
 
             role = user.role;
-
+            currentUser = user.user;
             switch (role){
                 case "ADMIN" :
                 decodedRole = "Администратор";
@@ -491,7 +491,7 @@ var photo = false;
 
                 case "TEACHER":
                 decodedRole = "Преподаватель";
-                currentUser = user.user;
+
                 renderTeacherCourse(currentUser.id);
                 break;
 
