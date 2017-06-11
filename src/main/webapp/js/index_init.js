@@ -48,7 +48,7 @@ function renderCourse() {
             card += "<div class=\" row col s12 m12 l12\">";
 
 
-            for(var i = 0 ; i<data.length;i++){
+            for(var i = 0 ; i<courses.length;i++){
 
 var elC = i;
                 var j =  courses.length-i-1;
