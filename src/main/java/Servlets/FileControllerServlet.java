@@ -5,8 +5,7 @@ package Servlets;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
+import org.apache.http.*;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
@@ -52,6 +51,8 @@ public class FileControllerServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
 
+
+        boolean accepted = false;
         Map<String,String[]> paramMap = req.getParameterMap();
         String url=null;
         try{
@@ -64,16 +65,55 @@ public class FileControllerServlet extends HttpServlet{
         }
 
 
+        try {
+            if (req.getHeader("accept").isEmpty()){
+
+                PrintWriter out = resp.getWriter();
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                out.print("-1");
+                out.flush();
+                out.close();
+
+                return;
+            }else{
+
+                accepted=true;
+            }
+
+        }catch (Exception e){
 
 
+            PrintWriter out = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            out.print("-1");
+            out.flush();
+            out.close();
 
-        if(url!=null){
+            return;
+
+
+        }
+
+
+        if(url!=null&&accepted){
 
 
             HttpClient httpclient = new DefaultHttpClient();
 
             HttpGet httpPost = new HttpGet(url);
+            httpPost.addHeader(new Header() {
+                public String getName() {
+                    return "accept";
+                }
 
+                public String getValue() {
+                    return "value";
+                }
+
+                public HeaderElement[] getElements() throws ParseException {
+                    return new HeaderElement[0];
+                }
+            });
 
 
 
