@@ -66,7 +66,7 @@ public class FileControllerServlet extends HttpServlet{
 
 
         try {
-            if (req.getHeader("accept").isEmpty()){
+            if (req.getHeader("accept").contains("Basic")){
 
                 PrintWriter out = resp.getWriter();
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -75,6 +75,7 @@ public class FileControllerServlet extends HttpServlet{
                 out.close();
 
                 return;
+
             }else{
 
                 accepted=true;
@@ -83,6 +84,7 @@ public class FileControllerServlet extends HttpServlet{
         }catch (Exception e){
 
 
+            accepted=false;
             PrintWriter out = resp.getWriter();
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             out.print("-1");

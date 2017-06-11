@@ -3,7 +3,9 @@ package Servlets;
 import Auth.AuthRealm;
 import Auth.UserRole;
 import DBSingletones.DBCourse;
+import DBSingletones.DBPushcare;
 import Model.Course;
+import Model.Student;
 import Model.Teacher;
 import com.google.gson.Gson;
 
@@ -38,11 +40,59 @@ public class CourseControllerServet extends HttpServlet{
         String query = null;
         String author = null;
         String page = null;
+        String pushcare = null;
         try{
             query = paramMap.get("q")[0];
         }catch (Exception e){
             query = null;
         }
+        try {
+            pushcare = paramMap.get("pushcare")[0];
+        }catch (Exception e){
+            pushcare = null;
+        }
+
+        if(pushcare!=null){
+
+            Student student = (Student) ((AuthRealm)req.getSession().getAttribute("auth")).getUser();
+
+            List<Long> courseLisr = DBPushcare.getInstance().getPushcares(student.getId());
+
+            List<Course> courseList = new ArrayList<Course>();
+
+            for(long tLong : courseLisr){
+
+                if(query!=null){
+
+                   Course course = DBCourse.getInstance().getCourseWithId(tLong);
+
+                    if(course.getHeaderText().contains(query)){
+                        courseList.add(course);
+                    }
+
+
+                }else {
+
+                    courseList.add(DBCourse.getInstance().getCourseWithId(tLong));
+                }
+            }
+
+
+            Gson gson = new Gson();
+
+
+
+            PrintWriter out = resp.getWriter();
+            resp.setStatus(HttpServletResponse.SC_OK);
+            out.write(gson.toJson(courseList));
+            out.flush();
+            out.close();
+
+
+            return;
+        }
+
+
         try{
             author = paramMap.get("a")[0];
         }catch (Exception e){
@@ -95,7 +145,7 @@ public class CourseControllerServet extends HttpServlet{
             out.flush();
             out.close();
 
-
+            return;
         }
 
         for(Course tCourse: courseList){

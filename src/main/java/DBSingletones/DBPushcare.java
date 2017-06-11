@@ -8,6 +8,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,10 +68,36 @@ public class DBPushcare {
 
     public void addPushcare(Pushcare pushcare){
 
+try {
+
+
+        dao.create(pushcare);
+        dao.getConnectionSource().close();
+}catch (Exception e){
+
+}
+}
+
+
+    public List<Long> getPushcares(long userId){
+
+        try {
+        List<Pushcare> getPush = dao.queryForAll();
+        List<Long> retVal = new ArrayList<Long>();
+        for(Pushcare tempPushcare : getPush){
+            if(tempPushcare.getUserID()==userId){
+                retVal.add(tempPushcare.getCourseBeBuy());
+            }
+        }
+        return retVal;
+
+
+        }catch (Exception e){
+            return null;
+        }
 
 
     }
-
 
 
     public boolean checkPushcare(long userId,long itemId){
