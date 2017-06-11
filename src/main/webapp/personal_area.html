@@ -422,8 +422,19 @@
                     </div>
 
                     <div id='nocourse' class="center col s12 lato">
-                      У вас пока нет курсов. Вы можете создать или купить курс.
-                    </div>
+                        <div class="row center center-align">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div></div>
 
 
                 </div>
@@ -893,6 +904,11 @@ function renderTeacherCourse() {
 
             card += "<\/div>";
 
+            if(card=="<div class=\" row col s12 m12 l12\"><\/div>"){
+                card = "У вас пока нет курсов. Вы можете создать или купить курс."
+            }
+
+
             container.innerHTML = card;
         }
 
@@ -961,6 +977,10 @@ function renderStudentCourse() {
             }
 
             card += "<\/div>";
+
+            if(card=="<div class=\" row col s12 m12 l12\"><\/div>"){
+                card = "У вас пока нет курсов. Вы можете создать или купить курс."
+            }
 
             container.innerHTML = card;
         }
