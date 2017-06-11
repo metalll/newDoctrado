@@ -50,23 +50,13 @@ function renderCourse() {
 
             for(var i = 0 ; i<courses.length;i++){
 
-var elC = i;
+var elC = i+1;
 
 
                 var j =  courses.length-i-1;
 
-                if(elC%3==0&&j<=3){
-                    if(j==3){  }
-                    if(j==2){
-                        card += "<div class=\"col l2\"><\/div>";
-                    }
-                    if(j==1){
-                        card += "<div class=\"col l4\"><\/div>";
-                    }
-                }
 
-
-                card += "  <div class=\"col s12 m4 l4\">";
+            card += "  <div class=\"col s12 m4 l4\">";
             card += "        <div style=\"height: 350px;\"  class=\"card hoverable\">";
             card += "            <div class=\"card-image\">";
             card += "                <img class=\"center center-align\" style=\"height:200px;overflow:hidden; top: 0; bottom:0; left: 0; right:0; margin: auto;\" src=\""+courses[i].avatar+"\">";
@@ -78,6 +68,15 @@ var elC = i;
             card += "        <\/div>";
 
 
+                if(elC%3==0&&j<=3){
+                    if(j==3){  }
+                    if(j==2){
+                        card += "<div class=\"col l2\"><\/div>";
+                    }
+                    if(j==1){
+                        card += "<div class=\"col l4\"><\/div>";
+                    }
+                }
             }
 
             card += "<\/div>"
