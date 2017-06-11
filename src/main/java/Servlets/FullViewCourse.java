@@ -4,6 +4,7 @@ import Auth.AuthRealm;
 import DBSingletones.DBCourse;
 import DBSingletones.DBPushcare;
 import Model.Admin;
+import Model.Course;
 import Model.Student;
 import Model.Teacher;
 import com.google.gson.Gson;
@@ -85,14 +86,17 @@ public class FullViewCourse extends HttpServlet {
 
                 if(realm.getUser() instanceof Teacher){
 
+                    Course tCourse = DBCourse.getInstance().getCourseWithId(courseId);
 
 
-                    if(DBPushcare.getInstance().checkPushcare(((Teacher)realm.getUser()).getId(),courseId)){
+
+
+                    if(DBPushcare.getInstance().checkPushcare(((Teacher)realm.getUser()).getId(),courseId)||((Teacher)realm.getUser()).getId()==tCourse.getAuthorId()){
 
 
                         PrintWriter out = resp.getWriter();
                         Gson gson = new Gson();
-                        out.write(gson.toJson(DBCourse.getInstance().getCourseWithId(courseId)));
+                        out.write(gson.toJson(tCourse));
                         out.flush();
                         out.close();
 

@@ -481,30 +481,170 @@
 
 <script>
 
-
-
     var savedPdfDocument = null;
     var margin;
 
 
+    var allPages = 0;
+    var currPage = 1;
 
-    function back() {
+    var height = 0;
+    var width = 0;
+
+
+    var userLoadedFlag = false;
+    var courseLoadedFlag = false;
+
+
+    var currentUser = null;
+    var role = null;
+    var decodedRole = null;
+
+    //dialog pages;
+
+    var photo = false;
+
+    var currentCourse = null;
+
+    function endAllOperation() {
+
+
+
+        if(currentCourse.course==null||currentCourse.course==""||currentCourse.course==NaN||currentCourse.course==undefined){
+
+            var container = document.getElementById('noaccess');
+            if(currentUser==null){
+
+                container.innerHTML = "Для просмотра материала курса требуется регистрация";
+
+            }else{
+                container.innerHTML = "У вас не доступа к просмотру данного курса. Вы можете купить данный курс";
+            }
+          document.getElementById('account_balance_box').innerHTML = currentCourse.cost + " грн.";
+
+
+
+
+        }else {
+            var tparent = document.getElementById('account_balance_box').parentNode;
+            tparent.removeChild(document.getElementById('account_balance_box'));
+
+
+            renderPDF(currentCourse.course, document.getElementById('flipbook'));
+        }
+
+
+
+        document.getElementById('avatar_box').removeAttribute("src");
+        document.getElementById('avatar_box').setAttribute("src", currentCourse.avatar);
+
+
 
     }
 
-
-    function scaleS() {
-
-
-
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
     $(document).ready(function () {
 
 
-        //$("#back_div").css({left: 35, top: 25});
+        $('.modal').modal();
 
 
+
+
+
+        $.ajax({
+            type:"get",
+            url:"/API/ViewCourse",
+            data:{
+                course:getParameterByName('id')
+            },
+            success:function (data) {
+
+                currentCourse = JSON.parse(data);
+
+                courseLoadedFlag = true;
+
+                if(courseLoadedFlag && userLoadedFlag){
+                    endAllOperation();
+                }
+
+
+            }
+
+        });
+
+
+
+        getCurentUser(function (user) {
+            if (user == null) {
+                //window.location.href = "/";
+                currentUser = null;
+                userLoadedFlag = true;
+                if(userLoadedFlag&&courseLoadedFlag){
+                    endAllOperation();
+                }
+                return;
+            }
+
+
+            role = user.role;
+            currentUser = user.user;
+            switch (role) {
+                case "ADMIN" :
+                    decodedRole = "Администратор";
+                    break;
+
+                case "STUDENT":
+                    decodedRole = "Студент";
+                //    var parent = document.getElementById('create_course_card').parentNode;
+
+                //    parent.removeChild(document.getElementById('create_course_card'));
+
+                    renderStudentCourse();
+                    break;
+
+                case "TEACHER":
+                    decodedRole = "Преподаватель";
+
+                  //  renderTeacherCourse(currentUser.id);
+                    break;
+
+
+                // default:window.location.href = "/"; return;
+            }
+
+            currentUser = user.user;
+//            document.getElementById('account_box').innerHTML = currentUser.email;
+//            document.getElementById('account_balance_box').innerHTML = currentUser.balance + " грн.";
+//            document.getElementById('account_type_box').innerHTML = decodedRole;
+//            document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstname;
+//            document.getElementById('header').innerHTML = currentUser.name + " – профиль";
+//
+//
+//            // avatar_box
+//
+//            document.getElementById('avatar_box').removeAttribute("src");
+//            document.getElementById('avatar_box').setAttribute("src", currentUser.avatar);
+
+
+            userLoadedFlag = true;
+
+            if(courseLoadedFlag && userLoadedFlag){
+                endAllOperation();
+            }
+
+
+
+        });
 
         var documentWidth =$(window).width();
         var tWidth = (documentWidth - 950) / 2;
@@ -517,14 +657,10 @@
         console.log(documentWidth);
         document.getElementById('box').style.marginLeft = 0 + "px";
 
-        var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/pdf.pdf";
-        renderPDF(url, document.getElementById('flipbook'));
-    });
-    var allPages = 0;
-    var currPage = 1;
+      //  var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/pdf.pdf";
 
-    var height = 0;
-    var width = 0;
+    });
+
 
     function renderPDF(url, canvasContainer, options) {
         var options = options || { scale: 0.81 };
@@ -665,176 +801,11 @@
 
 
 
-    var currentUser = null;
-    var role = null;
-    var decodedRole = null;
 
-    //dialog pages;
 
-    var photo = false;
 
 
 
-    $(document).ready(function () {
-        //  $('#account_box') - write accout;
-
-        $('.modal').modal();
-
-        getCurentUser(function (user) {
-
-            if(user==null){
-
-                window.location.href = "/";
-                return;
-            }
-
-
-
-
-            role = user.role;
-            currentUser = user.user;
-            switch (role){
-                case "ADMIN" :
-                    decodedRole = "Администратор";
-                    break;
-
-                case "STUDENT":
-                    decodedRole = "Студент";
-                    var parent = document.getElementById('create_course_card').parentNode;
-
-                    parent.removeChild(document.getElementById('create_course_card'));
-
-                    renderStudentCourse();
-                    break;
-
-                case "TEACHER":
-                    decodedRole = "Преподаватель";
-
-                    renderTeacherCourse(currentUser.id);
-                    break;
-
-
-               // default:window.location.href = "/"; return;
-            }
-
-            currentUser = user.user;
-            document.getElementById('account_box').innerHTML = currentUser.email;
-            document.getElementById('account_balance_box').innerHTML = currentUser.balance + " грн.";
-            document.getElementById('account_type_box').innerHTML = decodedRole;
-            document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstname;
-            document.getElementById('header').innerHTML = currentUser.name + " – профиль";
-
-
-            // avatar_box
-
-            document.getElementById('avatar_box').removeAttribute("src");
-            document.getElementById('avatar_box').setAttribute("src",currentUser.avatar);
-
-
-        });
-
-
-
-
-    });
-
-
-    function loadStudentCourse(uid) {
-
-    }
-
-    function loadTeacherCourse(uid) {
-
-        $.ajax({
-
-            type: 'get',
-            url: "/API/Course",
-            data: {
-                a:currentUser.id
-            },
-            success: function (data) {
-
-
-
-                console.log(data);
-
-                var courses = JSON.parse(data);
-
-                var container = document.getElementById('nocourse');
-
-
-
-                var insertedHtml = '<div class=\"row\">';
-
-                if(courses!='[]'){
-
-
-
-                    for(var i = 0 ;i<courses.length;i++){
-
-                        var j =  courses.length-i-1;
-
-                        var elC = i+1;
-//                    insertedHtml += "   <div class=\"row col s12 hand_cursor m12 l4\"  href=\"javascript:void(0);\" onclick=\""+"\" >";
-//                    insertedHtml += "    <div class=\"col s12 m12 l12\">";
-//                    insertedHtml += "";
-//                    insertedHtml += "                <div class=\"card\">";
-//                    insertedHtml += "                    <div class=\"card-image\">";
-//                    insertedHtml += "                        <img class=\"center center-align\" style=\" object-fit: cover;  \" src=\""+courses[i].avatar+"\">";
-//                    insertedHtml += "                        <span class=\"card-title center backgr-col center-align \" style=\"font-size: 125%\">"+courses[i].headerText+"<\/span>";
-//                    insertedHtml += "                    <\/div>";
-//                    insertedHtml += "                  ";
-//                    insertedHtml += "                   <\/div>";
-//                    insertedHtml += "            <\/div>";
-//                    insertedHtml += "            <\/div>";
-//
-
-                        insertedHtml += "                    <div class=\"col s12 m4\">";
-                        insertedHtml += "                        <div class=\"card\">";
-                        insertedHtml += "                            <div class=\"card-image center hoverable center-align hand_cursor\" style=\" height : 200px;overflow: hidden \" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
-                        insertedHtml += "                                <img src=\""+courses[i].avatar+"\">";
-                        insertedHtml += "                                <span class=\"card-title\" style=\" font-size: 16px; \">"+courses[i].headerText+"<\/span>";
-                        insertedHtml += "                            <\/div>";
-                        insertedHtml += "";
-                        insertedHtml += "                        <\/div>";
-                        insertedHtml += "                    <\/div>";
-
-                        if(elC%3==0&&j<=3){
-                            if(j==3){  }
-                            if(j==2){
-                                insertedHtml += "<div class=\"col l2\"><\/div>";
-                            }
-                            if(j==1){
-                                insertedHtml += "<div class=\"col l4\"><\/div>";
-                            }
-                        }
-
-                    }
-                }
-
-                insertedHtml += '<\/div>';
-                container.innerHTML = insertedHtml;
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-        });
-
-
-
-
-    }
 
 
 
