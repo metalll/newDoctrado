@@ -352,7 +352,7 @@
             </div>
         </div>
 
-        <div class="card green">
+        <div id="create_course_card" class="card green">
 
             <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
                 <span class="card-title green white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
@@ -482,6 +482,10 @@ var photo = false;
 
                 case "STUDENT":
                 decodedRole = "Студент";
+                var parent = document.getElementById('create_course_card').parentNode;
+
+                parent.removeChild(document.getElementById('create_course_card'));
+
                 renderStudentCourse();
                 break;
 
@@ -916,6 +920,8 @@ function renderStudentCourse() {
             var courses = JSON.parse(data);
 
             var card="";
+
+
 
             var container = document.getElementById('nocourse');
 
