@@ -66,6 +66,24 @@
 
 
 
+    <script type="text/javascript" src="js/turnjs/extras/modernizr.2.5.3.min.js"></script>
+    <script type="text/javascript" src="js/turnjs/extras/jquery-ui-1.8.20.custom.min.js"></script>
+    <script type="text/javascript" src="js/turnjs/lib/turn.html4.js"></script>
+    <script type="text/javascript" src="js/turnjs/lib/turn.js"></script>
+
+
+
+
+
+
+
+
+
+    <script src="js/pdfjs/build/pdf.js"></script>
+    <script src="js/basic.js"></script>
+
+
+
 
     <meta name="viewport" content="width=device-width">
 
@@ -233,7 +251,7 @@
     </div>
 </div>
 <!-- END TOOLBAR INDEPENDANT DIV -->
-<div id = "toolbar-indicator" class="systembar-state-marker orange" style="top: 18px;"></div>
+<div id = "toolbar-indicator" class="systembar-state-marker orange" style="top: 73px;"></div>
 
 
 
@@ -250,8 +268,8 @@
 <div class="row" style=" padding: 10px 0 10px 36px; margin-top: 0px; margin-bottom: 0;">
     <div class="col s12" style="padding-top: 8px;">
 
-        <h3 class="lato-page grey-text text-darken-3" style="display: inline; margin-bottom: 0.8rem; margin-top: 0.8rem;">
-            Личный кабинет
+        <h3 class="lato-page grey-text text-darken-3" id="header_text" style="display: inline; margin-bottom: 0.8rem; margin-top: 0.8rem;">
+            Подробнее о курсе
             <div onclick="DisplayDIV('guide-intro');" class="grey-text text-darken-1"
                  style="display: inline; position: relative; top: -8px; cursor: pointer; margin-left: 10px;"><i
                     class="material-icons" style="font-size: 2rem;">help_outline</i></div>
@@ -279,7 +297,7 @@
                 <img id="avatar_box" src="img/avatar-2.png" class="circle" style="width: 200px ; height:  200px ; overflow: hidden">
 
                 <p id="account_name_box" class="grey-text lato left-align  text-darken-2"
-                   style="display: inline; font-size: 20px; margin-top: 35px; margin-left: 8px; float: right;">Петров<br>Алексей<br>Владимирович
+                   style="display: inline; font-size: 20px; margin-top: 35px; margin-left: 8px; float: right;">Великолепный курс
 
 
                 </p>
@@ -309,11 +327,11 @@
         <div class="card white"
              style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
 
-            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
-                <a onclick="displayAccount();" class="green-text waves-effect waves-light"> Пополнить счет </a>
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2); ">
+                <a onclick="displayAccount();"  class="green-text waves-effect waves-light"> Купить курс </a>
 
                 <p id="account_balance_box" class="grey-text text-darken-2"
-                   style="display: inline; float: right; margin-top: -4px;">У вас на счету : 100 грн<br>
+                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Стоимость курса : 100 грн<br>
 
 
                 </p>
@@ -327,10 +345,10 @@
              style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
 
             <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2); ">
-                <a onclick="displayAccount();" class="waves-effect waves-light">Подробнее</a>
+                <a onclick="displayAccount();" class="waves-effect waves-light">Еще курсы автора</a>
 
                 <p id="account_box" class="grey-text text-darken-2"
-                   style="display: inline; float: right; margin-top: -4px;">linuxoid6666@gmail.com<br>
+                   style="display: inline;  font-size: 16px; float: right; margin-top: -4px;">Пупкин Василий Анатолич<br>
 
 
                 </p>
@@ -341,10 +359,12 @@
 
         <div class="card white" style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12);">
             <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
-                <a onclick="displayAccount();" class="green-text waves-effect waves-light">Статистика</a>
+                <a onclick="displayAccount();" class="green-text waves-effect waves-light">Пройти тест</a>
 
                 <p id="account_type_box" class="grey-text text-darken-2"
-                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Преподаватель<br>
+                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Вы еще проходили тестирование<br>
+
+
 
 
                 </p>
@@ -352,10 +372,10 @@
             </div>
         </div>
 
-        <div id="create_course_card" class="card green">
+        <div id="edit_course_card" class="card green">
 
             <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
-                <span class="card-title green white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
+                <span class="card-title green white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Изменить параметры курса</span>
             </div>
 
 
@@ -363,7 +383,16 @@
 
         </div>
 
+        <div id="edit_test_card" class="card orange">
 
+            <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
+                <span class="card-title orange white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Добавить/Изменить тест</span>
+            </div>
+
+
+
+
+        </div>
 
 
 
@@ -386,7 +415,7 @@
                     <ul class="tabs" style="overflow-x: hidden; border-bottom: 1px solid #ddd;">
                         <li class="tab col s12" style="text-align: center;"><a href="#yoursimplebooklets"
                                                                                class="lato grey-text text-darken-2"
-                                                                               style="font-size: 27px; letter-spacing: 0; padding-left: 1.5rem;">Ваши курсы</a></li>
+                                                                               style="font-size: 27px; letter-spacing: 0; padding-left: 1.5rem;">Материал курса</a></li>
 
                         <!-- <li class="tab col s4"><a href="#favs" class="grey-text text-darken-2 lato" style="font-size: 18px;"><i class="material-icons left pink-text">favorite</i> Favorites</a></li> -->
                     </ul>
@@ -399,42 +428,20 @@
                 <div class="col s12 white" style=" margin-top: 2px; padding: 0 0 50px 6px;">
 
 
-                    <div class="white" style="padding:0;">
-                        <div class="row">
-                            <div class="col s12">
-                                <div class="row" style="margin-bottom: 0;">
-
-                                    <div class="col s12 m12">
-                                        <div id="modalmybookletmenubox_filter">
-                                            <input id="modalmybookletmenubox_filter_input" type="text" style="margin-top: -14px;"
-                                                   placeholder="поиск по вашим курсам" value="">
-                                        </div>
-                                    </div>
-                                </div>
 
 
+                    <div id='noaccess' class="center col s12 lato">
 
+
+                        <div id="box"  class="container center center–align col s12">
+                            <div class="flipbook" style="margin-left: 10%; width: 90%; height: inherit;" id = "general_container">
 
 
 
                             </div>
                         </div>
-                    </div>
 
-                    <div id='nocourse' class="center col s12 lato">
-                        <div class="row center center-align">
-                            <div class="preloader-wrapper big active">
-                                <div class="spinner-layer spinner-green-only">
-                                    <div class="circle-clipper left">
-                                        <div class="circle"></div>
-                                    </div><div class="gap-patch">
-                                    <div class="circle"></div>
-                                </div><div class="circle-clipper right">
-                                    <div class="circle"></div>
-                                </div>
-                                </div>
-                            </div>
-                        </div></div>
+                        </div>
 
 
                 </div>
@@ -458,6 +465,178 @@
 <!-- Include this before the closing `body` tag -->
 
 <script>
+
+
+    var savedPdfDocument = null;
+    var margin;
+
+
+    function back() {
+
+    }
+
+
+    function scaleS() {
+
+
+
+    }
+
+    $(document).ready(function () {
+
+
+        $("#back_div").css({left: 35, top: 25});
+
+
+
+        var documentWidth =$(window).width();
+        var tWidth = (documentWidth - 950) / 2;
+
+        documentWidth = tWidth;
+        margin = tWidth;
+        //   $("#box").style.marginLeft =  documentWidth;
+
+        console.log('documentWidth');
+        console.log(documentWidth);
+        document.getElementById('box').style.marginLeft = documentWidth + "px";
+
+        var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/dip.pdf";
+        renderPDF(url, document.getElementById('general_container'));
+    });
+    var allPages = 0;
+    var currPage = 1;
+
+    var height = 0;
+    var width = 0;
+
+    function renderPDF(url, canvasContainer, options) {
+        var options = options || { scale: 0.81 };
+
+        //   var bootFlags = [];
+
+
+        function renderPage(page,scale) {
+
+
+            var viewport = page.getViewport(options.scale);
+            if(scale!=null&&scale!=undefined){
+                viewport = page.getViewport(scale);
+            }
+
+
+            var div = document.createElement('div');
+
+            var canvas = document.createElement('canvas');
+            canvas.setAttribute('id',currPage);
+            var ctx = canvas.getContext('2d');
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+
+
+
+
+            if(width==0||height==0){
+                height = viewport.height;
+                width = viewport.width;
+
+                document.getElementById('box').style.width = width ;
+                document.getElementById('box').style.height = height;
+
+
+
+            }
+
+
+
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+
+
+            div.appendChild(canvas);
+            canvasContainer.appendChild(div);
+
+            page.render(renderContext);
+
+            console.log(currPage);
+            console.log(allPages);
+            if(currPage == allPages){
+
+
+                height = 680;
+
+                width = 950;
+                // set fullScreen
+
+
+
+
+
+
+
+
+
+                $('.flipbook').turn({
+                    // Width
+
+                    width:width,
+
+                    // Height
+
+                    height:height,
+
+                    // Elevation
+
+                    elevation: 200,
+
+                    // Enable gradients
+
+                    gradients: true,
+
+                    // Auto center this flipbook
+
+
+
+                });
+
+
+            }else{
+                currPage++;
+
+            }
+        }
+
+        function renderPages(pdfDoc) {
+
+            if(savedPdfDocument==null){
+                savedPdfDocument = pdfDoc;            }
+
+            allPages = pdfDoc.numPages;
+            for(var num = 1; num <= pdfDoc.numPages; num++){
+                //currPage = num;
+                pdfDoc.getPage(num).then(renderPage);
+            }
+
+
+
+        }
+        PDFJS.disableWorker = true;
+
+        var docInitParams = new Object();
+        docInitParams.url = url;
+        docInitParams.httpHeaders = {"accept" : "Basic SLKOOE032",
+            "X-CustomHeader" : "40359820958024350238508234"};
+
+        PDFJS.getDocument(docInitParams).then(renderPages);
+    }
+
+
+
+
+
     var currentUser = null;
     var role = null;
     var decodedRole = null;
@@ -507,7 +686,7 @@
                     break;
 
 
-                default:window.location.href = "/"; return;
+               // default:window.location.href = "/"; return;
             }
 
             currentUser = user.user;
