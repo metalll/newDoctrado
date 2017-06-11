@@ -482,12 +482,13 @@ var photo = false;
 
                 case "STUDENT":
                 decodedRole = "Студент";
+                renderStudentCourse();
                 break;
 
                 case "TEACHER":
                 decodedRole = "Преподаватель";
                 currentUser = user.user;
-                loadTeacherCourse(currentUser.id);
+                renderTeacherCourse(currentUser.id);
                 break;
 
 
@@ -908,7 +909,8 @@ function renderStudentCourse() {
         type: 'get',
         url: "/API/Course",
         data: {
-            a:currentUser.id
+            a:currentUser.id,
+            pushcare:'pushcare',
         },success:function (data) {
 
             var courses = JSON.parse(data);
