@@ -38,11 +38,14 @@ public class FullViewCourse extends HttpServlet {
 
         try {
 
+
+
             Object reqO = req.getSession().getAttribute("auth");
             courseId = Long.valueOf(paramMap.get("course")[0]);
             AuthRealm realm = (AuthRealm) reqO;
 
 
+            Course tCourse = DBCourse.getInstance().getCourseWithId(courseId);
 
             if(reqO!=null){
 
@@ -86,7 +89,7 @@ public class FullViewCourse extends HttpServlet {
 
                 if(realm.getUser() instanceof Teacher){
 
-                    Course tCourse = DBCourse.getInstance().getCourseWithId(courseId);
+
 
 
 
@@ -123,6 +126,16 @@ public class FullViewCourse extends HttpServlet {
 
             }
 
+
+
+            tCourse.setTest("");
+            tCourse.setCourse("");
+
+            PrintWriter out = resp.getWriter();
+            Gson gson = new Gson();
+            out.write(gson.toJson(tCourse));
+            out.flush();
+            out.close();
 
 
 
