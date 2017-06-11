@@ -434,7 +434,7 @@
 
 
                         <div id="box"  class="container center center–align col s12">
-                            <div class="flipbook" style="margin-left: 10%; width: 90%; height: inherit;" id = "general_container">
+                            <div class="flipbook" style="margin-left: 5%; width: 95%; height: inherit;" id = "general_container">
 
 
 
@@ -485,7 +485,7 @@
     $(document).ready(function () {
 
 
-        $("#back_div").css({left: 35, top: 25});
+        //$("#back_div").css({left: 35, top: 25});
 
 
 
@@ -493,12 +493,12 @@
         var tWidth = (documentWidth - 950) / 2;
 
         documentWidth = tWidth;
-        margin = tWidth;
+        margin = 0;
         //   $("#box").style.marginLeft =  documentWidth;
 
         console.log('documentWidth');
         console.log(documentWidth);
-        document.getElementById('box').style.marginLeft = documentWidth + "px";
+        document.getElementById('box').style.marginLeft = 0 + "px";
 
         var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/dip.pdf";
         renderPDF(url, document.getElementById('general_container'));
