@@ -480,19 +480,9 @@
 
 
     function onblur(val) {
-
-
-        if (isNaN(val)||val<1||val>allPages){
-
-
-
-            Materialize.toast('В этом документе нет страницы: '+val, 3000, 'rounded red');
-
-
-        }else{
-
+        console.log('turn to val : '+val)
         $('#flipbook').turn('page', val);
-        }
+
     }
 
     function back() {
