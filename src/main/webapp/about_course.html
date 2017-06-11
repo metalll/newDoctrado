@@ -611,7 +611,9 @@
                 });
 
                 $('#allPages').text(allPages);
-
+                $("#flipbook").bind("turning", function(event, page, view) {
+                    $('#currPage').val(page);
+                });
 
 
             }else{
