@@ -11,7 +11,7 @@ function getCurentUser(callback) {
 
         if(data=="ANNONYMOUS"){
 
-            callback(null);
+            //callback(null);
 
          return;
         }

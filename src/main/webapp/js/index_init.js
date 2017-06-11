@@ -4,6 +4,9 @@
 $(document).ready(function () {
 
 
+
+    renderCourse();
+
     $('.carousel.carousel-slider').carousel({fullWidth: true});
     // $('.button-collapse').sideNav();
 
