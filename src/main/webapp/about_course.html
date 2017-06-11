@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+<html xmlns:og="//opengraphprotocol.org/schema/" xmlns:fb="//www.facebook.com/2008/fbml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="google-signin-client_id" content="1031819201507.apps.googleusercontent.com">
+
+
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/material/img/logos/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+
+
+
+    <title id="header" >personal doctrado</title>
+
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/smoothness/jquery-ui.css" type="text/css" />
+    <style type='text/css'>@import url(//fonts.googleapis.com/css?family=Elsie+Swash+Caps|Open+Sans);</style>
+
+    <link rel='stylesheet' type='text/css' href='css/php.css' />
+    <link rel='stylesheet' type='text/css' href='css/app.css' />
+
+
+    <!--Import materialize.css-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"  media="screen,projection"/>
+
+    <!-- Scott's custom css -->
+    <link href="css/ipad.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+    <link href="css/jquery-ui.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+
+    <!-- <link href="/material/css/style-homepage.css" type="text/css" rel="stylesheet" media="screen,projection"/>  -->
+
+
+
+    <!-- these are the ones from KK that worked prior to 2015-09-01
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    -->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+    <script type="text/javascript" src="js/ajax_jQuery_extentions.js"></script>
+
+    <!-- nh 2017-03-14 trying to allow google to logout -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        var googleClientId = "1031819201507.apps.googleusercontent.com";
+    </script>
+
+    <script type="text/javascript" src="js/authorizator.js"></script>
+
+
+
+
+
+
+    <meta name="viewport" content="width=device-width">
+
+</head>
+<body class='dashboard'
+      onload="">
+
+
+<script>
+    W = {account_id: '334737', plus: '0'};
+</script>
+
+<script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '341981852533773',
+            xfbml      : true,
+            version    : 'v2.7'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script><script>
+    $(".action-braintree-pay").on("click", function () {
+        alert("lanuching popup");
+        var json = {"plan": "PLUS"};
+        DisplayDIV('upgrade_braintree', null, null, null, json);
+    });
+</script>
+
+<style>
+    #HW_badge {
+        top: -16px!important;
+        left: -20px!important;
+    }
+</style>
+
+
+
+
+<div id="create_course_dialog" class="modal">
+
+
+
+    <div class="modal-content">
+        <div id="view_mod" class="">
+            <h4 class = "green-text">Создание курса</h4>
+            <div class="row">
+                <div class="row col s12">
+                    <div class="input-field center center-align col s12">
+                        <input id="course_name" type="text" class="validate" >
+                        <label for="course_name">&nbsp;&nbsp; Название курса</label>
+                    </div>
+                </div>
+                <h6 class="orange-text center center-align col s12 lato" style="font-size: 16px">Обложка курса</h6>
+                <button style="position: relative;                       background: #ffffff;                       background-color: #ffffff;                       width: 100%;                       max-width: 220px;                       height: 220px;                       display: block;                       border: none;                       margin: 0 auto;" type="button" onclick="uploadPhoto();">                    <img class="responsive-img circle" src="img/default-course.png" id="avatar-img">                </button>
+                <input accept="image/*" style="display: none;" id="avatar-input" type="file">
+                <div class="row col s12">
+                    <div class="file-field input-field">
+                        <h6 class="orange-text center center-align col s12 lato" style="font-size: 16px">PDF – материал курса</h6>
+                        <div class="orange btn">
+                            <span>Файл</span>
+                            <input id="course_file" type="file" accept="application/pdf">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row col s12">
+                    <div class="input-field center center-align col s10">
+                        <input id="course_cost" type="number" min="50" class="validate left-align left" >
+                        <label for="course_cost"  data-error=" &nbsp;&nbsp; Цена курса должна быть больше 50 грн и не может содержать буквы">&nbsp;&nbsp; Цена курса</label>
+                    </div>
+                    <div class="col s2">
+                        <p style="font-size: 16px ; padding-top: 34px" class="left-align left orange-text">грн.</p>
+                    </div>
+                </div>
+
+            </div></div>
+        <div class="preloader center center-align hide" id="preloader">
+            <div style="margin-top: 90px"></div>
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+            <div style="margin-top: 90px"></div>
+        </div>
+    </div>
+
+    <div class="modal-footer " id="footer_mod">
+        <a href="#!" class="modal-action waves-effect green white-text waves-green btn-flat" onclick="createCourse();">Создать курс</a>
+    </div>
+</div>
+
+<!-- TOOLBAR INDEPENDANT DIV -->
+<div class="lander">
+    <div>
+
+        <div class="row systembar orange" style="">
+
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Личный кабинет' href="personal_area.html"><i class="material-icons white-text text-darken-2" style="font-size: 2rem;">home</i></a>
+            </div>
+
+
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Список всех курсов' href="course.html"><i class="material-icons white-text text-darken-2" style="font-size: 2rem;">dashboard</i></a>
+            </div>
+
+            <div class="col s12 center tool-nav">
+                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Подробнее об вашем аккаунте' onclick="displayAccount();" target="_blank"><i class="material-icons white-text text-darken-2" style="font-size: 2rem;">account_circle</i></a>
+            </div>
+
+            <!--
+                            <div class="col s12 center tool-nav">
+                                <a class="tooltipped" data-position='right' data-delay='50' data-tooltip='Email Support' onclick='DisplayDIV("emailcontact");' target="_blank"><i class="material-icons grey-text text-darken-2" style="font-size: 2rem;">mail</i></a>
+                            </div>
+            -->
+
+
+
+
+
+
+
+
+
+            <div class="col s12 center tool-nav">
+
+                <a class="" style="position: fixed; left: 12px; bottom: 10px;" href="/">
+                    <img src="favicon.ico" style="height: 24px;">
+
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- END TOOLBAR INDEPENDANT DIV -->
+<div id = "toolbar-indicator" class="systembar-state-marker orange" style="top: 18px;"></div>
+
+
+
+<div onclick="DisplayDIV('guide-dashboard');" class="white-text text-darken-1 systembar-guide"><i class="material-icons"
+                                                                                                  style="font-size: 2rem;">help_outline</i>
+</div>
+
+
+<!-- BEGIN BODY BOX TOP ROW 2 BOXES LEFT TITLE 'DASHBOARD' RIGHT TITLE YOUR ACCOUNT-->
+
+<!-- Include this wherever you'd like the Barepay code to generate -->
+<barepay></barepay>
+
+<div class="row" style=" padding: 10px 0 10px 36px; margin-top: 0px; margin-bottom: 0;">
+    <div class="col s12" style="padding-top: 8px;">
+
+        <h3 class="lato-page grey-text text-darken-3" style="display: inline; margin-bottom: 0.8rem; margin-top: 0.8rem;">
+            Личный кабинет
+            <div onclick="DisplayDIV('guide-intro');" class="grey-text text-darken-1"
+                 style="display: inline; position: relative; top: -8px; cursor: pointer; margin-left: 10px;"><i
+                    class="material-icons" style="font-size: 2rem;">help_outline</i></div>
+        </h3>
+
+        <!--<a href="/logout.php" class="btn-flat waves-effect waves-dark white lighten-5 right" style="padding:0 1rem; margin-top: 7px;">log off</a>-->
+        <!-- nh 2017-03-14 trying to get google logout -->
+        <a class="action-logout btn-flat waves-effect waves-dark red white-text right"
+           style="padding:0 1rem; margin-top:7px;" href="javascript:void(0);" onclick="sign_out();">Выход</a>
+        <a href="https://simplebooklet.com/help" target="_blank" class="orange-text right" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">помощь</a>
+
+        <a href="https://simplebooklet.com/quickguidesimplebooklet" target="_blank" class="orange-text right" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">курсы</a>
+
+        <a href="https://headwayapp.co/simplebooklet-updates" target="_blank"class="orange-text right CHANGE_THIS" style="font-size: 1rem; padding-top: 17px; padding-left: 10px; font-weight: 500; margin-right: 10px;">уведомления</a>
+
+    </div>
+
+    <!-- BEGIN  LEFT TITLE 'DASHBOARD'-->
+    <div class="col s12 m6">
+
+        <div class="card white">
+
+            <div class="card-content">
+
+                <img id="avatar_box" src="img/avatar-2.png" class="circle" style="width: 200px ; height:  200px ; overflow: hidden">
+
+                <p id="account_name_box" class="grey-text lato left-align  text-darken-2"
+                   style="display: inline; font-size: 20px; margin-top: 35px; margin-left: 8px; float: right;">Петров<br>Алексей<br>Владимирович
+
+
+                </p>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <!-- END  LEFT TITLE 'DASHBOARD'-->
+    <!-- BEGIN  RIGHT TITLE 'YOUR ACCOUNT'-->
+    <div class="col s12 m6">
+
+
+
+        <div class="card white"
+             style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
+
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
+                <a onclick="displayAccount();" class="green-text waves-effect waves-light"> Пополнить счет </a>
+
+                <p id="account_balance_box" class="grey-text text-darken-2"
+                   style="display: inline; float: right; margin-top: -4px;">У вас на счету : 100 грн<br>
+
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="card white"
+             style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12); margin-bottom: 0;">
+
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2); ">
+                <a onclick="displayAccount();" class="waves-effect waves-light">Подробнее</a>
+
+                <p id="account_box" class="grey-text text-darken-2"
+                   style="display: inline; float: right; margin-top: -4px;">linuxoid6666@gmail.com<br>
+
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card white" style="box-shadow: 0 0px 0px 0 rgba(0,0,0,0.16),0 0px 0px 0 rgba(0,0,0,0.12);">
+            <div class="card-action" style="border-bottom: 1px solid rgba(160,160,160,0.2);">
+                <a onclick="displayAccount();" class="green-text waves-effect waves-light">Статистика</a>
+
+                <p id="account_type_box" class="grey-text text-darken-2"
+                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Преподаватель<br>
+
+
+                </p>
+
+            </div>
+        </div>
+
+        <div id="create_course_card" class="card green">
+
+            <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
+                <span class="card-title green white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Создать новый курс</span>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- END RIGHT TITLE 'YOUR ACCOUNT'-->
+    </div>
+    <!-- END BODY BOX TOP ROW 2 BOXES LEFT TITLE 'DASHBOARD' RIGHT TITLE YOUR ACCOUNT-->
+</div>
+<div class="white" style="padding: 10px 0;">
+    <div class="row" style="padding-left: 36px;">
+        <div class="col s12" style="padding: 0px;">
+
+            <div class="row">
+                <div class="col s12 white" style="padding: 0 15px; margin-bottom: 0;">
+
+                    <ul class="tabs" style="overflow-x: hidden; border-bottom: 1px solid #ddd;">
+                        <li class="tab col s12" style="text-align: center;"><a href="#yoursimplebooklets"
+                                                                               class="lato grey-text text-darken-2"
+                                                                               style="font-size: 27px; letter-spacing: 0; padding-left: 1.5rem;">Ваши курсы</a></li>
+
+                        <!-- <li class="tab col s4"><a href="#favs" class="grey-text text-darken-2 lato" style="font-size: 18px;"><i class="material-icons left pink-text">favorite</i> Favorites</a></li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div id="yoursimplebooklets" class="row">
+
+
+                <div class="col s12 white" style=" margin-top: 2px; padding: 0 0 50px 6px;">
+
+
+                    <div class="white" style="padding:0;">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="row" style="margin-bottom: 0;">
+
+                                    <div class="col s12 m12">
+                                        <div id="modalmybookletmenubox_filter">
+                                            <input id="modalmybookletmenubox_filter_input" type="text" style="margin-top: -14px;"
+                                                   placeholder="поиск по вашим курсам" value="">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id='nocourse' class="center col s12 lato">
+                        <div class="row center center-align">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-green-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div><div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div></div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div id="galleries">
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+</div>
+</div>
+
+<!-- Include this before the closing `body` tag -->
+
+<script>
+    var currentUser = null;
+    var role = null;
+    var decodedRole = null;
+
+    //dialog pages;
+
+    var photo = false;
+
+
+
+    $(document).ready(function () {
+        //  $('#account_box') - write accout;
+
+        $('.modal').modal();
+
+        getCurentUser(function (user) {
+
+            if(user==null){
+
+                window.location.href = "/";
+                return;
+            }
+
+
+
+
+            role = user.role;
+            currentUser = user.user;
+            switch (role){
+                case "ADMIN" :
+                    decodedRole = "Администратор";
+                    break;
+
+                case "STUDENT":
+                    decodedRole = "Студент";
+                    var parent = document.getElementById('create_course_card').parentNode;
+
+                    parent.removeChild(document.getElementById('create_course_card'));
+
+                    renderStudentCourse();
+                    break;
+
+                case "TEACHER":
+                    decodedRole = "Преподаватель";
+
+                    renderTeacherCourse(currentUser.id);
+                    break;
+
+
+                default:window.location.href = "/"; return;
+            }
+
+            currentUser = user.user;
+            document.getElementById('account_box').innerHTML = currentUser.email;
+            document.getElementById('account_balance_box').innerHTML = currentUser.balance + " грн.";
+            document.getElementById('account_type_box').innerHTML = decodedRole;
+            document.getElementById('account_name_box').innerHTML = currentUser.surname + "<br>" + currentUser.name + "<br>" + currentUser.firstname;
+            document.getElementById('header').innerHTML = currentUser.name + " – профиль";
+
+
+            // avatar_box
+
+            document.getElementById('avatar_box').removeAttribute("src");
+            document.getElementById('avatar_box').setAttribute("src",currentUser.avatar);
+
+
+        });
+
+
+
+
+    });
+
+
+    function loadStudentCourse(uid) {
+
+    }
+
+    function loadTeacherCourse(uid) {
+
+        $.ajax({
+
+            type: 'get',
+            url: "/API/Course",
+            data: {
+                a:currentUser.id
+            },
+            success: function (data) {
+
+
+
+                console.log(data);
+
+                var courses = JSON.parse(data);
+
+                var container = document.getElementById('nocourse');
+
+
+
+                var insertedHtml = '<div class=\"row\">';
+
+                if(courses!='[]'){
+
+
+
+                    for(var i = 0 ;i<courses.length;i++){
+
+                        var j =  courses.length-i-1;
+
+                        var elC = i+1;
+//                    insertedHtml += "   <div class=\"row col s12 hand_cursor m12 l4\"  href=\"javascript:void(0);\" onclick=\""+"\" >";
+//                    insertedHtml += "    <div class=\"col s12 m12 l12\">";
+//                    insertedHtml += "";
+//                    insertedHtml += "                <div class=\"card\">";
+//                    insertedHtml += "                    <div class=\"card-image\">";
+//                    insertedHtml += "                        <img class=\"center center-align\" style=\" object-fit: cover;  \" src=\""+courses[i].avatar+"\">";
+//                    insertedHtml += "                        <span class=\"card-title center backgr-col center-align \" style=\"font-size: 125%\">"+courses[i].headerText+"<\/span>";
+//                    insertedHtml += "                    <\/div>";
+//                    insertedHtml += "                  ";
+//                    insertedHtml += "                   <\/div>";
+//                    insertedHtml += "            <\/div>";
+//                    insertedHtml += "            <\/div>";
+//
+
+                        insertedHtml += "                    <div class=\"col s12 m4\">";
+                        insertedHtml += "                        <div class=\"card\">";
+                        insertedHtml += "                            <div class=\"card-image center hoverable center-align hand_cursor\" style=\" height : 200px;overflow: hidden \" href=\"javascript:void(0);\" onclick=\"selectTeacher();\">";
+                        insertedHtml += "                                <img src=\""+courses[i].avatar+"\">";
+                        insertedHtml += "                                <span class=\"card-title\" style=\" font-size: 16px; \">"+courses[i].headerText+"<\/span>";
+                        insertedHtml += "                            <\/div>";
+                        insertedHtml += "";
+                        insertedHtml += "                        <\/div>";
+                        insertedHtml += "                    <\/div>";
+
+                        if(elC%3==0&&j<=3){
+                            if(j==3){  }
+                            if(j==2){
+                                insertedHtml += "<div class=\"col l2\"><\/div>";
+                            }
+                            if(j==1){
+                                insertedHtml += "<div class=\"col l4\"><\/div>";
+                            }
+                        }
+
+                    }
+                }
+
+                insertedHtml += '<\/div>';
+                container.innerHTML = insertedHtml;
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+
+    }
+
+
+
+    function displayAccount() {
+        alert("display account");
+    }
+
+    function sign_out() {
+        $.delete("/API/Auth",{data:"data"},function (data) {
+            window.location.href="/";
+        });
+    }
+
+
+    function showDialog() {
+
+        $('#create_course_dialog').modal('open');
+
+
+
+    }
+
+
+
+
+
+
+    var imgLoaded = false;
+    var pdfLoaded = false;
+    var imageN = "";
+    var pdf = "";
+    var cName = "";
+    var cost ;
+    function createCourse() {
+
+
+
+
+
+        var courseName =  $('#course_name').val();  //course_name
+
+
+        cName = courseName;
+        var doc = $('#course_file').prop('files')[0];
+        cost = $("#course_cost").val();
+        var formDoc = new FormData();
+        formDoc.append('type', 'conf_doc');
+        formDoc.append('doc', doc);
+
+        var image = $('#avatar-input').prop('files')[0];
+        var formImg = new FormData();
+        formImg.append('type', 'conf_doc');
+        formImg.append('doc', image);
+
+
+
+
+        if(doc==null){
+
+            Materialize.toast('Добавьте PDF файл курса', 3000, 'rounded red');
+            return;
+        }
+
+        if(courseName==""){
+
+            Materialize.toast('Добавьте название курса', 3000, 'rounded red');
+            return;
+        }
+
+        if(cost==""||cost<50){
+
+            Materialize.toast('Измените стоимость курса', 3000, 'rounded red');
+            return;
+        }
+
+//"#footer_mod"
+        $("#footer_mod").addClass('hide');
+        $("#view_mod").addClass('hide');
+        $("#preloader").removeClass('hide');
+
+        if(image==null){
+
+            imgLoaded = true;
+            imageN = "img/default-course.png";
+            Materialize.toast('Изображение загружено', 3000, 'rounded green');
+
+            if(pdfLoaded&&imgLoaded){
+
+                endAddingCourse();
+
+
+            }
+
+        }
+        else{
+
+            $.ajax({
+
+                type: 'post',
+                url: "/API/File",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formImg,
+                success: function (data) {
+                    imgLoaded = true;
+
+                    Materialize.toast('Изображение загружено', 3000, 'rounded green');
+
+                    imageN = data;
+
+                    if(pdfLoaded&&imgLoaded){
+
+                        endAddingCourse();
+
+                    }
+
+                }
+
+
+
+
+            });
+
+
+
+        }
+
+
+
+
+
+        $.ajax({
+
+            type: 'post',
+            url: "/API/File",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formDoc,
+            success: function (data) {
+                pdfLoaded = true;
+                Materialize.toast('Pdf файл загружен', 3000, 'rounded green');
+
+
+                pdf = data;
+
+                if(pdfLoaded&&imgLoaded){
+
+                    endAddingCourse();
+
+                }
+
+            }
+
+
+
+
+        });
+
+
+
+
+
+    }
+
+
+    function  endAddingCourse() {
+
+
+        $.ajax({
+
+            type: 'post',
+            url: "/API/Course",
+            data: {
+                headerText:cName,
+                course:pdf,
+                cost:cost,
+                avatar:imageN
+
+            },
+            success: function (data) {
+                Materialize.toast('Курс успешно создан', 3000, 'rounded green');
+
+                window.location.href = "/personal_area.html?course=12";
+
+
+            }
+
+
+
+
+        });
+
+    }
+
+    $("#avatar-input").change(function () {
+        hasPhoto = false;
+        var file, img;
+        var _URL = window.URL || window.webkitURL;
+        if ((file = this.files[0])) {
+            if (this.files[0].size > 5242880) {
+                document.getElementById("avatar-input").value = "";
+
+                Materialize.toast('Размер картинки не должен превышать 5Мб', 3000, 'rounded red');
+                return;
+            }
+            img = new Image();
+            img.onload = function () {
+                hasPhoto = true;
+                $("#avatar-img").css('width', '100%').css('height', '100%');
+                document.getElementById('avatar-img').src = img.src;
+            };
+            img.onerror = function () {
+
+                Materialize.toast('Выбранный файл не является картинкой!', 3000, 'rounded red');
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+    });
+
+
+
+    function renderTeacherCourse() {
+
+        $.ajax({
+
+            type: 'get',
+            url: "/API/Course",
+            data: {
+                a:currentUser.id
+            },success:function (data) {
+
+                var courses = JSON.parse(data);
+
+                var card="";
+
+                var container = document.getElementById('nocourse');
+
+
+                card += "<div class=\" row col s12 m12 l12\">";
+
+
+                for(var i = 0 ; i<courses.length;i++){
+
+                    var elC = i+1;
+
+
+                    var j =  courses.length-i-1;
+
+
+                    card += "  <div class=\"col s12 m4 l4\">";
+                    card += "        <div style=\"height: 350px;\"  class=\"card hoverable\">";
+                    card += "            <div class=\"card-image\">";
+                    card += "                <img class=\"center center-align\" style=\"height:200px; width: 250px; overflow:hidden; top: 0; bottom:0; left: 0; right:0; margin: auto;\" src=\""+courses[i].avatar+"\">";
+                    card += "                <span class=\"card-title flow-text\"><\/span><\/div><div class=\"card-content\"><p class=\"center-align\">"+courses[i].headerText+"<\/p><\/div>";
+                    card += "            <div class=\"card-action center center-align\"><p style=\"margin-top: 0px;\" class=\"col center center-align s12 m12 l12\"><a href=\"https:\/\/doctrado-sviasy.rhcloud.com\/getCourse?id=cd056f82-4a1f-459d-b5fe-109eae8c0d3b\" class=\"center center-align\">Цена "+courses[i].cost+" грн<\/a><\/p>";
+                    card += "               <a style=\" margin-top: 10px;\" href=\"https:\/\/doctrado-sviasy.rhcloud.com\/getCourse?id=cd056f82-4a1f-459d-b5fe-109eae8c0d3b\" class=\"col s12 m12 l12 btn green white-text\">Подробнее<\/a>";
+                    card += "            <\/div>";
+                    card += "        <\/div>";
+                    card += "        <\/div>";
+
+
+                    if(elC%3==0&&j<=3){
+                        if(j==3){  }
+                        if(j==2){
+                            card += "<div class=\"col l2\"><\/div>";
+                        }
+                        if(j==1){
+                            card += "<div class=\"col l4\"><\/div>";
+                        }
+                    }
+                }
+
+                card += "<\/div>";
+
+                if(card=="<div class=\" row col s12 m12 l12\"><\/div>"){
+                    card = "У вас пока нет курсов. Вы можете создать или купить курс."
+                }
+
+
+                container.innerHTML = card;
+            }
+
+
+
+
+        });
+
+
+
+    }
+
+
+    function renderStudentCourse() {
+
+        $.ajax({
+
+            type: 'get',
+            url: "/API/Course",
+            data: {
+                a:currentUser.id,
+                pushcare:'pushcare',
+            },success:function (data) {
+
+                var courses = JSON.parse(data);
+
+                var card="";
+
+
+
+                var container = document.getElementById('nocourse');
+
+
+                card += "<div class=\" row col s12 m12 l12\">";
+
+
+                for(var i = 0 ; i<courses.length;i++){
+
+                    var elC = i+1;
+
+
+                    var j =  courses.length-i-1;
+
+
+                    card += "  <div class=\"col s12 m4 l4\">";
+                    card += "        <div style=\"height: 350px;\"  class=\"card hoverable\">";
+                    card += "            <div class=\"card-image\">";
+                    card += "                <img class=\"center center-align\" style=\"height:200px; width: 250px; overflow:hidden; top: 0; bottom:0; left: 0; right:0; margin: auto;\" src=\""+courses[i].avatar+"\">";
+                    card += "                <span class=\"card-title flow-text\"><\/span><\/div><div class=\"card-content\"><p class=\"center-align\">"+courses[i].headerText+"<\/p><\/div>";
+                    card += "            <div class=\"card-action center center-align\"><p style=\"margin-top: 0px;\" class=\"col center center-align s12 m12 l12\"><a href=\"https:\/\/doctrado-sviasy.rhcloud.com\/getCourse?id=cd056f82-4a1f-459d-b5fe-109eae8c0d3b\" class=\"center center-align\">Цена "+courses[i].cost+" грн<\/a><\/p>";
+                    card += "               <a style=\" margin-top: 10px;\" href=\"https:\/\/doctrado-sviasy.rhcloud.com\/getCourse?id=cd056f82-4a1f-459d-b5fe-109eae8c0d3b\" class=\"col s12 m12 l12 btn green white-text\">Подробнее<\/a>";
+                    card += "            <\/div>";
+                    card += "        <\/div>";
+                    card += "        <\/div>";
+
+
+                    if(elC%3==0&&j<=3){
+                        if(j==3){  }
+                        if(j==2){
+                            card += "<div class=\"col l2\"><\/div>";
+                        }
+                        if(j==1){
+                            card += "<div class=\"col l4\"><\/div>";
+                        }
+                    }
+                }
+
+                card += "<\/div>";
+
+                if(card=="<div class=\" row col s12 m12 l12\"><\/div>"){
+                    card = "У вас пока нет курсов. Вы можете создать или купить курс."
+                }
+
+                container.innerHTML = card;
+            }
+
+
+
+
+        });
+
+
+
+    }
+
+    function uploadPhoto() {
+        $("#avatar-input").click();
+    }
+    function upload() {
+        var UUIDImg = getUUID();
+        var form = new FormData();
+        var image = $('#avatar-input').prop('files')[0];
+        form.append('key',UUIDImg);
+        form.append('image', image);
+        $.ajax({
+            type: 'post',
+            url: "/API/File",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: form,
+            success: function (data) {
+
+                //todo doto))
+
+            }
+        });
+    }
+
+</script>
+</body>
+
+
+
+
+
+
+
+
