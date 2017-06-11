@@ -59,24 +59,29 @@ public class CourseControllerServet extends HttpServlet{
             List<Long> courseLisr = DBPushcare.getInstance().getPushcares(student.getId());
 
             List<Course> courseList = new ArrayList<Course>();
+try {
+    for (long tLong : courseLisr) {
 
-            for(long tLong : courseLisr){
+        if (query != null) {
 
-                if(query!=null){
+            Course course = DBCourse.getInstance().getCourseWithId(tLong);
 
-                   Course course = DBCourse.getInstance().getCourseWithId(tLong);
-
-                    if(course.getHeaderText().contains(query)){
-                        courseList.add(course);
-                    }
-
-
-                }else {
-
-                    courseList.add(DBCourse.getInstance().getCourseWithId(tLong));
-                }
+            if (course.getHeaderText().contains(query)) {
+                courseList.add(course);
             }
 
+
+        } else {
+
+            courseList.add(DBCourse.getInstance().getCourseWithId(tLong));
+        }
+    }
+}catch (Exception e){
+    PrintWriter out = resp.getWriter();
+    out.write("[]");
+    out.flush();
+    out.close();
+}
 
             Gson gson = new Gson();
 
