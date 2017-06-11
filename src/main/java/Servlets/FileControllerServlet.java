@@ -66,7 +66,7 @@ public class FileControllerServlet extends HttpServlet{
 
 
         try {
-            if (req.getHeader("accept").contains("Basic")){
+            if (!req.getHeader("accept").contains("Basic")){
 
                 PrintWriter out = resp.getWriter();
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
