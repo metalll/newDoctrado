@@ -436,13 +436,13 @@
                         <div id="controls" class="center center-align col s12">
 
                             <div class=" col s5  right-align " id="left"><a href="javascript:void(0);" onclick="$('#flipbook').turn('previous');">  <i class="material-icons">keyboard_arrow_left</i></a> </div>
-                            <div class="col s2" id="curr_page">  <input type="text" maxlength="3" size="3" class="currentPageNumber action-page-goto grey-text text-darken-3" value="0" style="font-size: 0.9rem; margin-bottom: 0;display:inline-block; width: 30px; text-align: center; height: 30px; border: 1px solid #888; background-color: rgba(255, 255, 255, 0.5); border-radius: 6px; margin-right: 2px;"> из 25  </div>
+                            <div class="col s2" id="curr_page">  <input type="text" maxlength="3" size="3" class="currentPageNumber action-page-goto grey-text text-darken-3" value="0" style="font-size: 0.9rem; margin-bottom: 0;display:inline-block; width: 30px; text-align: center; height: 30px; border: 1px solid #888; background-color: rgba(255, 255, 255, 0.5); border-radius: 6px; margin-right: 2px;">  из 25   </div>
                             <div class=" col s2  left-align " id="right"> <a href="javascript:void(0);" onclick="$('#flipbook').turn('next');">  <i class="material-icons">keyboard_arrow_right</i> </a> </div>
 
 
                         </div>
                         <div id="box"  class="container center center–align col s12">
-                            <div id="flipbook" class="flipbook" style="margin-left: -3%; width: 110%; height: inherit;" id = "general_container">
+                            <div id="flipbook" class="flipbook" style="margin-left: -3%; width: 110%; height: inherit;" >
 
 
 
@@ -509,7 +509,7 @@
         document.getElementById('box').style.marginLeft = 0 + "px";
 
         var url = "/API/File?url=https://datadoctrado-sviasy.rhcloud.com/file?path=/var/lib/openshift/58cfc6e77628e17039000082/app-root/logs/upload/pdf.pdf";
-        renderPDF(url, document.getElementById('general_container'));
+        renderPDF(url, document.getElementById('flipbook'));
     });
     var allPages = 0;
     var currPage = 1;
