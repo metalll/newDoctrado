@@ -63,7 +63,7 @@ var elC = i;
             card += "               <a style=\" \" href=\"https:\/\/doctrado-sviasy.rhcloud.com\/getCourse?id=cd056f82-4a1f-459d-b5fe-109eae8c0d3b\" class=\"col s6 m6 l6 btn green\">Подробнее<\/a>";
             card += "            <\/div>";
             card += "        <\/div>";
-
+            card += "        <\/div>";
 
                 if(elC%3==0&&j<=3){
                     if(j==3){  }
