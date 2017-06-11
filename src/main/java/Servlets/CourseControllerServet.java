@@ -240,7 +240,7 @@ try {
 
                DBCourse.getInstance().addCourse(tempCourse);
 
-
+                System.out.print("TEMP COURSE ID: " + tempCourse.getId());
 
 
                PrintWriter out = resp.getWriter();
