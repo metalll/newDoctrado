@@ -530,7 +530,7 @@
             tparent.removeChild(document.getElementById('account_balance_box'));
 
 
-            renderPDF(currentCourse.course, document.getElementById('flipbook'));
+            renderPDF("/API/File?url="+currentCourse.course, document.getElementById('flipbook'));
         }
 
 
