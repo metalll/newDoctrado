@@ -238,7 +238,8 @@ function toJSON() {
             id:currCourseTestID,
         },
         success:function (data) {
-            alert('eeee');
+            Materialize.toast('Изменения успешно сохранены', 3000, 'rounded green');
+
         }
 
 
