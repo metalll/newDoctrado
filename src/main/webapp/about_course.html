@@ -632,7 +632,7 @@
 
                 //    parent.removeChild(document.getElementById('create_course_card'));
 
-                    renderStudentCourse();
+                  //  renderStudentCourse();
                     break;
 
                 case "TEACHER":
@@ -1197,26 +1197,6 @@
 
     function uploadPhoto() {
         $("#avatar-input").click();
-    }
-    function upload() {
-        var UUIDImg = getUUID();
-        var form = new FormData();
-        var image = $('#avatar-input').prop('files')[0];
-        form.append('key',UUIDImg);
-        form.append('image', image);
-        $.ajax({
-            type: 'post',
-            url: "/API/File",
-            processData: false,
-            contentType: false,
-            cache: false,
-            data: form,
-            success: function (data) {
-
-                //todo doto))
-
-            }
-        });
     }
 
 </script>
