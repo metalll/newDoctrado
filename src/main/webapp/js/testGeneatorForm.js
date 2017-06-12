@@ -232,7 +232,7 @@ function toJSON() {
     $.ajax({
 
         type:"post",
-        url:"https://doctrado-sviasy.rhcloud.com/test",
+        url:"/API/Test",
         data:{
             test:endcodedJSON,
             id:currCourseTestID,
