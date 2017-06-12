@@ -63,7 +63,7 @@
     <script type="text/javascript" src="js/authorizator.js"></script>
 
 
-
+    <script type="text/javascript" src="js/testGeneatorForm.js"></script>
 
 
     <script type="text/javascript" src="js/turnjs/extras/modernizr.2.5.3.min.js"></script>
@@ -144,6 +144,26 @@
     }
 </style>
 
+
+<div id="test-dialog" class="modal modal-fixed-footer test-modal">
+    <div class="modal-content" id="test-container">
+        <h6 class="center center-align">Редактирование Теста</h6>
+
+
+
+        <ul class="collapsible" data-collapsible="accordion" id="test-ul">
+
+
+        </ul>
+        <div class="col s12 row" href="javascript:void(0);" onclick="addTest();"><a
+                class="btn col s12 center center-align">+</a></div>
+
+    </div>
+    <div class="modal-footer">
+        <a href="javascript:void(0);" onclick="toJSON();" class=" waves-effect waves-green btn-flat ">Применить
+            изменения</a>
+    </div>
+</div>
 
 
 
@@ -370,7 +390,7 @@
                 <a onclick="displayAccount();" class="green-text waves-effect waves-light">Пройти тест</a>
 
                 <p id="account_type_box" class="grey-text text-darken-2"
-                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Вы еще проходили тестирование<br>
+                   style="display: inline; float: right; font-size: 16px; margin-top: -4px;">Вы еще не проходили тестирование<br>
 
 
 
@@ -394,7 +414,7 @@
         <div id="edit_test_card" class="card orange">
 
             <div class="card-content  grey-text center center-align text-darken-3 hand_cursor"  onclick="showDialog();" href="#create_course_dialog" style="padding: 7px 65px;">
-                <span class="card-title orange white-text text-darken-3  hand_cursor lato" onclick="showDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Добавить/Изменить тест</span>
+                <span class="card-title orange white-text text-darken-3  hand_cursor lato" onclick="showTestDialog();" href="#create_course_dialog"  style="margin-top: 5px; font-weight: 500;">Добавить/Изменить тест</span>
             </div>
 
 

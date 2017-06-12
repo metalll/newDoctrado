@@ -35,4 +35,9 @@ public class AuthRealm {
     public void setAccessRole(UserRole accessRole) {
         this.accessRole = accessRole;
     }
+
+
+
+
+
 }

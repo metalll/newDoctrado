@@ -64,6 +64,26 @@ public class DBTeacher {
 
     }
 
+
+
+    public Teacher getTeacherWithId(long id){
+        try {
+            Teacher retVal = dao.queryForId(id);
+            dao.getConnectionSource().close();
+            return retVal;
+
+        }catch (Exception e){
+
+
+
+        }
+
+
+        return null;
+    }
+
+
+
     public List<Teacher> queryAllTeachers(){
 
         List<Teacher> retVal = null;

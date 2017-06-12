@@ -67,6 +67,17 @@ public class DBCourse {
     }
 
 
+    public void updateCourse(Course course){
+        try {
+            dao.update(course);
+            dao.getConnectionSource().close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
     public void addCourse(Course course){
         try {
             dao.create(course);
