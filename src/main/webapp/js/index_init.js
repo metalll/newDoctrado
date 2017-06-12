@@ -45,7 +45,7 @@ function renderCourse() {
             var container = document.getElementById('course-container');
 
 
-            card += "<div class=\" row container col s12 m12 l12\">";
+            card += "<div class=\" row  col s12 m12 l12\">";
 
 
             for(var i = 0 ; i<courses.length;i++){
