@@ -17,6 +17,10 @@ function deleteQuestion(id) {
     console.log(operandParent);
 
 
+
+
+
+
     operandParent.removeChild(operandChild);
 
 
@@ -239,7 +243,7 @@ function toJSON() {
         },
         success:function (data) {
             Materialize.toast('Изменения успешно сохранены', 3000, 'rounded green');
-
+            $('#test-dialog').modal('close')
         }
 
 
