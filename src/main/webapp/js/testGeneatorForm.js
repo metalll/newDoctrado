@@ -1,6 +1,10 @@
 /**
  * Created by NSD on 12.06.17.
  */
+
+var currCourseTestID ;
+
+
 function deleteQuestion(id) {
     console.log('del: ' + id);
 
@@ -212,7 +216,7 @@ function toJSON() {
 
         });
 
-        //  console.log(Answers);
+       // //  console.log(Answers);
 
         Question.answers = myTableArray;
         retVal.push(Question);
@@ -223,13 +227,15 @@ function toJSON() {
 
     var JSONSend = JSON.stringify(retVal);
 
+    var endcodedJSON = Base64.encode(JSONSend);
+
     $.ajax({
 
         type:"post",
         url:"https://doctrado-sviasy.rhcloud.com/test",
         data:{
-            JSON:JSONSend,
-            parent:'cd056f82-4a1f-459d-b5fe-109eae8c0d3b'
+            test:encodedJSON,
+            id:currCourseTestID,
         },
         success:function (data) {
             alert('eeee');
@@ -281,33 +287,23 @@ function addAnswer(sender_id) {
 }
 
 
-$(document).ready(function () {
+function initTest(id) {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal').modal();
+    // $('.modal').modal();
+
+    currCourseTestID = id;
 
     $.ajax({
-        url: 'https://doctrado-sviasy.rhcloud.com/test?parent=cd056f82-4a1f-459d-b5fe-109eae8c0d3b',
-        type:'get',
-        success:function (data) {
-            loadTest(data);
-        }
-    });
-
-
-
-});
-
-function addTheme() {
-
-    $.ajax({
-        type: 'post',
-        url: 'https://doctrado-sviasy.rhcloud.com/addCourse',
+        url: '/API/Test',
         data: {
-            parent: 'cd056f82-4a1f-459d-b5fe-109eae8c0d3b',
-            number: '1'
+            id: id
         },
+        type: 'get',
+
         success: function (data) {
-            window.location.reload();
+            var decodedData = Base64.decode(data)
+
+            loadTest(decodedData);
         }
     });
 
@@ -317,311 +313,20 @@ function addTheme() {
 
 
 
-function call() {
-
-    //$('#progress_bar').modal('open');
-
-
-    //  bar.animate(1.0);
 
 
 
 
-    var email = document.getElementById('email1').value;
-    var password = document.getElementById('password1').value;
-    var errors = false;
-    var errEmail = false;
-    var errPass = false;
-    if (email == "") {
-        //Materialize.toast('Введите ваш email',4000,'rounded');
-        errEmail = true;
-        errors = true;
-
-    }
-
-    if (password == "") {
-        //Materialize.toast('Введите ваш пароль',4000,'rounded');
-        errPass = true;
-        errors = true;
-    }
-    if (errEmail && errPass) {
-        Materialize.toast('<div class="red-text text-darken-3"><b> Введите ваш email <br> и пароль </b></div>', 4000, 'rounded');
-        //       bar.hide();
-        return;
-    }
-    if (errEmail) {
-        Materialize.toast('<div class="red-text text-darken-3"><b> Введите ваш email </b></div>', 4000, 'rounded');
-    }
-    if (errPass) {
-        Materialize.toast('<div class="red-text text-darken-3"><b>Введите ваш пароль</b></div>', 4000, 'rounded');
-    }
-
-    if (errors) {
-        //          bar.hide();
-        return;
-    }
-    $.ajax({
-        type: 'post',
-        url: 'https://doctrado-sviasy.rhcloud.com/login',
-        data: {
-            email: email,
-            password: password
-        },
-        success: function (data) {
-            if (data == -1) {
-                Materialize.toast('<div class="red-text text-darken-3"><b>Неверный логин <br> или пароль</b></div>', 4000, 'rounded');
-                bar.hide();
-            }
-            else window.location.href = "https://doctrado-sviasy.rhcloud.com/profile";
-        }
-    });
-}
-function call1() {
-    //        $('#progress_bar').modal('open');
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var errors = false;
-    var errEmail = false;
-    var errPass = false;
-    if (email == "") {
-        //Materialize.toast('Введите ваш email',4000,'rounded');
-        errEmail = true;
-        errors = true;
-
-    }
-
-    if (password == "") {
-        //Materialize.toast('Введите ваш пароль',4000,'rounded');
-        errPass = true;
-        errors = true;
-    }
-    if (errEmail && errPass) {
-        Materialize.toast('<div class="red-text text-darken-3"><b> Введите ваш email <br> и пароль </b></div>', 4000, 'rounded');
-        //          $('#progress_bar').modal('close');
-        return;
-    }
-    if (errEmail) {
-        Materialize.toast('<div class="red-text text-darken-3"><b> Введите ваш email </b></div>', 4000, 'rounded');
-    }
-    if (errPass) {
-        Materialize.toast('<div class="red-text text-darken-3"><b>Введите ваш пароль</b></div>', 4000, 'rounded');
-    }
-
-    if (errors) {
-        //            $('#progress_bar').modal('close');
-        return;
-    }
-    $.ajax({
-        type: 'post',
-        url: 'https://doctrado-sviasy.rhcloud.com/login',
-        data: {
-            email: email,
-            password: password
-        },
-        success: function (data) {
-            if (data == -1) {
-                Materialize.toast('<div class="red-text text-darken-3"><b>Неверный логин <br> или пароль</b></div>', 4000, 'rounded');
-                //  $('#progress_bar').modal('close');
-            }
-            else window.location.href = "https://doctrado-sviasy.rhcloud.com/profile";
-        }
-    });
-}
-
-
-
-function callReg1(accept) {
-    var nameR = document.getElementById('nameR1').value;
-    var last_nameR = document.getElementById('last_nameR1').value;
-    var surnameR = document.getElementById('surnameR1').value;
-    var emailR = document.getElementById('emailR1').value;
-    var passwordR = document.getElementById('passwordR1').value;
-    var telephone = document.getElementById('telephone1').value;
-    var born = document.getElementById('born1').value;
-    var test5 = document.getElementById('test51').value;
-
-    var error = false;
-
-    var nameREr = false;
-    var last_nameREr = false;
-    var surnameREr = false;
-    var emailREr = false;
-    var passwordREr = false;
-    var telephoneEr = false;
-    var bornEr = false;
-    var testEr = false;
-
-    if (nameR == "") {
-        error = true;
-        nameREr = true;
-    }
-    if (last_nameR == "") {
-        error = true;
-        last_nameREr = true;
-    }
-    if (surnameR == "") {
-        error = true;
-        surnameREr = true;
-    }
-    if (emailR == "") {
-        error = true;
-        emailREr = true;
-    }
-    if (passwordR == "") {
-        error = true;
-        passwordREr = true;
-    }
-    if (telephone == "") {
-        error = true;
-        telephoneEr = true;
-    }
-    if (born == "") {
-        error = true;
-        bornEr = true;
-    }
-    if (test5 == "") {
-        error = true;
-        testEr = true;
-    }
-
-    if (error) {
-        if (nameREr || last_nameREr || surnameREr || emailREr || passwordREr || telephoneEr || bornEr || testEr) {
-            Materialize.toast('<div class="red-text text-darken-3"><b>Заполните все поля</b></div>', 4000, 'rounded');
-
-            return;
-        }
-    }
-    $.ajax({
-        type: 'post',
-        url: 'https://doctrado-sviasy.rhcloud.com/validate_user',
-        data: {
-            email: emailR,
-            password: passwordR,
-            name: nameR,
-            last_name: last_nameR,
-            surname: surnameR,
-            telephone: telephone,
-            born: born,
-            type: accept
-        },
-        success: function (data) {
-            if (data == 0) {
-                $('#modal3').modal('close');
-                $('#modal1').modal('close');
-                $('#modal2').modal('close');
-
-
-                if (accept == 's') $('#modal4').modal('open');
-
-                if (accept == 't') $('#modal5').modal('open');
-            }
-
-        }
-    });
-
-
-}
 
 
 
 
-$( window ).load(function(){
 
 
-});
 
 
-function callReg(accept) {
-    var nameR = document.getElementById('nameR').value;
-    var last_nameR = document.getElementById('last_nameR').value;
-    var surnameR = document.getElementById('surnameR').value;
-    var emailR = document.getElementById('emailR').value;
-    var passwordR = document.getElementById('passwordR').value;
-    var telephone = document.getElementById('telephone').value;
-    var born = document.getElementById('born').value;
-    var test5 = document.getElementById('test5').value;
 
 
-    var error = false;
-
-    var nameREr = false;
-    var last_nameREr = false;
-    var surnameREr = false;
-    var emailREr = false;
-    var passwordREr = false;
-    var telephoneEr = false;
-    var bornEr = false;
-    var testEr = false;
-
-    if (nameR == "") {
-        error = true;
-        nameREr = true;
-    }
-    if (last_nameR == "") {
-        error = true;
-        last_nameREr = true;
-    }
-    if (surnameR == "") {
-        error = true;
-        surnameREr = true;
-    }
-    if (emailR == "") {
-        error = true;
-        emailREr = true;
-    }
-    if (passwordR == "") {
-        error = true;
-        passwordREr = true;
-    }
-    if (telephone == "") {
-        error = true;
-        telephoneEr = true;
-    }
-    if (born == "") {
-        error = true;
-        bornEr = true;
-    }
-    if (test5 == "") {
-        error = true;
-        testEr = true;
-    }
-
-    if (error) {
-        if (nameREr || last_nameREr || surnameREr || emailREr || passwordREr || telephoneEr || bornEr || testEr) {
-            Materialize.toast('<div class="red-text text-darken-3"><b>Заполните все поля</b></div>', 4000, 'rounded');
-            return;
-        }
-    }
-    $.ajax({
-        type: 'post',
-        url: 'https://doctrado-sviasy.rhcloud.com/validate_user',
-        data: {
-            email: emailR,
-            password: passwordR,
-            name: nameR,
-            last_name: last_nameR,
-            surname: surnameR,
-            telephone: telephone,
-            born: born,
-            type: accept
-        },
-        success: function (data) {
-            if (data == 0) {
-                $('#modal3').modal('close');
-                $('#modal1').modal('close');
-                $('#modal2').modal('close');
-
-                if (accept == 's') $('#modal4').modal('open');
-
-                if (accept == 't') $('#modal5').modal('open');
-
-
-                //  $('#progress_bar').modal('close');
-            }
-
-        }
-    });
-}
 
 
 
