@@ -234,7 +234,7 @@ function toJSON() {
         type:"post",
         url:"https://doctrado-sviasy.rhcloud.com/test",
         data:{
-            test:encodedJSON,
+            test:endcodedJSON,
             id:currCourseTestID,
         },
         success:function (data) {
