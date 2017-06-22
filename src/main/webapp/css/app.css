@@ -19,13 +19,22 @@
 
 
 
+[type="checkbox"]:checked+label:before{
+
+    border-right: 2px solid #ff9800;
+    border-bottom: 2px solid #ff9800;
+}
+
+.collection .collection-item.active {
+    background-color:#ff9800;
+    color: white;
+}
+.collection a.collection-item{
+    color:#ff9800 ;
+}
 
 
-
-
-
-
-/* helpers */
+    /* helpers */
 
 .t {
     display: table;

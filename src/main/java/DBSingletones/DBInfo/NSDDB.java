@@ -18,10 +18,6 @@ private static String DB_LOGIN="";
 private static String DB_PASS="";
 
 
-private static ConnectionSource connectionSource = null;
-
-
-
 
     public static String[] getConnection() throws URISyntaxException, SQLException {
 
